@@ -1,0 +1,13 @@
+axis	dataset	comparison	auc_delta	aupr_delta	mcc_delta	ece_delta	brier_delta	interpretation
+architecture	SL329	RegionAwareTCN_aux_t12_3seed minus GenericTCN_t12_3seed	-0.001532	-0.003458	-0.012859	NA	NA	Region-aware supervision helps MXD494/DISORDER723 but is not uniformly beneficial for SL329.
+representation	SL329	ESM2-t33 RegionAwareTCN minus ESM2-t12 RegionAwareTCN	0.004055	0.002627	0.031063	NA	NA	ESM2-t33 is the decisive ranking-performance upgrade, especially on DISORDER723.
+calibration	SL329	Platt-calibrated t33 minus raw t33	0.000000	0.000000	0.000000	-0.009123	-0.015659	Platt preserves ranking metrics and improves probability quality.
+homology	SL329	NR25-vs-SL329 t33 minus full-train t33	-0.002266	-0.005537	-0.003297	NA	NA	NR25 remains competitive but is not uniformly SOTA.
+architecture	MXD494	RegionAwareTCN_aux_t12_3seed minus GenericTCN_t12_3seed	0.006270	0.052391	0.010291	NA	NA	Region-aware supervision helps MXD494/DISORDER723 but is not uniformly beneficial for SL329.
+representation	MXD494	ESM2-t33 RegionAwareTCN minus ESM2-t12 RegionAwareTCN	0.004781	0.004664	0.002013	NA	NA	ESM2-t33 is the decisive ranking-performance upgrade, especially on DISORDER723.
+calibration	MXD494	Platt-calibrated t33 minus raw t33	0.000000	0.000000	0.000000	-0.156019	-0.072682	Platt preserves ranking metrics and improves probability quality.
+homology	MXD494	NR25-vs-MXD494 t33 minus full-train t33	-0.016548	-0.018969	-0.015936	NA	NA	NR25 remains competitive but is not uniformly SOTA.
+architecture	DISORDER723	RegionAwareTCN_aux_t12_3seed minus GenericTCN_t12_3seed	0.001908	0.006036	0.002509	NA	NA	Region-aware supervision helps MXD494/DISORDER723 but is not uniformly beneficial for SL329.
+representation	DISORDER723	ESM2-t33 RegionAwareTCN minus ESM2-t12 RegionAwareTCN	0.021479	0.064740	0.050966	NA	NA	ESM2-t33 is the decisive ranking-performance upgrade, especially on DISORDER723.
+calibration	DISORDER723	Platt-calibrated t33 minus raw t33	0.000000	0.000000	0.000000	-0.170328	-0.061230	Platt preserves ranking metrics and improves probability quality.
+homology	DISORDER723	NR25-vs-DISORDER723 t33 minus full-train t33	-0.007736	-0.038080	-0.009357	NA	NA	NR25 remains competitive but is not uniformly SOTA.

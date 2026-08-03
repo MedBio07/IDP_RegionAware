@@ -1,0 +1,65 @@
+# Local environments
+.conda/
+.venv/
+venv/
+env/
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Large or generated research artifacts
+data/**
+!data/**/
+!data/**/README.md
+!data/**/*.md
+predictions/
+results/**
+!results/**/
+!results/**/README.md
+!results/**/*.md
+models/**/*.pt
+models/**/*.pth
+models/**/*.pkl
+models/**/*.ckpt
+models/**/*.safetensors
+references/
+*.npy
+*.npz
+*.h5
+*.hdf5
+
+# Build outputs and generated packages
+*.log
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex.gz
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

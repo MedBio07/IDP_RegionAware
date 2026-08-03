@@ -1,0 +1,39 @@
+experiment_id: p2_region_aware_tcn_noaux_esm2_position_onehot_seed1
+stage: P2
+model: RegionAwareTCN
+features:
+  - esm
+  - position
+  - onehot
+esm2_model: esm2_t12_35M_UR50D
+embedding_dir: data/features/esm2_embeddings/esm2_t12_35M_UR50D_layer12_fp16
+train: data/DM3000_Train.fasta
+validation: data/DM1229_Validation.fasta
+tests:
+  - name: SL329
+    path: data/SL329_test.fasta
+  - name: MXD494
+    path: data/MXD494_test.fasta
+  - name: DISORDER723
+    path: data/DISORDER723_test.fasta
+architecture:
+  hidden_dim: 128
+  layers: 4
+  kernels: [3, 7, 15]
+  dilations: [1, 2, 4, 8]
+  dropout: 0.15
+auxiliary_heads:
+  - sdr
+  - ldr
+  - terminal_idr
+  - internal_idr
+training:
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  aux_loss_weight: 0.0
+  epochs: 8
+  max_tokens: 10000
+  max_proteins: 32
+  threshold_selection: validation Fmax on DM1229_Validation
+  seed: 1

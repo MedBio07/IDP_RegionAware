@@ -1,0 +1,9 @@
+# Table 3. Target-specific NR25 low-homology robustness
+
+| dataset | removed_train_proteins | kept_train_proteins | full_auc | nr25_auc | auc_delta_nr25_minus_full | nr25_aupr | full_mcc | nr25_mcc | mcc_delta_nr25_minus_full | sota_auc | nr25_gap_vs_sota |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SL329 | 176 | 2824 | 0.919327 | 0.917061 | -0.002266 | 0.913435 | 0.736481 | 0.733184 | -0.003297 | 0.915000 | 0.002061 |
+| MXD494 | 323 | 2677 | 0.850637 | 0.834089 | -0.016548 | 0.585903 | 0.499439 | 0.483503 | -0.015936 | 0.842000 | -0.007911 |
+| DISORDER723 | 424 | 2576 | 0.944611 | 0.936875 | -0.007736 | 0.652169 | 0.610462 | 0.601105 | -0.009357 | 0.943000 | -0.006125 |
+
+Note: NR25 results are reported as robustness evidence and are not uniformly SOTA.

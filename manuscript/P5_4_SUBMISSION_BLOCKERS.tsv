@@ -1,0 +1,7 @@
+priority	item	status	action
+P0	author_and_administrative_placeholders	BLOCKING_FOR_SUBMISSION	Fill authors, affiliations, corresponding author, funding, conflict of interest and final cover-letter signature.
+P0	public_code_data_model_url	BLOCKING_FOR_SUBMISSION	Create public repository and archival DOI; insert into Availability and Implementation.
+P0	formal_references	BLOCKING_FOR_SUBMISSION	Convert P5_4_CORE_REFERENCE_AUDIT.md into journal-style references and add ESM2/MMseqs2/database citations.
+P1	final_sota_audit	RECHECK_IMMEDIATELY_BEFORE_SUBMISSION	Repeat direct literature search for SL329/MXD494/DISORDER723 before uploading.
+P1	figure_format	EDITORIAL_FORMATTING_REQUIRED	Convert PDF/PNG figures to the exact journal production format and resolution requested at submission.
+P1	runtime_hardware	AUTHOR_CONFIRMATION_REQUIRED	Add GPU, CPU, RAM, CUDA driver and training/inference wall-clock time.

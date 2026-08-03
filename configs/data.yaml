@@ -1,0 +1,56 @@
+datasets:
+  train:
+    name: DM3000_Train
+    path: data/DM3000_Train.fasta
+  validation:
+    name: DM1229_Validation
+    path: data/DM1229_Validation.fasta
+  tests:
+    - name: SL329
+      path: data/SL329_test.fasta
+      ignore_label: -1
+    - name: MXD494
+      path: data/MXD494_test.fasta
+      ignore_label: -1
+    - name: DISORDER723
+      path: data/DISORDER723_test.fasta
+      ignore_label: -1
+  nr25_train:
+    - name: DM3000_Train_nr25_vs_SL329
+      target_test: SL329
+      path: data/nr25_by_test/DM3000_Train_nr25_vs_SL329.fasta
+    - name: DM3000_Train_nr25_vs_MXD494
+      target_test: MXD494
+      path: data/nr25_by_test/DM3000_Train_nr25_vs_MXD494.fasta
+    - name: DM3000_Train_nr25_vs_DISORDER723
+      target_test: DISORDER723
+      path: data/nr25_by_test/DM3000_Train_nr25_vs_DISORDER723.fasta
+
+annotation_rules:
+  sdr_max_length: 29
+  ldr_min_length: 30
+  terminal_distance_residues: 10
+  terminal_fraction: 0.10
+  disorder_content_bins:
+    - 0-5
+    - 5-20
+    - 20-80
+    - 80-100
+  protein_length_bins:
+    - <=200
+    - 201-500
+    - 501-1000
+    - >1000
+
+evaluation:
+  threshold_source: DM1229_Validation
+  default_threshold: 0.5
+  ignore_label: -1
+  required_metrics:
+    - Sn
+    - Sp
+    - BACC
+    - MCC
+    - AUC
+    - AUPR
+    - Fmax

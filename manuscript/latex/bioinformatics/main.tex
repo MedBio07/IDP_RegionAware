@@ -1,0 +1,263 @@
+\documentclass[namedate,webpdf,traditional,large]{oup-authoring-template}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+
+\graphicspath{{Fig/}}
+\newcommand{\societylogo}{}
+\newcommand{\method}{RegionAwareTCN}
+\newcommand{\twelve}{ESM2-t12}
+\newcommand{\thirtythree}{ESM2-t33}
+\newcommand{\placeholder}[1]{\textbf{[#1]}}
+
+\begin{document}
+
+\journaltitle{Bioinformatics}
+\DOI{DOI added during production}
+\copyrightyear{2026}
+\pubyear{2026}
+\vol{XX}
+\issue{X}
+\access{Published: Date added during production}
+\appnotes{Original Paper}
+\firstpage{1}
+
+\title[Calibrated sequence-only IDR prediction]{\method: sequence-only, region-aware and uncertainty-calibrated intrinsic disorder prediction with protein language model representations}
+
+\author[1,$\ast$]{\placeholder{First Author}}
+\author[1]{\placeholder{Second Author}}
+\author[2]{\placeholder{Senior Author}}
+
+\address[1]{\orgdiv{\placeholder{Department}}, \orgname{\placeholder{Institution}}, \orgaddress{\street{\placeholder{Street}}, \postcode{\placeholder{Postcode}}, \state{\placeholder{State}}, \country{\placeholder{Country}}}}
+\address[2]{\orgdiv{\placeholder{Department}}, \orgname{\placeholder{Institution}}, \orgaddress{\street{\placeholder{Street}}, \postcode{\placeholder{Postcode}}, \state{\placeholder{State}}, \country{\placeholder{Country}}}}
+
+\corresp[$\ast$]{Corresponding author. \href{mailto:corresponding.author@example.edu}{corresponding.author@example.edu}}
+
+%\received{Date}{0}{Year}
+%\revised{Date}{0}{Year}
+%\accepted{Date}{0}{Year}
+%\editor{Associate Editor: Name}
+
+\abstract{
+\textbf{Motivation:} Intrinsic disorder prediction has benefited from protein language models, but benchmark gains remain difficult to interpret when disorder labels are regionally heterogeneous, test sets differ in prevalence, and homologous training examples may inflate apparent performance.\\
+\textbf{Results:} We developed \method, a sequence-only residue-level predictor that combines frozen ESM2 representations with temporal convolutional sequence modeling and auxiliary supervision for short/long and terminal/internal disorder patterns. The final model uses ESM2-t33 embeddings, three-seed score averaging, validation-selected thresholding and Platt calibration fitted only on the DM1229 validation set. Across SL329, MXD494 and DISORDER723, the ESM2-t33 \method{} ensemble achieved AUC values of 0.919327, 0.850637 and 0.944611, respectively, exceeding curated direct state-of-the-art point AUC values under the full DM3000 training protocol. Protein-level paired resampling showed that the ESM2-t33 upgrade produced the strongest statistically supported gain on DISORDER723, improving AUC by 0.021479 over the ESM2-t12 \method{} ensemble (95\% bootstrap CI 0.013868 to 0.028520; paired permutation \(p=0.001996\)). Target-specific NR25 evaluation showed competitive but not uniformly state-of-the-art low-homology performance. Platt calibration preserved ranking metrics while reducing DISORDER723 ECE from 0.187936 to 0.017608 and Brier score from 0.093709 to 0.032479.\\
+\textbf{Availability:} Code, trained model weights, prediction files and reproducibility scripts will be available at \url{https://github.com/TO-BE-FILLED/RegionAwareTCN}; an archival DOI will be inserted before submission.\\
+\textbf{Contact:} \href{mailto:corresponding.author@example.edu}{corresponding.author@example.edu}\\
+\textbf{Supplementary information:} Supplementary data are available with the manuscript.
+}
+
+\keywords{intrinsic disorder prediction, intrinsically disordered regions, protein language model, ESM2, calibration, uncertainty, low-homology evaluation}
+
+\maketitle
+
+\section{Introduction}
+
+Intrinsically disordered proteins and intrinsically disordered regions (IDRs) are central to regulation, signaling, molecular recognition and protein interaction networks, yet their residue-level prediction remains a difficult sequence analysis problem \citep{wright1999intrinsically,necci2021caid}. Disorder is not a single homogeneous state. Disordered residues may occur in short or long segments, near the termini or inside proteins, and in proteins with very different overall disorder content. Benchmark labels also vary in origin and certainty, including DisProt-like annotations, missing-residue-derived annotations, NoX-style labels and unknown residues. These factors make global benchmark metrics useful but incomplete.
+
+Recent intrinsic disorder predictors increasingly use protein language models (PLMs), feature fusion, ensembles and length-aware or region-aware training strategies \citep{tang2023idpfusion,pang2023idplm,nambiar2024drbert,xie2025idpedl,liu2025fusionencoder}. Community evaluations such as CAID have also shifted attention toward ranking metrics, threshold-dependent metrics, low-similarity subsets and disorder-function extensions \citep{necci2021caid,caid3_2026,pang2024disoflag}. Strong recent methods include IDP-EDL, which combines PLM representations with short-, long- and generic-disorder predictors, and FusionEncoder, which integrates traditional and PLM-based features through a fusion architecture \citep{xie2025idpedl,liu2025fusionencoder}. CAID-era methods such as PUNCH2, PredIDR2, DisorderUnetLM and flDPnn3 further show that PLM-based or hybrid representations are now central to competitive disorder prediction \citep{meng2025punch2,han2025predidr2,kotowski2025disorderunetlm,wang2026fldpnn3}.
+
+Despite this progress, three issues remain important for a method paper. First, full-training benchmark gains can be misleading without explicit low-homology controls. Second, internal and terminal IDRs can have different error profiles that are hidden by aggregate AUC. Third, most predictors report raw scores rather than calibrated probabilities, limiting their practical use for experimental prioritization. In particular, a high residue-level score is more useful if it can be interpreted as a calibrated probability and accompanied by uncertainty information.
+
+We present \method, a sequence-only residue-level IDR prediction framework that combines frozen ESM2 representations \citep{lin2023esm}, temporal convolutional sequence modeling and auxiliary supervision for short/long and terminal/internal disorder patterns. The selected final model uses ESM2-t33-650M residue embeddings, one-hot and relative-position features, a three-seed score-averaged ensemble and validation-fitted Platt calibration \citep{platt1999probabilistic}. We keep the main model sequence-only and avoid PDB coordinates, experimentally missing residues, multiple-sequence alignments, profile features, AlphaFold confidence features and function labels as primary inputs. This design reduces leakage risk and simplifies deployment.
+
+The study makes five contributions. First, it evaluates a sequence-only PLM-based \method{} under a unified train/validation/test protocol. Second, it separates full DM3000 benchmark performance from target-specific NR25 low-homology training. Third, it uses error-analysis-driven representation upgrading to show that ESM2-t33 closes the DISORDER723 ranking gap that smoothing and loss reweighting did not solve. Fourth, it reports hard-case stratification across short/long disorder, terminal/internal IDRs, residue zones and protein-level strata. Fifth, it evaluates calibrated probability quality and uncertainty-error enrichment.
+
+\section{Materials and Methods}
+
+\subsection{Datasets and label handling}
+
+The study used DM3000 as the training set and DM1229 as the validation set. Three independent external benchmarks were used for final testing: SL329, MXD494 and DISORDER723 (Table~\ref{tab:dataset}). Labels were treated at residue level with three states: ordered, disordered and unknown. Unknown residues were excluded from all metric calculations, which primarily affects SL329. Thresholds, calibration parameters and model choices were selected on DM1229 and fixed before test-set evaluation.
+
+The three external benchmarks differ substantially in disorder prevalence. Among known residues, the disorder fraction is 0.435334 for SL329, 0.224360 for MXD494 and 0.062845 for DISORDER723. Because DISORDER723 is highly imbalanced, AUPR, MCC, Fmax and calibration metrics are reported alongside ROC-AUC.
+
+\subsection{NR25 leakage-control evaluation}
+
+Target-specific NR25 training sets were generated by removing DM3000 training proteins with MMseqs2 percentage identity above 25\% against each target benchmark \citep{steinegger2017mmseqs2}. The resulting training sets retained 2824 proteins for SL329, 2677 proteins for MXD494 and 2576 proteins for DISORDER723. Full DM3000 and NR25 results are reported separately to avoid mixing standard benchmark performance with low-homology generalization claims.
+
+\subsection{Sequence representation and \method{}}
+
+Residue-level ESM2 embeddings were extracted and cached. The representation-upgrade experiment replaced ESM2-t12-35M layer 12 with ESM2-t33-650M layer 33 while keeping the \method{} head, thresholding protocol and benchmark evaluation fixed. \method{} applies temporal convolutional sequence modeling to frozen residue representations, residue one-hot features and relative-position features. It also includes auxiliary supervision for short versus long disordered regions and terminal versus internal disorder patterns. These auxiliary tasks provide a region-aware training and analysis scaffold, rather than a claim of uniform aggregate-metric improvement.
+
+The final predictor averages scores from three independently trained ESM2-t33 \method{} models with seeds 1, 2 and 3. The ensemble score is used for ranking metrics, validation-selected thresholding and calibration.
+
+\subsection{Training, calibration and evaluation}
+
+Models were trained on DM3000 or target-specific NR25 training sets and selected using validation performance on DM1229. The binary decision threshold was selected on DM1229 by maximizing Fmax for the corresponding score distribution. For the final full-training ESM2-t33 ensemble, this validation-selected threshold was 0.833731 and was used for the Sn, Sp, BACC and MCC values reported in the main benchmark table. Test labels were never used for threshold tuning or calibration fitting.
+
+Post-hoc calibration was fitted using DM1229 validation predictions. Raw scores, temperature scaling, Platt scaling and isotonic regression were evaluated. Platt scaling was selected for the main calibrated output because it preserved ranking metrics while improving expected calibration error (ECE), Brier score and negative log-likelihood with lower overfitting risk than isotonic regression. Uncertainty was computed from calibrated binary predictive entropy.
+
+Residue-level performance was evaluated with sensitivity (Sn), specificity (Sp), balanced accuracy (BACC), Matthews correlation coefficient (MCC), ROC-AUC, AUPR and Fmax. Calibration quality was evaluated with ECE, Brier score and negative log-likelihood. Stratified analyses were performed for short disordered regions (SDRs), long disordered regions (LDRs), terminal/internal IDRs, residue zones, protein length bins and protein disorder-content bins. ESM2-t33 and ESM2-t12 \method{} ensembles were compared with protein-level paired bootstrap confidence intervals and paired permutation tests. External SOTA methods were available only as aggregate published metrics, so they were compared as point references rather than by paired statistical tests.
+
+\section{Results}
+
+\subsection{\method{} reaches AUC-level SOTA point performance in the full DM3000 setting}
+
+Under the full DM3000 training protocol, the ESM2-t33 \method{} ensemble reached AUC values of 0.919327, 0.850637 and 0.944611 on SL329, MXD494 and DISORDER723, respectively (Table~\ref{tab:full}; Figure~\ref{fig:rocpr}). These point estimates exceed the curated direct SOTA AUC values for all three benchmarks: IDP-EDL on SL329, FusionEncoder on MXD494 and IDP-EDL on DISORDER723 \citep{xie2025idpedl,liu2025fusionencoder}. The corresponding point gains were +0.004327, +0.008637 and +0.001611.
+
+Threshold-dependent metrics give a more restrained interpretation. On SL329, the model achieved MCC 0.736481, exceeding the curated IDP-EDL MCC of 0.700. On MXD494, it achieved MCC 0.499439, slightly above the curated FusionEncoder MCC of 0.492. On DISORDER723, MCC was 0.610462, below the curated IDP-EDL MCC of 0.636. Therefore, the primary performance claim is AUC-level SOTA point performance, not comprehensive dominance across all metrics.
+
+\subsection{ESM2-t33 is the main driver of the DISORDER723 gain}
+
+Replacing ESM2-t12 with ESM2-t33 improved AUC point estimates on all external datasets. The AUC delta was +0.004055 on SL329, +0.004781 on MXD494 and +0.021479 on DISORDER723 (Table~\ref{tab:full}). Protein-level paired statistics showed strong support for the DISORDER723 improvement, with a 95\% bootstrap CI of 0.013868 to 0.028520 and paired permutation \(p=0.001996\). SL329 and MXD494 had positive point deltas, but their protein-level confidence intervals crossed zero and should be interpreted as favorable but not statistically secure under conservative protein-level resampling.
+
+This result connects to the prior failure analysis (Figure~\ref{fig:evidence}). Score smoothing, position removal and focal/asymmetric losses did not close the DISORDER723 gap, whereas a stronger frozen PLM representation substantially improved ranking performance. The largest gain occurred on the most difficult benchmark, supporting representation quality as the main lever for this stage of the project.
+
+\subsection{NR25 evaluation defines the low-homology boundary}
+
+Target-specific NR25 training reduced performance relative to full DM3000 training (Table~\ref{tab:nr25}). The AUC drop was small on SL329 (-0.002266), larger on MXD494 (-0.016548) and moderate on DISORDER723 (-0.007736). Under NR25 training, \method{} remained above the curated SL329 SOTA AUC but fell below the curated MXD494 and DISORDER723 SOTA AUC values. The appropriate claim is therefore competitive low-homology robustness, not uniformly low-homology SOTA.
+
+\subsection{Hard-case stratification identifies internal IDRs as the remaining weakness}
+
+Hard-case stratification confirmed that IDR prediction difficulty is region dependent (Figure~\ref{fig:hardcase}). In DISORDER723, terminal IDR AUC was 0.968186, whereas internal IDR AUC was 0.887416 and internal MCC was 0.210033. The same qualitative pattern appears in other datasets, where internal IDRs are consistently harder than terminal IDRs. ESM2-t33 alleviates this failure mode but does not fully solve it.
+
+\subsection{Platt calibration improves probability quality and uncertainty tracks errors}
+
+Platt calibration preserved AUC, AUPR and MCC while improving probability quality (Table~\ref{tab:calibration}). On DISORDER723, ECE decreased from 0.187936 to 0.017608 and Brier score decreased from 0.093709 to 0.032479. On MXD494, ECE decreased from 0.256921 to 0.100902 and Brier score decreased from 0.219616 to 0.146934.
+
+Calibrated uncertainty was informative (Figure~\ref{fig:uncertainty}). The top 10\% most uncertain residues were enriched for errors by 2.57-fold on SL329, 2.51-fold on MXD494 and 6.96-fold on DISORDER723. This supports uncertainty-aware interpretation, especially for low-prevalence or annotation-sensitive benchmarks.
+
+\section{Discussion}
+
+\method{} supports a sequence-only, region-aware and calibrated framing for intrinsic disorder prediction. The final ESM2-t33 ensemble reaches AUC-level SOTA point performance on SL329, MXD494 and DISORDER723 under the full DM3000 protocol. The strongest evidence is not merely the final point estimate but the experimental chain: low-cost post-processing and loss variants did not close the DISORDER723 gap, whereas upgrading the frozen PLM representation substantially improved DISORDER723 ranking and internal-IDR behavior.
+
+The study also clarifies the boundary of the performance claim. Protein-level paired statistics support a strong ESM2-t33-over-ESM2-t12 gain on DISORDER723, but the corresponding gains on SL329 and MXD494 are smaller and not significant under conservative protein-level resampling. External SOTA methods do not provide residue-level predictions, so direct paired tests against them are not possible. For this reason, the manuscript claims AUC-level SOTA point performance rather than broad statistical dominance over all existing predictors.
+
+The NR25 experiments are a strength because they separate standard benchmark performance from low-homology generalization. The t33 model remains competitive under NR25 training and remains above the SL329 SOTA AUC, but MXD494 and DISORDER723 fall below the curated SOTA values. This limitation should be stated explicitly. It improves credibility and positions the work as leakage-aware rather than benchmark-optimized.
+
+Calibration is a practical contribution. Platt scaling markedly improves ECE and Brier score, especially on MXD494 and DISORDER723, without changing AUC, AUPR or MCC. Calibrated uncertainty also enriches prediction errors, supporting a caution signal for ambiguous residues, disorder boundaries and low-prevalence datasets.
+
+Internal IDRs remain the major unsolved technical problem. Although ESM2-t33 improved DISORDER723 internal AUC, internal MCC remained low. This suggests that internal disorder may require additional signals, such as function-aware labels, binding-region annotations, molecular recognition feature labels or specialized hard-example training. Structure features should not be added casually because local audits found no controlled structure-feature coverage and several benchmarks contain PDB-chain-like identifiers, creating leakage risk. Structure-aware preprints and CAID3-era predictors should therefore be treated as important future-work context rather than as uncontrolled add-ons to the present sequence-only claim \citep{kabir2026esmdispred,wang2026fldpnn3}.
+
+Overall, the strongest manuscript position is not that a new neural network solves IDR prediction. The stronger contribution is a transparent and calibrated PLM-era benchmark framework that achieves strong full-training performance, exposes low-homology and internal-IDR limitations, and provides probability estimates suitable for uncertainty-aware use.
+
+\section{Conclusion}
+
+\method{} provides a sequence-only, region-aware and calibrated framework for residue-level intrinsic disorder prediction. The ESM2-t33 three-seed ensemble achieves AUC-level SOTA point performance on three external benchmarks under the full DM3000 protocol, with the strongest statistically supported representation-upgrade gain on DISORDER723. The model remains competitive but not uniformly SOTA under target-specific NR25 evaluation. Platt calibration substantially improves probability quality and calibrated uncertainty enriches prediction errors. The main remaining challenges are internal IDR classification, DISORDER723 MCC and low-homology generalization on MXD494 and DISORDER723.
+
+\section{Availability and implementation}
+
+Code, configuration files, trained model weights, validation-fitted calibration parameters, residue-level predictions, benchmark result tables and figure-generation assets will be made available in a public repository and archived with a permanent DOI before publication. The repository URL and archival DOI are to be inserted before submission. The local reproducibility package contains labeled FASTA datasets under \texttt{data/}, target-specific NR25 train-set construction artifacts under \texttt{data/nr25\_by\_test/}, cached ESM2 embeddings under \texttt{data/features/esm2\_embeddings/}, trained \method{} weights under \texttt{models/}, predictions under \texttt{predictions/}, result tables under \texttt{results/}, figures under \texttt{figures/}, and manuscript assets under \texttt{manuscript/}. The final public release should either include the cached ESM2 embeddings or provide exact commands for regenerating them from sequence FASTA files.
+
+\section{Data availability}
+
+The datasets, processed train/validation/test splits, prediction outputs, evaluation tables and manuscript figures will be released with the code repository subject to third-party dataset redistribution permissions. If direct redistribution of any benchmark file is restricted, the repository will provide construction scripts, checksums and instructions for obtaining the source data.
+
+\section{Supplementary data}
+
+Supplementary material includes the paper-level ablation table, protein-level bootstrap and paired permutation results, hard-case stratified performance, full calibration metrics and uncertainty-error enrichment tables.
+
+\section{Funding}
+
+\placeholder{Funding information to be filled before submission.}
+
+\section{Conflict of interest}
+
+\placeholder{Conflict of interest statement to be filled before submission.}
+
+\section{Acknowledgements}
+
+\placeholder{Acknowledgements to be filled before submission.}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figure1_evidence_chain.pdf}
+\caption{Evidence chain and model framing. The manuscript separates architecture choice, representation upgrading, calibration, NR25 robustness and hard-case analysis, keeping performance claims tied to their corresponding evidence level.}
+\label{fig:evidence}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figure2_roc_pr.pdf}
+\caption{ROC and precision-recall curves for the ESM2-t12 to ESM2-t33 representation upgrade. The largest and statistically supported AUC gain occurs on DISORDER723.}
+\label{fig:rocpr}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figure3_hard_case_auc.pdf}
+\caption{Hard-case stratified AUC for the final ESM2-t33 \method{} ensemble. Terminal IDRs are easier than internal IDRs, and DISORDER723 internal IDRs remain the principal unresolved weakness.}
+\label{fig:hardcase}
+\end{figure*}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figure4_calibration_uncertainty.pdf}
+\caption{Platt calibration and uncertainty-error enrichment. Calibrated uncertainty identifies error-enriched residues, especially on the highly imbalanced DISORDER723 benchmark.}
+\label{fig:uncertainty}
+\end{figure*}
+
+\begin{table*}[!t]
+\centering
+\caption{Dataset and NR25 leakage-control summary. Unknown residues are masked during evaluation.}
+\label{tab:dataset}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+Dataset & Proteins & Known & Disordered & Unknown & Disorder frac. & SDR & LDR & Terminal & Internal & NR25 kept \\
+\midrule
+DM3000 train & 3000 & 730804 & 74170 & 0 & 0.101491 & 5427 & 392 & 4183 & 1636 & NA \\
+DM1229 validation & 1229 & 305830 & 29082 & 0 & 0.095092 & 2372 & 166 & 1751 & 787 & NA \\
+SL329 test & 329 & 90836 & 39544 & 89582 & 0.435334 & 464 & 274 & 328 & 410 & 2824 \\
+MXD494 test & 494 & 196501 & 44087 & 0 & 0.224360 & 577 & 271 & 517 & 331 & 2677 \\
+DISORDER723 test & 723 & 215229 & 13526 & 0 & 0.062845 & 1363 & 60 & 1017 & 406 & 2576 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[!t]
+\centering
+\caption{Full DM3000 benchmark performance. Binary metrics use the DM1229 validation-selected threshold. Paired statistics compare local ESM2-t33 and ESM2-t12 \method{} ensembles, not external aggregate SOTA methods.}
+\label{tab:full}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+Dataset & Sn & Sp & BACC & MCC & AUC & AUPR & Fmax & SOTA & SOTA AUC & t12 AUC & t33 - t12 AUC \\
+\midrule
+SL329 & 0.774150 & 0.942759 & 0.858455 & 0.736481 & 0.919327 & 0.918972 & 0.842101 & IDP-EDL & 0.915000 & 0.915272 & 0.004055 \\
+MXD494 & 0.742350 & 0.812379 & 0.777365 & 0.499439 & 0.850637 & 0.604872 & 0.623957 & FusionEncoder & 0.842000 & 0.845856 & 0.004781 \\
+DISORDER723 & 0.654000 & 0.972866 & 0.813433 & 0.610462 & 0.944611 & 0.690249 & 0.639095 & IDP-EDL & 0.943000 & 0.923132 & 0.021479 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[!t]
+\centering
+\caption{Target-specific NR25 low-homology robustness. NR25 results are robustness evidence and are not uniformly SOTA.}
+\label{tab:nr25}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Dataset & Removed train & Kept train & Full AUC & NR25 AUC & AUC delta & NR25 AUPR & Full MCC & NR25 MCC \\
+\midrule
+SL329 & 176 & 2824 & 0.919327 & 0.917061 & -0.002266 & 0.913435 & 0.736481 & 0.733184 \\
+MXD494 & 323 & 2677 & 0.850637 & 0.834089 & -0.016548 & 0.585903 & 0.499439 & 0.483503 \\
+DISORDER723 & 424 & 2576 & 0.944611 & 0.936875 & -0.007736 & 0.652169 & 0.610462 & 0.601105 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[!t]
+\centering
+\caption{Platt calibration and uncertainty-error enrichment for the final ESM2-t33 ensemble. Calibration is fitted only on DM1229 validation predictions.}
+\label{tab:calibration}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+Dataset & AUC & AUPR & MCC & Raw ECE & Platt ECE & ECE delta & Raw Brier & Platt Brier & Top-10\% error enrich. \\
+\midrule
+SL329 & 0.919327 & 0.918972 & 0.736481 & 0.109384 & 0.100261 & -0.009123 & 0.126544 & 0.110885 & 2.565826 \\
+MXD494 & 0.850637 & 0.604872 & 0.499439 & 0.256921 & 0.100902 & -0.156019 & 0.219616 & 0.146934 & 2.513963 \\
+DISORDER723 & 0.944611 & 0.690249 & 0.610462 & 0.187936 & 0.017608 & -0.170328 & 0.093709 & 0.032479 & 6.955547 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\bibliographystyle{oup-abbrvnat}
+\bibliography{regionawaretcn_refs}
+
+\end{document}

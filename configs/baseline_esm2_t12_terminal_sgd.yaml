@@ -1,0 +1,16 @@
+experiment_id: p1_esm2_t12_terminal_sgd_seed1
+stage: P1
+model: sklearn.SGDClassifier
+features:
+  - esm
+  - position
+esm2_model: esm2_t12_35M_UR50D
+embedding_dir: data/features/esm2_embeddings/esm2_t12_35M_UR50D_layer12_fp16
+train: data/DM3000_Train.fasta
+validation: data/DM1229_Validation.fasta
+tests:
+  - data/SL329_test.fasta
+  - data/MXD494_test.fasta
+  - data/DISORDER723_test.fasta
+threshold_selection: validation Fmax on DM1229_Validation
+seed: 1
