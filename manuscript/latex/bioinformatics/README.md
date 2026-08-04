@@ -11,7 +11,7 @@ This directory contains a Bioinformatics-oriented LaTeX manuscript prepared with
 
 ## Main Files
 
-- `main.tex`: full Bioinformatics-style manuscript draft.
+- `main.tex`: current P5.7 Bioinformatics-style manuscript draft using the P4.8 warm-start RegionAdapterMoETCN main model.
 - `regionawaretcn_refs.bib`: BibTeX references cited by `main.tex`.
 - `oup-authoring-template.cls`: OUP LaTeX class.
 - `oup-abbrvnat.bst`: OUP author-year bibliography style.
@@ -20,13 +20,19 @@ This directory contains a Bioinformatics-oriented LaTeX manuscript prepared with
 
 ## Compile Command Used In This Workspace
 
-The PDF in this package was generated with a user-level Tectonic environment:
+The current P5.7 PDF in this package was generated with a user-level Tectonic environment:
 
 ```bash
 /data8T/IDPs_DM3000Train/.conda/tectonic/bin/tectonic --keep-logs --keep-intermediates main.tex
 ```
 
 Tectonic automatically downloaded the required TeX packages and ran BibTeX during compilation.
+
+The compiled P5.7 manuscript is also copied to:
+
+```bash
+manuscript/latex/RegionAdapterMoETCN_Bioinformatics_P5_7_manuscript.pdf
+```
 
 If using a conventional TeX Live environment instead, use:
 

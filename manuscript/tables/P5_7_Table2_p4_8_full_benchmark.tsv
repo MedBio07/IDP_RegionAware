@@ -1,0 +1,4 @@
+dataset	method	sn	sp	bacc	mcc	auc	aupr	fmax	sota_method	sota_auc	auc_gap_vs_sota	p4_8_minus_p4_6_auc	p4_8_minus_p4_6_mcc	auc_delta_ci_95	paired_permutation_p
+SL329	RegionAdapterMoETCN warm-start + Platt	0.780902	0.935526	0.858214	0.733181	0.920545	0.920569	0.841076	IDP-EDL	0.915000	0.005545	0.001218	-0.003300	0.000298 to 0.002092	0.253493
+MXD494	RegionAdapterMoETCN warm-start + Platt	0.752104	0.807806	0.779955	0.501629	0.850471	0.602829	0.624979	FusionEncoder	0.842000	0.008471	-0.000166	0.002190	-0.001384 to 0.001085	0.497006
+DISORDER723	RegionAdapterMoETCN warm-start + Platt	0.659175	0.972673	0.815924	0.613151	0.945409	0.693164	0.642751	IDP-EDL	0.943000	0.002409	0.000798	0.002689	0.000015 to 0.001502	0.321357
