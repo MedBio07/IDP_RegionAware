@@ -6,7 +6,7 @@ Date: 2026-08-03
 
 P5.4 status: **CONDITIONALLY_READY_FOR_AUTHOR_COMPLETION**.
 
-The scientific evidence chain is internally consistent, and the main benchmark metrics are reproducible from the final prediction files. The package is not yet submission-final because author-specific metadata, public repository/DOI, formal references, licensing and exact hardware/runtime details remain unresolved.
+The scientific evidence chain is internally consistent, and the main benchmark metrics are reproducible from the final prediction files. The package is not yet submission-final because author-specific metadata, archival DOI, formal references, licensing and exact hardware/runtime details remain unresolved.
 
 ## Compliance Snapshot
 
@@ -62,7 +62,7 @@ The D2MOE 2026 arXiv risk was checked and does not report the same SL329/MXD494/
 ## Next Required Actions
 
 1. Fill authors, affiliations, corresponding author, funding, conflicts and final cover-letter signature.
-2. Create public code/data/model repository and archival DOI.
+2. Create archival DOI for weights, predictions, large result tables and derived artifacts.
 3. Convert the reference audit into journal-ready references.
 4. Add exact software/hardware/runtime details.
 5. Re-run final direct SOTA search immediately before submission upload.

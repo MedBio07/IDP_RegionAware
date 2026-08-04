@@ -114,7 +114,7 @@ RegionAwareTCN provides a sequence-only, region-aware and calibrated framework f
 
 ## Data Availability
 
-Code, configuration files, trained model weights, validation-fitted calibration parameters, residue-level predictions, benchmark result tables and figure-generation assets will be made available in a public repository and archived with a permanent DOI before publication. The repository URL and archival DOI are to be inserted before submission.
+Code, configuration files, reproducibility scripts, figures and manuscript assets will be made available at https://github.com/MedBio07/IDP_RegionAware. Trained model weights, validation-fitted calibration parameters, residue-level predictions, benchmark result tables and large derived artifacts will be archived with a permanent DOI before submission.
 
 The local reproducibility package contains labeled FASTA datasets under `data/`, target-specific NR25 train-set construction artifacts under `data/nr25_by_test/`, cached ESM2 embeddings under `data/features/esm2_embeddings/`, trained RegionAwareTCN weights under `models/`, predictions under `predictions/`, result tables under `results/`, figures under `figures/`, and manuscript assets under `manuscript/`. The final public release should either include the cached ESM2 embeddings or provide exact commands for regenerating them from sequence FASTA files.
 

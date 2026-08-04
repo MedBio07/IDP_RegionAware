@@ -3,6 +3,8 @@
 Region-aware intrinsic disorder prediction experiments for DM3000 training and
 external IDP benchmarks.
 
+Repository URL: https://github.com/MedBio07/IDP_RegionAware
+
 ## Repository Contents
 
 - `scripts/`: training, prediction, evaluation, calibration, ablation, and

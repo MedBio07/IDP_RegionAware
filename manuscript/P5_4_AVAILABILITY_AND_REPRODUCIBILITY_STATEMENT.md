@@ -2,7 +2,7 @@
 
 ## Availability And Implementation Draft
 
-Code, configuration files, evaluation scripts, trained RegionAwareTCN weights, validation-fitted calibration parameters, residue-level prediction files, generated result tables and figure-generation assets should be deposited in a public repository before submission. The repository URL and archival DOI are not yet assigned and must be inserted before journal submission.
+Code, configuration files, evaluation scripts, figure-generation scripts, manuscript assets and small summary artifacts should be deposited in the public repository at https://github.com/MedBio07/IDP_RegionAware. Trained RegionAwareTCN weights, validation-fitted calibration parameters, residue-level prediction files, generated result tables and large derived artifacts should be deposited in an archival repository before submission. The archival DOI is not yet assigned and must be inserted before journal submission.
 
 The current local package already contains the following reproducibility assets:
 
@@ -25,7 +25,7 @@ The current local package already contains the following reproducibility assets:
 
 ## Submission-Time Missing Items
 
-- Public repository URL and archival DOI.
+- Archival DOI for weights, predictions, large result tables and derived artifacts.
 - License for code and model weights.
 - Confirmation that the 5.1 GB ESM2 embedding cache can be redistributed; otherwise provide regeneration commands only.
 - Exact GPU model, driver version, CUDA runtime and wall-clock training times.

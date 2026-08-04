@@ -46,7 +46,7 @@ latexmk -pdf main.tex
 ## Required Manual Replacements Before Submission
 
 - Replace all `\placeholder{...}` fields with real authors, affiliations, funding, conflicts and acknowledgements.
-- Replace `https://github.com/TO-BE-FILLED/RegionAwareTCN` with the public repository URL.
-- Insert the Zenodo or institutional archive DOI.
+- Confirm that `https://github.com/MedBio07/IDP_RegionAware` is public and accessible.
+- Insert the Zenodo or institutional archive DOI for weights, predictions and large derived artifacts.
 - Re-check all BibTeX entries with a reference manager.
 - Confirm whether Bioinformatics prefers author-year or numbered references for the final upload. This draft currently uses `namedate` and `oup-abbrvnat`.
