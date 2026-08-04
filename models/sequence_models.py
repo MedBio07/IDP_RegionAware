@@ -95,6 +95,101 @@ class RegionAwareTCN(nn.Module):
         }
 
 
+class LowRankResidualAdapter(nn.Module):
+    """Low-rank residual adapter for frozen-representation specialization."""
+
+    def __init__(
+        self,
+        hidden_dim: int,
+        adapter_dim: int = 32,
+        dropout: float = 0.15,
+    ) -> None:
+        super().__init__()
+        self.norm = nn.LayerNorm(hidden_dim)
+        self.down = nn.Linear(hidden_dim, adapter_dim)
+        self.up = nn.Linear(adapter_dim, hidden_dim)
+        self.dropout = nn.Dropout(dropout)
+        nn.init.zeros_(self.up.weight)
+        nn.init.zeros_(self.up.bias)
+
+    def forward(self, x: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+        z = self.down(self.norm(x))
+        z = self.up(self.dropout(F.gelu(z)))
+        return (x + z) * mask.unsqueeze(-1)
+
+
+class RegionAdapterMoETCN(nn.Module):
+    """Region-specialized low-rank adapters with a learned MoE residue gate."""
+
+    def __init__(
+        self,
+        input_dim: int,
+        hidden_dim: int = 128,
+        layers: int = 4,
+        dropout: float = 0.15,
+        kernels: tuple[int, ...] = (3, 7, 15),
+        adapter_dim: int = 32,
+        gate_temperature: float = 1.0,
+    ) -> None:
+        super().__init__()
+        self.gate_temperature = gate_temperature
+        self.input_norm = nn.LayerNorm(input_dim)
+        self.input_projection = nn.Linear(input_dim, hidden_dim)
+        self.blocks = nn.ModuleList(
+            [
+                MultiKernelTCNBlock(
+                    hidden_dim=hidden_dim,
+                    kernels=kernels,
+                    dilation=2 ** index,
+                    dropout=dropout,
+                )
+                for index in range(layers)
+            ]
+        )
+        self.final_norm = nn.LayerNorm(hidden_dim)
+        self.region_adapters = nn.ModuleList(
+            [
+                LowRankResidualAdapter(
+                    hidden_dim=hidden_dim,
+                    adapter_dim=adapter_dim,
+                    dropout=dropout,
+                )
+                for _ in range(4)
+            ]
+        )
+        self.generic_head = nn.Linear(hidden_dim, 1)
+        self.expert_heads = nn.ModuleList([nn.Linear(hidden_dim, 1) for _ in range(4)])
+        self.gate_head = nn.Linear(hidden_dim, 4)
+        self.auxiliary_head = nn.Linear(hidden_dim, 4)
+
+    def forward(self, x: torch.Tensor, mask: torch.Tensor) -> dict[str, torch.Tensor]:
+        h = self.input_projection(self.input_norm(x))
+        h = F.gelu(h) * mask.unsqueeze(-1)
+        for block in self.blocks:
+            h = block(h, mask)
+        h = self.final_norm(h)
+        temperature = max(float(self.gate_temperature), 1.0e-6)
+        gate_logits = self.gate_head(h) / temperature
+        gate_weights = torch.softmax(gate_logits, dim=-1)
+        adapted_states = torch.stack([adapter(h, mask) for adapter in self.region_adapters], dim=2)
+        expert_logits = torch.stack(
+            [head(adapted_states[:, :, index, :]).squeeze(-1) for index, head in enumerate(self.expert_heads)],
+            dim=-1,
+        )
+        generic_logits = self.generic_head(h).squeeze(-1)
+        expert_delta = torch.sum(expert_logits * gate_weights, dim=-1)
+        disorder_logits = generic_logits + expert_delta
+        auxiliary_logits = self.auxiliary_head(h)
+        return {
+            "disorder_logits": disorder_logits,
+            "generic_logits": generic_logits,
+            "expert_logits": expert_logits,
+            "gate_logits": gate_logits,
+            "gate_weights": gate_weights,
+            "auxiliary_logits": auxiliary_logits,
+        }
+
+
 class GenericTCN(nn.Module):
     """Frozen-feature TCN without region experts or auxiliary heads."""
 

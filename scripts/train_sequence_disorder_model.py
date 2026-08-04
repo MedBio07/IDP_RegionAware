@@ -23,7 +23,7 @@ from torch.nn import functional as F
 from annotate_disorder_regions import is_terminal_segment, iter_disorder_segments
 from evaluate_disorder_predictions import parse_labeled_fasta, roc_auc
 from models.features import feature_matrix, parse_feature_list
-from models.sequence_models import AuxiliaryTCN, GenericTCN, RegionAwareTCN
+from models.sequence_models import AuxiliaryTCN, GenericTCN, RegionAdapterMoETCN, RegionAwareTCN
 
 
 AUXILIARY_NAMES = ("sdr", "ldr", "terminal_idr", "internal_idr")
@@ -252,12 +252,27 @@ def masked_disorder_loss(
     return torch.sum(loss * mask) / torch.clamp(torch.sum(mask), min=1.0)
 
 
+def masked_region_gate_loss(
+    gate_weights: torch.Tensor,
+    region_targets: torch.Tensor,
+    known_mask: torch.Tensor,
+) -> torch.Tensor:
+    target_sum = torch.sum(region_targets, dim=-1, keepdim=True)
+    gate_mask = known_mask * (target_sum.squeeze(-1) > 0).float()
+    normalized_targets = region_targets / torch.clamp(target_sum, min=1.0)
+    log_gate = torch.log(torch.clamp(gate_weights, min=1.0e-8))
+    loss = -torch.sum(normalized_targets * log_gate, dim=-1)
+    return torch.sum(loss * gate_mask) / torch.clamp(torch.sum(gate_mask), min=1.0)
+
+
 def build_model(
     model_type: str,
     input_dim: int,
     hidden_dim: int,
     layers: int,
     dropout: float,
+    adapter_dim: int,
+    gate_temperature: float,
 ) -> torch.nn.Module:
     if model_type in ("RegionAwareTCN", "region_aware_tcn"):
         return RegionAwareTCN(input_dim=input_dim, hidden_dim=hidden_dim, layers=layers, dropout=dropout)
@@ -265,6 +280,15 @@ def build_model(
         return GenericTCN(input_dim=input_dim, hidden_dim=hidden_dim, layers=layers, dropout=dropout)
     if model_type in ("AuxiliaryTCN", "auxiliary_tcn"):
         return AuxiliaryTCN(input_dim=input_dim, hidden_dim=hidden_dim, layers=layers, dropout=dropout)
+    if model_type in ("RegionAdapterMoETCN", "region_adapter_moe_tcn"):
+        return RegionAdapterMoETCN(
+            input_dim=input_dim,
+            hidden_dim=hidden_dim,
+            layers=layers,
+            dropout=dropout,
+            adapter_dim=adapter_dim,
+            gate_temperature=gate_temperature,
+        )
     raise ValueError(f"unsupported model type: {model_type}")
 
 
@@ -275,7 +299,63 @@ def canonical_model_type(model_type: str) -> str:
         return "GenericTCN"
     if model_type in ("AuxiliaryTCN", "auxiliary_tcn"):
         return "AuxiliaryTCN"
+    if model_type in ("RegionAdapterMoETCN", "region_adapter_moe_tcn"):
+        return "RegionAdapterMoETCN"
     raise ValueError(f"unsupported model type: {model_type}")
+
+
+def initialize_model_from_checkpoint(
+    model: torch.nn.Module,
+    checkpoint_path: Path,
+    device: torch.device,
+) -> list[str]:
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    source_state = checkpoint["model_state_dict"]
+    target_state = model.state_dict()
+    loaded_keys: list[str] = []
+    for key, value in source_state.items():
+        if key in target_state and target_state[key].shape == value.shape:
+            target_state[key].copy_(value)
+            loaded_keys.append(key)
+    if isinstance(model, RegionAdapterMoETCN):
+        expert_weight = source_state.get("expert_head.weight")
+        expert_bias = source_state.get("expert_head.bias")
+        if expert_weight is not None:
+            for index in range(min(4, expert_weight.shape[0])):
+                key = f"expert_heads.{index}.weight"
+                if key in target_state and target_state[key].shape == expert_weight[index : index + 1].shape:
+                    target_state[key].copy_(expert_weight[index : index + 1])
+                    loaded_keys.append(key)
+        if expert_bias is not None:
+            for index in range(min(4, expert_bias.shape[0])):
+                key = f"expert_heads.{index}.bias"
+                if key in target_state and target_state[key].shape == expert_bias[index : index + 1].shape:
+                    target_state[key].copy_(expert_bias[index : index + 1])
+                    loaded_keys.append(key)
+    model.load_state_dict(target_state)
+    return loaded_keys
+
+
+def freeze_shared_backbone_parameters(model: torch.nn.Module) -> tuple[int, int]:
+    trainable_prefixes = ("region_adapters.", "expert_heads.", "gate_head.")
+    total = 0
+    trainable = 0
+    for name, parameter in model.named_parameters():
+        total += parameter.numel()
+        parameter.requires_grad = name.startswith(trainable_prefixes)
+        if parameter.requires_grad:
+            trainable += parameter.numel()
+    return total, trainable
+
+
+def count_trainable_parameters(model: torch.nn.Module) -> tuple[int, int]:
+    total = 0
+    trainable = 0
+    for parameter in model.parameters():
+        total += parameter.numel()
+        if parameter.requires_grad:
+            trainable += parameter.numel()
+    return total, trainable
 
 
 def train_epoch(
@@ -294,6 +374,7 @@ def train_epoch(
     focal_gamma: float,
     asym_gamma_pos: float,
     asym_gamma_neg: float,
+    gate_loss_weight: float,
     rng: random.Random,
 ) -> dict[str, float]:
     model.train()
@@ -303,6 +384,7 @@ def train_epoch(
     total_loss = 0.0
     total_main = 0.0
     total_aux = 0.0
+    total_gate = 0.0
     total_known = 0.0
     for batch in batches:
         tensors = collate_batch(batch, feature_names, embedding_dir, device)
@@ -328,7 +410,16 @@ def train_epoch(
                 aux_mask,
                 aux_weight,
             )
-        loss = main_loss + aux_loss_weight * aux_loss
+        gate_loss = output["disorder_logits"].new_tensor(0.0)
+        if gate_loss_weight > 0.0:
+            if "gate_weights" not in output:
+                raise ValueError("gate loss requires a model with gate_weights")
+            gate_loss = masked_region_gate_loss(
+                output["gate_weights"],
+                tensors["auxiliary"],
+                tensors["known_mask"],
+            )
+        loss = main_loss + aux_loss_weight * aux_loss + gate_loss_weight * gate_loss
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=5.0)
@@ -337,11 +428,13 @@ def train_epoch(
         total_loss += float(loss.detach().cpu()) * known
         total_main += float(main_loss.detach().cpu()) * known
         total_aux += float(aux_loss.detach().cpu()) * known
+        total_gate += float(gate_loss.detach().cpu()) * known
         total_known += known
     return {
         "train_loss": total_loss / total_known,
         "train_main_loss": total_main / total_known,
         "train_aux_loss": total_aux / total_known,
+        "train_gate_loss": total_gate / total_known,
         "train_batches": float(len(batches)),
     }
 
@@ -453,6 +546,7 @@ def write_epoch_log(path: Path, rows: list[dict[str, object]]) -> None:
         "train_loss",
         "train_main_loss",
         "train_aux_loss",
+        "train_gate_loss",
         "train_batches",
         "validation_auc",
         "validation_aupr",
@@ -495,7 +589,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--model-type",
         default="RegionAwareTCN",
-        choices=("RegionAwareTCN", "region_aware_tcn", "GenericTCN", "generic_tcn", "AuxiliaryTCN", "auxiliary_tcn"),
+        choices=(
+            "RegionAwareTCN",
+            "region_aware_tcn",
+            "GenericTCN",
+            "generic_tcn",
+            "AuxiliaryTCN",
+            "auxiliary_tcn",
+            "RegionAdapterMoETCN",
+            "region_adapter_moe_tcn",
+        ),
     )
     parser.add_argument("--embedding-dir", type=Path)
     parser.add_argument("--model-out", required=True, type=Path)
@@ -508,9 +611,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--hidden-dim", type=int, default=128)
     parser.add_argument("--layers", type=int, default=4)
     parser.add_argument("--dropout", type=float, default=0.15)
+    parser.add_argument("--adapter-dim", type=int, default=32)
+    parser.add_argument("--gate-temperature", type=float, default=1.0)
+    parser.add_argument("--init-from-checkpoint", type=Path)
+    parser.add_argument("--freeze-shared-backbone", action="store_true")
+    parser.add_argument("--select-initial-checkpoint", action="store_true")
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--aux-loss-weight", type=float, default=0.20)
+    parser.add_argument("--gate-loss-weight", type=float, default=0.0)
     parser.add_argument("--loss-type", choices=("bce", "focal", "asymmetric"), default="bce")
     parser.add_argument("--focal-gamma", type=float, default=2.0)
     parser.add_argument("--asym-gamma-pos", type=float, default=0.0)
@@ -547,13 +656,89 @@ def main() -> None:
         hidden_dim=args.hidden_dim,
         layers=args.layers,
         dropout=args.dropout,
+        adapter_dim=args.adapter_dim,
+        gate_temperature=args.gate_temperature,
     ).to(device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
+    loaded_init_keys: list[str] = []
+    if args.init_from_checkpoint:
+        loaded_init_keys = initialize_model_from_checkpoint(model, args.init_from_checkpoint, device)
+    total_parameters, trainable_parameters = count_trainable_parameters(model)
+    if args.freeze_shared_backbone:
+        total_parameters, trainable_parameters = freeze_shared_backbone_parameters(model)
+    trainable_parameter_list = [parameter for parameter in model.parameters() if parameter.requires_grad]
+    if not trainable_parameter_list:
+        raise ValueError("no trainable parameters remain after freezing")
+    optimizer = torch.optim.AdamW(trainable_parameter_list, lr=args.learning_rate, weight_decay=args.weight_decay)
     rng = random.Random(args.seed)
 
     best_auc = -1.0
     best_metadata: dict[str, object] | None = None
     epoch_rows: list[dict[str, object]] = []
+
+    def checkpoint_metadata(epoch: int, val_metrics: dict[str, float | int]) -> dict[str, object]:
+        return {
+            "experiment_id": args.experiment_id,
+            "train": str(args.train),
+            "validation": str(args.validation),
+            "features": feature_names,
+            "embedding_dir": str(args.embedding_dir) if args.embedding_dir else None,
+            "model_type": model_type,
+            "input_dim": input_dim,
+            "hidden_dim": args.hidden_dim,
+            "layers": args.layers,
+            "dropout": args.dropout,
+            "adapter_dim": args.adapter_dim,
+            "gate_temperature": args.gate_temperature,
+            "init_from_checkpoint": str(args.init_from_checkpoint) if args.init_from_checkpoint else None,
+            "loaded_init_keys": len(loaded_init_keys),
+            "freeze_shared_backbone": args.freeze_shared_backbone,
+            "total_parameters": total_parameters,
+            "trainable_parameters": trainable_parameters,
+            "auxiliary_names": list(AUXILIARY_NAMES),
+            "aux_loss_weight": args.aux_loss_weight,
+            "gate_loss_weight": args.gate_loss_weight,
+            "loss_type": args.loss_type,
+            "focal_gamma": args.focal_gamma,
+            "asym_gamma_pos": args.asym_gamma_pos,
+            "asym_gamma_neg": args.asym_gamma_neg,
+            "disorder_pos_weight": disorder_pos_weight,
+            "aux_pos_weight": aux_pos_weight.tolist(),
+            "threshold": val_metrics["threshold"],
+            "validation_auc": val_metrics["validation_auc"],
+            "validation_aupr": val_metrics["validation_aupr"],
+            "validation_fmax": val_metrics["validation_fmax"],
+            "validation_mcc": val_metrics["validation_mcc"],
+            "best_epoch": epoch,
+            "seed": args.seed,
+        }
+
+    if args.select_initial_checkpoint:
+        val_predictions = predict_examples(
+            model=model,
+            examples=validation_examples,
+            feature_names=feature_names,
+            embedding_dir=args.embedding_dir,
+            device=device,
+            max_tokens=args.max_tokens,
+            max_proteins=args.max_proteins,
+        )
+        val_metrics = evaluate_predictions(validation_examples, val_predictions)
+        best_auc = float(val_metrics["validation_auc"])
+        best_metadata = checkpoint_metadata(0, val_metrics)
+        save_checkpoint(args.model_out, model, best_metadata)
+        epoch_row = {
+            "epoch": 0,
+            "train_loss": math.nan,
+            "train_main_loss": math.nan,
+            "train_aux_loss": math.nan,
+            "train_gate_loss": math.nan,
+            "train_batches": 0.0,
+            **val_metrics,
+            "epoch_seconds": 0.0,
+        }
+        epoch_rows.append(epoch_row)
+        print(json.dumps({key: format_value(value) for key, value in epoch_row.items()}, ensure_ascii=False), flush=True)
+
     for epoch in range(1, args.epochs + 1):
         epoch_started = time.perf_counter()
         train_row = train_epoch(
@@ -572,6 +757,7 @@ def main() -> None:
             focal_gamma=args.focal_gamma,
             asym_gamma_pos=args.asym_gamma_pos,
             asym_gamma_neg=args.asym_gamma_neg,
+            gate_loss_weight=args.gate_loss_weight,
             rng=rng,
         )
         val_predictions = predict_examples(
@@ -594,33 +780,7 @@ def main() -> None:
         print(json.dumps({key: format_value(value) for key, value in epoch_row.items()}, ensure_ascii=False), flush=True)
         if float(val_metrics["validation_auc"]) > best_auc:
             best_auc = float(val_metrics["validation_auc"])
-            best_metadata = {
-                "experiment_id": args.experiment_id,
-                "train": str(args.train),
-                "validation": str(args.validation),
-                "features": feature_names,
-                "embedding_dir": str(args.embedding_dir) if args.embedding_dir else None,
-                "model_type": model_type,
-                "input_dim": input_dim,
-                "hidden_dim": args.hidden_dim,
-                "layers": args.layers,
-                "dropout": args.dropout,
-                "auxiliary_names": list(AUXILIARY_NAMES),
-                "aux_loss_weight": args.aux_loss_weight,
-                "loss_type": args.loss_type,
-                "focal_gamma": args.focal_gamma,
-                "asym_gamma_pos": args.asym_gamma_pos,
-                "asym_gamma_neg": args.asym_gamma_neg,
-                "disorder_pos_weight": disorder_pos_weight,
-                "aux_pos_weight": aux_pos_weight.tolist(),
-                "threshold": val_metrics["threshold"],
-                "validation_auc": val_metrics["validation_auc"],
-                "validation_aupr": val_metrics["validation_aupr"],
-                "validation_fmax": val_metrics["validation_fmax"],
-                "validation_mcc": val_metrics["validation_mcc"],
-                "best_epoch": epoch,
-                "seed": args.seed,
-            }
+            best_metadata = checkpoint_metadata(epoch, val_metrics)
             save_checkpoint(args.model_out, model, best_metadata)
 
     if best_metadata is None:

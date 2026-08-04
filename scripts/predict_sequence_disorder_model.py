@@ -16,7 +16,7 @@ import torch
 
 from evaluate_disorder_predictions import parse_labeled_fasta
 from models.features import feature_matrix
-from models.sequence_models import AuxiliaryTCN, GenericTCN, RegionAwareTCN
+from models.sequence_models import AuxiliaryTCN, GenericTCN, RegionAdapterMoETCN, RegionAwareTCN
 
 
 def metadata_features(value: object) -> list[str]:
@@ -39,6 +39,10 @@ def build_model(metadata: dict[str, object]) -> torch.nn.Module:
         return GenericTCN(**kwargs)
     if model_type == "AuxiliaryTCN":
         return AuxiliaryTCN(**kwargs)
+    if model_type == "RegionAdapterMoETCN":
+        kwargs["adapter_dim"] = int(metadata.get("adapter_dim", 32))
+        kwargs["gate_temperature"] = float(metadata.get("gate_temperature", 1.0))
+        return RegionAdapterMoETCN(**kwargs)
     raise ValueError(f"unsupported model type in checkpoint: {model_type}")
 
 

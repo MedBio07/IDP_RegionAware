@@ -1,0 +1,66 @@
+experiment_id: p4_7_region_adapter_moe_tcn_esm2_t33_gate002_warm_seed1
+stage: P4.7
+model: RegionAdapterMoETCN
+features:
+  - esm
+  - position
+  - onehot
+esm2_model: esm2_t33_650M_UR50D
+embedding_dir: data/features/esm2_embeddings/esm2_t33_650M_UR50D_layer33_fp16
+train: data/DM3000_Train.fasta
+validation: data/DM1229_Validation.fasta
+tests:
+  - name: SL329
+    path: data/SL329_test.fasta
+  - name: MXD494
+    path: data/MXD494_test.fasta
+  - name: DISORDER723
+    path: data/DISORDER723_test.fasta
+architecture:
+  hidden_dim: 128
+  layers: 4
+  kernels: [3, 7, 15]
+  dilations: [1, 2, 4, 8]
+  dropout: 0.15
+  adapter_dim: 32
+  gate_temperature: 1.0
+warm_start:
+  init_from_checkpoint_pattern: models/p4_6_region_aware_tcn_esm2_t33_position_onehot_seed{seed}.pt
+  freeze_shared_backbone: true
+  select_initial_checkpoint: true
+  trainable_modules:
+    - region_adapters
+    - expert_heads
+    - gate_head
+region_experts:
+  - sdr
+  - ldr
+  - terminal_idr
+  - internal_idr
+training:
+  optimizer: AdamW
+  learning_rate: 0.0002
+  weight_decay: 0.0001
+  aux_loss_weight: 0.00
+  gate_loss_weight: 0.02
+  loss_type: bce
+  epochs: 6
+  max_tokens: 10000
+  max_proteins: 32
+  threshold_selection: validation Fmax on DM1229_Validation
+  seeds: [1, 2, 3]
+comparison_baseline:
+  full_train_model: p4_6_region_aware_tcn_esm2_t33_3seed_ensemble
+  full_train_auc:
+    SL329: 0.919327
+    MXD494: 0.850637
+    DISORDER723: 0.944611
+  warm_3seed_auc:
+    SL329: 0.920545
+    MXD494: 0.850471
+    DISORDER723: 0.945409
+  primary_result:
+    - DISORDER723 internal MCC improves from 0.210033 to 0.237379.
+    - DISORDER723 internal AUC improves from 0.887416 to 0.894658.
+    - MXD494 internal MCC improves from 0.228756 to 0.234204.
+    - SL329 overall AUC improves, but SL329 MCC and internal MCC decrease slightly.
