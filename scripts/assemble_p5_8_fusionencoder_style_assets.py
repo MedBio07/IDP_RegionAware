@@ -273,7 +273,7 @@ def plot_method_overview(path_pdf: Path, path_png: Path) -> None:
     matplotlib.use("Agg")
     import matplotlib as mpl
     import matplotlib.pyplot as plt
-    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+    from matplotlib.patches import Circle, FancyArrowPatch, FancyBboxPatch, Rectangle
 
     path_pdf.parent.mkdir(parents=True, exist_ok=True)
     path_eps = path_pdf.with_suffix(".eps")
@@ -306,7 +306,7 @@ def plot_method_overview(path_pdf: Path, path_png: Path) -> None:
         "savefig.facecolor": "white",
     }
     width_mm = 183.0
-    height_mm = 108.0
+    height_mm = 156.0
     with mpl.rc_context(rc):
         fig, ax = plt.subplots(figsize=(width_mm / 25.4, height_mm / 25.4), layout="constrained")
         ax.set_xlim(0, 1)
@@ -325,12 +325,13 @@ def plot_method_overview(path_pdf: Path, path_png: Path) -> None:
             weight: str = "normal",
             linestyle: str = "-",
             linewidth: float = 0.9,
+            radius: float = 0.008,
         ) -> None:
             patch = FancyBboxPatch(
                 (x, y),
                 w,
                 h,
-                boxstyle="round,pad=0.008,rounding_size=0.010",
+                boxstyle=f"round,pad=0.006,rounding_size={radius}",
                 linewidth=linewidth,
                 linestyle=linestyle,
                 edgecolor=edge,
@@ -374,99 +375,191 @@ def plot_method_overview(path_pdf: Path, path_png: Path) -> None:
                 )
             )
 
-        def panel_label(x: float, text: str) -> None:
-            ax.text(x, 0.895, text, ha="left", va="center", fontsize=7.2, color=palette["black"], fontweight="bold")
+        def panel(x: float, y: float, w: float, h: float, label: str, title: str) -> None:
+            ax.add_patch(Rectangle((x, y), w, h, facecolor="none", edgecolor="#1F354D", linewidth=0.95))
+            ax.text(x + 0.012, y + h - 0.020, f"({label})", ha="left", va="center", fontsize=7.8, fontweight="bold")
+            ax.text(x + 0.050, y + h - 0.020, title, ha="left", va="center", fontsize=7.6, fontweight="bold")
 
-        ax.text(
-            0.50,
-            0.962,
-            "RegionAdapterMoETCN sequence-only prediction workflow",
-            ha="center",
-            va="center",
-            fontsize=10.0,
-            fontweight="bold",
-            color=palette["black"],
-        )
-        panel_label(0.026, "a  Residue inputs")
-        panel_label(0.346, "b  Warm-start backbone")
-        panel_label(0.612, "c  Region-adapter MoE")
-        panel_label(0.850, "d  Calibration output")
+        def inset(x: float, y: float, w: float, h: float, title: str, edge: str) -> None:
+            ax.add_patch(Rectangle((x, y), w, h, facecolor="#FFFFFF", edgecolor=edge, linewidth=0.75, linestyle="--"))
+            ax.text(x + 0.010, y + h - 0.018, title, fontsize=6.0, ha="left", va="center")
 
-        box(0.028, 0.520, 0.104, 0.120, "Protein\nsequence", palette["pale_blue"], palette["blue"], 7.0, "bold")
-        feature_boxes = [
-            ("Frozen ESM2-t33\nembedding", 0.180, 0.730, palette["pale_blue"], palette["blue"]),
-            ("Amino-acid\none-hot", 0.180, 0.555, palette["pale_green"], palette["green"]),
-            ("Relative\nposition", 0.180, 0.380, palette["pale_orange"], palette["vermillion"]),
-        ]
-        for label, x, y, face, edge in feature_boxes:
-            box(x, y, 0.126, 0.100, label, face, edge, 6.2)
-            arrow((0.132, 0.580), (x, y + 0.050), edge, curve=0.07 if y > 0.58 else -0.07)
+        def token_track(x: float, y: float, tokens: str, cell_w: float, cell_h: float) -> None:
+            colors = [palette["pale_blue"], palette["pale_green"], palette["pale_orange"], palette["pale_purple"]]
+            edges = [palette["blue"], palette["green"], palette["vermillion"], palette["purple"]]
+            for index, token in enumerate(tokens):
+                cx = x + index * cell_w
+                ax.add_patch(
+                    FancyBboxPatch(
+                        (cx, y),
+                        cell_w * 0.83,
+                        cell_h,
+                        boxstyle="round,pad=0.002,rounding_size=0.004",
+                        facecolor=colors[index % len(colors)],
+                        edgecolor=edges[index % len(edges)],
+                        linewidth=0.7,
+                    )
+                )
+                ax.text(cx + cell_w * 0.415, y + cell_h / 2, token, ha="center", va="center", fontsize=6.0, fontweight="bold")
 
-        box(0.352, 0.540, 0.100, 0.105, "Concatenated\nresidue tensor", palette["white"], palette["black"], 6.4, "bold")
-        for _, x, y, _, edge in feature_boxes:
-            arrow((x + 0.126, y + 0.050), (0.352, 0.592), edge, curve=-0.02 if y > 0.58 else 0.02)
+        def matrix(x: float, y: float, rows: int, cols: int, w: float, h: float, edge: str, mode: str) -> None:
+            cell_w = w / cols
+            cell_h = h / rows
+            for row in range(rows):
+                for col in range(cols):
+                    if mode == "esm":
+                        intensity = (row * 2 + col * 3) % 7 / 6.0
+                        face = mpl.colors.to_hex((0.88 - 0.35 * intensity, 0.95 - 0.18 * intensity, 0.99))
+                    elif mode == "onehot":
+                        face = palette["green"] if row == (col * 2 + 1) % rows else "#FFFFFF"
+                    elif mode == "position":
+                        intensity = col / max(cols - 1, 1)
+                        face = mpl.colors.to_hex((1.0, 0.95 - 0.28 * intensity, 0.86 - 0.24 * intensity))
+                    else:
+                        face = "#FFFFFF"
+                    ax.add_patch(Rectangle((x + col * cell_w, y + (rows - row - 1) * cell_h), cell_w, cell_h, facecolor=face, edgecolor=edge, linewidth=0.22))
+            ax.add_patch(Rectangle((x, y), w, h, facecolor="none", edgecolor=edge, linewidth=0.7))
 
-        box(0.492, 0.727, 0.130, 0.083, "P4.6 checkpoint\nloads weights", palette["light_gray"], palette["gray"], 5.9)
-        box(0.492, 0.520, 0.130, 0.135, "Frozen shared\nTCN blocks", palette["light_gray"], palette["black"], 7.0, "bold")
-        arrow((0.452, 0.592), (0.492, 0.592), palette["gray"])
-        arrow((0.557, 0.727), (0.557, 0.655), palette["gray"], linewidth=0.8)
+        def vector_strip(x: float, y: float, n: int, w: float, h: float, edge: str, face: str) -> None:
+            gap = w * 0.006
+            cell_w = (w - gap * (n - 1)) / n
+            for index in range(n):
+                ax.add_patch(Rectangle((x + index * (cell_w + gap), y), cell_w, h, facecolor=face, edgecolor=edge, linewidth=0.45))
 
+        def conv_block(x: float, y: float, w: float, h: float, dilation: int) -> None:
+            box(x, y, w, h, "", "#FFFFFF", palette["gray"], linewidth=0.65, radius=0.006)
+            ax.text(x + w * 0.10, y + h * 0.78, f"d={dilation}", fontsize=4.8, color=palette["gray"], ha="left", va="center")
+            ys = [y + h * 0.62, y + h * 0.42, y + h * 0.22]
+            labels = ["k3", "k7", "k15"]
+            for yy, lab in zip(ys, labels):
+                ax.plot([x + w * 0.20, x + w * 0.58], [yy, yy], color=palette["blue"], linewidth=0.8)
+                for tick in range(3):
+                    ax.add_patch(Rectangle((x + w * (0.25 + tick * 0.11), yy - h * 0.035), w * 0.035, h * 0.07, facecolor=palette["pale_blue"], edgecolor=palette["blue"], linewidth=0.35))
+                ax.text(x + w * 0.66, yy, lab, ha="left", va="center", fontsize=4.6)
+            ax.text(x + w * 0.86, y + h * 0.45, "+", ha="center", va="center", fontsize=7.0, fontweight="bold")
+
+        def adapter_block(x: float, y: float, w: float, h: float, label: str, edge: str, face: str) -> None:
+            box(x, y, w, h, "", face, edge, linewidth=0.85, radius=0.006)
+            ax.text(x + w * 0.08, y + h * 0.72, label, ha="left", va="center", fontsize=5.8, fontweight="bold")
+            inner_y = y + h * 0.28
+            parts = [("Down\n128->32", 0.08), ("GELU", 0.38), ("Up\n32->128", 0.62), ("Head\nlogit", 0.84)]
+            for part, frac in parts:
+                bw = w * (0.21 if "->" in part else 0.14)
+                bx = x + w * frac
+                box(bx, inner_y, bw, h * 0.28, part, "#FFFFFF", edge, fontsize=4.4, linewidth=0.45, radius=0.004)
+            for start, end in [(0.29, 0.38), (0.52, 0.62), (0.80, 0.84)]:
+                arrow((x + w * start, inner_y + h * 0.14), (x + w * end, inner_y + h * 0.14), edge, linewidth=0.55, mutation_scale=5)
+
+        ax.text(0.115, 0.955, "Protein sequence", fontsize=7.3, fontweight="bold", ha="left", va="center")
+        ax.text(0.175, 0.925, "...", fontsize=8.5, ha="center", va="center")
+        token_track(0.210, 0.910, "MASSCAVQKLEP", 0.039, 0.030)
+        ax.text(0.690, 0.925, "...", fontsize=8.5, ha="center", va="center")
+        arrow((0.455, 0.910), (0.455, 0.890), palette["black"], linewidth=0.75, mutation_scale=8)
+
+        panel(0.060, 0.700, 0.880, 0.190, "a", "Residue representation layer")
+        inset(0.090, 0.735, 0.270, 0.115, "Frozen ESM2-t33 embeddings", palette["blue"])
+        matrix(0.113, 0.757, 6, 14, 0.220, 0.055, palette["blue"], "esm")
+        vector_strip(0.115, 0.742, 14, 0.216, 0.008, palette["blue"], palette["pale_blue"])
+        ax.text(0.315, 0.829, "pLM", fontsize=5.5, color=palette["blue"], ha="center", va="center", fontweight="bold")
+
+        inset(0.390, 0.735, 0.235, 0.115, "Amino-acid identity", palette["green"])
+        matrix(0.415, 0.760, 5, 12, 0.180, 0.050, palette["green"], "onehot")
+        vector_strip(0.415, 0.742, 12, 0.180, 0.008, palette["green"], palette["pale_green"])
+
+        inset(0.655, 0.735, 0.215, 0.115, "Relative position", palette["vermillion"])
+        matrix(0.678, 0.760, 4, 12, 0.170, 0.050, palette["vermillion"], "position")
+        vector_strip(0.680, 0.742, 12, 0.166, 0.008, palette["vermillion"], palette["pale_orange"])
+
+        box(0.210, 0.712, 0.500, 0.026, "Concatenate residue-wise features", "#FFFFFF", palette["black"], 5.7, linewidth=0.65, radius=0.004)
+        vector_strip(0.305, 0.705, 20, 0.300, 0.006, palette["gray"], "#FFFFFF")
+        box(0.758, 0.705, 0.070, 0.036, "x_i", "#FFFFFF", palette["black"], 6.0, "bold")
+        arrow((0.710, 0.725), (0.758, 0.723), palette["gray"], linewidth=0.50, mutation_scale=6)
+        arrow((0.224, 0.735), (0.430, 0.738), palette["blue"], curve=-0.08, linewidth=0.40, mutation_scale=5)
+        arrow((0.505, 0.735), (0.485, 0.738), palette["green"], curve=0.03, linewidth=0.40, mutation_scale=5)
+        arrow((0.765, 0.735), (0.575, 0.738), palette["vermillion"], curve=0.08, linewidth=0.40, mutation_scale=5)
+
+        arrow((0.500, 0.700), (0.500, 0.670), palette["black"], linewidth=0.75, mutation_scale=8)
+
+        panel(0.060, 0.488, 0.880, 0.182, "b", "Warm-start shared temporal encoder")
+        box(0.095, 0.575, 0.082, 0.052, "LayerNorm\n+ linear", palette["light_gray"], palette["gray"], 5.4)
+        vector_strip(0.099, 0.538, 10, 0.074, 0.017, palette["gray"], "#FFFFFF")
+        ax.text(0.103, 0.521, "h_i^0", fontsize=5.4, color=palette["gray"], ha="left", va="center")
+        arrow((0.177, 0.601), (0.235, 0.564), palette["gray"], linewidth=0.65, mutation_scale=7)
+
+        ax.text(0.238, 0.628, "Multi-kernel residual TCN stack", fontsize=6.0, ha="left", va="center", fontweight="bold")
+        dilations = [1, 2, 4, 8]
+        for index, dilation in enumerate(dilations):
+            conv_block(0.245 + index * 0.080, 0.520, 0.064, 0.088, dilation)
+            if index < len(dilations) - 1:
+                arrow((0.309 + index * 0.080, 0.564), (0.325 + index * 0.080, 0.564), palette["gray"], linewidth=0.45, mutation_scale=5)
+        box(0.625, 0.552, 0.110, 0.055, "sequence state\nh_i", "#FFFFFF", palette["black"], 5.7, "bold")
+        vector_strip(0.635, 0.520, 12, 0.090, 0.013, palette["black"], palette["pale_blue"])
+        arrow((0.565, 0.564), (0.625, 0.579), palette["gray"], linewidth=0.60, mutation_scale=7)
+        box(0.750, 0.552, 0.118, 0.055, "P4.6 checkpoint\nwarm-start", palette["pale_blue"], palette["blue"], 5.3)
+        arrow((0.807, 0.552), (0.530, 0.520), palette["blue"], curve=-0.18, linewidth=0.50, mutation_scale=6)
+        ax.text(0.103, 0.504, "Input projection and TCN weights are frozen in P4.8.", fontsize=5.3, color=palette["gray"], ha="left", va="center")
+
+        arrow((0.500, 0.488), (0.500, 0.458), palette["black"], linewidth=0.75, mutation_scale=8)
+
+        panel(0.060, 0.278, 0.880, 0.180, "c", "Region-aware low-rank adapter mixture")
+        box(0.095, 0.360, 0.082, 0.052, "Shared\nh_i", "#FFFFFF", palette["black"], 5.8, "bold")
         adapter_specs = [
-            ("SDR\nadapter", 0.682, 0.765, palette["pale_blue"], palette["blue"]),
-            ("LDR\nadapter", 0.682, 0.632, palette["pale_green"], palette["green"]),
-            ("Terminal-IDR\nadapter", 0.682, 0.499, palette["pale_orange"], palette["vermillion"]),
-            ("Internal-IDR\nadapter", 0.682, 0.366, palette["pale_purple"], palette["purple"]),
+            ("SDR", 0.235, 0.388, palette["blue"], palette["pale_blue"]),
+            ("LDR", 0.235, 0.338, palette["green"], palette["pale_green"]),
+            ("Terminal-IDR", 0.495, 0.388, palette["vermillion"], palette["pale_orange"]),
+            ("Internal-IDR", 0.495, 0.338, palette["purple"], palette["pale_purple"]),
         ]
-        for label, x, y, face, edge in adapter_specs:
-            box(x, y, 0.122, 0.078, label + "\n+ head", face, edge, 5.9, "bold")
-            arrow((0.622, 0.588), (x, y + 0.039), edge, curve=0.07 if y > 0.58 else -0.07)
+        for label, x, y, edge, face in adapter_specs:
+            adapter_block(x, y, 0.205, 0.040, label, edge, face)
+            arrow((0.177, 0.386), (x, y + 0.020), edge, curve=0.05 if x < 0.30 else -0.05, linewidth=0.45, mutation_scale=5)
+        box(0.095, 0.298, 0.082, 0.044, "Gate head\nsoftmax", "#FFFFFF", palette["purple"], 5.0, "bold", linestyle="--")
+        arrow((0.136, 0.360), (0.136, 0.342), palette["purple"], linewidth=0.45, mutation_scale=5, linestyle="--")
+        ax.text(0.730, 0.420, "MoE weights w_i", fontsize=5.5, ha="left", va="center")
+        weights = [0.30, 0.22, 0.19, 0.29]
+        weight_colors = [palette["blue"], palette["green"], palette["vermillion"], palette["purple"]]
+        for index, (weight, color) in enumerate(zip(weights, weight_colors)):
+            ax.add_patch(Rectangle((0.725, 0.383 - index * 0.018), 0.065 * weight / max(weights), 0.010, facecolor=color, edgecolor=color, linewidth=0.3))
+        box(0.825, 0.342, 0.075, 0.055, "sum\nw_r e_r", "#FFFFFF", palette["black"], 5.4, "bold")
+        for _, x, y, edge, _ in adapter_specs:
+            arrow((x + 0.205, y + 0.020), (0.825, 0.370), edge, curve=0.04 if y > 0.36 else -0.04, linewidth=0.45, mutation_scale=5)
+        arrow((0.177, 0.320), (0.825, 0.352), palette["purple"], curve=-0.12, linewidth=0.45, mutation_scale=5, linestyle="--")
+        ax.text(0.238, 0.292, "Each expert uses a residual low-rank adapter: Down 128->32, GELU, Up 32->128, and a residue logit head.", fontsize=5.0, color=palette["gray"], ha="left", va="center")
 
-        box(0.682, 0.175, 0.122, 0.082, "Residue-level\ngate", palette["white"], palette["purple"], 6.4, "bold", linestyle="--")
-        arrow((0.622, 0.548), (0.682, 0.216), palette["purple"], curve=-0.18, linestyle="--")
+        arrow((0.500, 0.278), (0.500, 0.250), palette["black"], linewidth=0.75, mutation_scale=8)
 
-        box(0.845, 0.522, 0.072, 0.112, "Generic +\nweighted\nexpert mix", palette["white"], palette["black"], 5.6, "bold")
-        for _, x, y, _, edge in adapter_specs:
-            arrow((x + 0.122, y + 0.039), (0.845, 0.578), edge, curve=0.04 if y > 0.58 else -0.04)
-        arrow((0.804, 0.216), (0.845, 0.548), palette["purple"], curve=0.22, linestyle="--")
-        ax.text(0.735, 0.300, "Only adapters,\nheads and gate\nare trained", ha="center", va="center", fontsize=5.6, color=palette["gray"], linespacing=1.05)
-
-        box(0.922, 0.700, 0.060, 0.076, "Average\n3 seeds", palette["pale_blue"], palette["blue"], 5.4)
-        box(0.922, 0.410, 0.060, 0.076, "Platt\nscaling", palette["pale_yellow"], "#8A6D00", 5.4)
-        box(0.913, 0.128, 0.076, 0.090, "Calibrated\nIDR p\n+ entropy", palette["white"], palette["black"], 5.3, "bold")
-        arrow((0.917, 0.578), (0.952, 0.700), palette["blue"], curve=0.12)
-        arrow((0.952, 0.700), (0.952, 0.486), palette["blue"], curve=-0.04)
-        arrow((0.952, 0.410), (0.952, 0.218), "#8A6D00")
-
-        ax.text(
-            0.080,
-            0.235,
-            "Sequence-only inputs:\nno PSSM, MSA, PDB coordinates,\nAlphaFold confidence or function labels",
-            ha="center",
-            va="center",
-            fontsize=5.8,
-            color=palette["gray"],
-            linespacing=1.1,
-        )
-        ax.text(
-            0.430,
-            0.225,
-            "Frozen modules preserve the P4.6 backbone;\ntrainable adapters provide local score correction",
-            ha="center",
-            va="center",
-            fontsize=5.8,
-            color=palette["gray"],
-            linespacing=1.1,
-        )
-        ax.text(
-            0.743,
-            0.094,
-            "Gate weights are reported as auxiliary mechanism evidence,\nnot as direct biological region annotations",
-            ha="center",
-            va="center",
-            fontsize=5.5,
-            color=palette["gray"],
-            linespacing=1.1,
-        )
+        panel(0.060, 0.060, 0.880, 0.190, "d", "Output layer, calibration and uncertainty")
+        x0 = 0.125
+        xs = [x0 + i * 0.030 for i in range(20)]
+        token_track(0.126, 0.203, "MASSCAVQKLEP", 0.030, 0.017)
+        score_tracks = [
+            [0.18, 0.22, 0.30, 0.43, 0.61, 0.72, 0.67, 0.52, 0.38, 0.29, 0.24, 0.33, 0.55, 0.78, 0.83, 0.69, 0.47, 0.31, 0.22, 0.18],
+            [0.15, 0.21, 0.28, 0.40, 0.58, 0.70, 0.65, 0.55, 0.39, 0.30, 0.25, 0.36, 0.58, 0.76, 0.80, 0.70, 0.50, 0.34, 0.25, 0.20],
+            [0.20, 0.23, 0.31, 0.44, 0.63, 0.73, 0.68, 0.54, 0.36, 0.28, 0.23, 0.34, 0.53, 0.74, 0.82, 0.67, 0.45, 0.30, 0.23, 0.18],
+        ]
+        labels = ["seed 1", "seed 2", "seed 3"]
+        for row, scores in enumerate(score_tracks):
+            y = 0.176 - row * 0.021
+            ax.plot(xs, [y + score * 0.014 for score in scores], color="#56B4E9", linewidth=0.60)
+            ax.text(0.088, y + 0.007, labels[row], fontsize=4.8, color=palette["gray"], ha="left", va="center")
+        box(0.520, 0.158, 0.080, 0.040, "Average\n3 seeds", palette["pale_blue"], palette["blue"], 5.1)
+        box(0.625, 0.158, 0.080, 0.040, "Platt\ncalibration", palette["pale_yellow"], "#8A6D00", 5.1)
+        arrow((0.472, 0.174), (0.520, 0.178), palette["blue"], linewidth=0.45, mutation_scale=5)
+        arrow((0.600, 0.178), (0.625, 0.178), "#8A6D00", linewidth=0.45, mutation_scale=5)
+        prob = [sum(values) / len(values) for values in zip(*score_tracks)]
+        ax.plot(xs, [0.102 + value * 0.033 for value in prob], color=palette["black"], linewidth=0.95)
+        ax.axhline(0.102 + 0.50 * 0.033, xmin=0.118, xmax=0.706, color=palette["gray"], linewidth=0.40, linestyle="--")
+        ax.text(0.088, 0.120, "p(IDR)", fontsize=5.2, ha="left", va="center", fontweight="bold")
+        for x, value in zip(xs, prob):
+            face = palette["vermillion"] if value >= 0.50 else "#FFFFFF"
+            ax.add_patch(Rectangle((x - 0.009, 0.082), 0.018, 0.013, facecolor=face, edgecolor=palette["vermillion"], linewidth=0.35))
+        ax.text(0.088, 0.089, "binary", fontsize=5.0, ha="left", va="center")
+        entropy = [min(1.0, 4.0 * value * (1.0 - value)) for value in prob]
+        for x, value in zip(xs, entropy):
+            ax.add_patch(Rectangle((x - 0.007, 0.064), 0.014, value * 0.018, facecolor="#E8B5CE", edgecolor=palette["purple"], linewidth=0.18))
+        ax.text(0.088, 0.066, "entropy", fontsize=5.0, ha="left", va="center")
+        arrow((0.705, 0.178), (0.735, 0.140), palette["black"], linewidth=0.45, mutation_scale=5)
+        ax.text(0.745, 0.140, "Calibrated residue probability,\nbinary disorder calls and\nentropy uncertainty", fontsize=5.2, ha="left", va="center", linespacing=1.05)
+        ax.text(0.745, 0.087, "Calibration parameters are fitted\nonly on DM1229 validation.", fontsize=4.9, color=palette["gray"], ha="left", va="center", linespacing=1.05)
 
         fig.savefig(path_pdf, dpi=600, metadata={"Title": "RegionAdapterMoETCN method overview"})
         fig.savefig(path_eps, dpi=600)
@@ -474,22 +567,30 @@ def plot_method_overview(path_pdf: Path, path_png: Path) -> None:
         fig.savefig(path_png, dpi=600)
         plt.close(fig)
 
+    from PIL import Image
+
+    with Image.open(path_png) as image:
+        if image.mode != "RGB":
+            image.convert("RGB").save(path_png, dpi=(600, 600))
+
     manifest = {
         "figure": "P5.8 RegionAdapterMoETCN method overview",
         "audience_medium": "Bioinformatics manuscript, static full-width method figure",
-        "figure_type": "workflow schematic; no quantitative data encoding",
+        "figure_type": "multi-panel method architecture schematic; no quantitative data encoding",
         "target_size_mm": {"width": width_mm, "height": height_mm},
         "source_inputs": [
             "scripts/assemble_p5_8_fusionencoder_style_assets.py",
             "manuscript/latex/bioinformatics/main.tex",
+            "models/sequence_models.py",
+            "scripts/train_sequence_disorder_model.py",
         ],
         "transformations": [
-            "manual schematic layout from the P4.8 architecture description",
+            "manual architecture-figure layout from the P4.8 model description and local reference method figures",
             "no numeric data filtering, smoothing, normalization, or imputation",
         ],
         "accessibility": [
             "all module roles are labeled directly",
-            "color is redundant with text labels and line styles",
+            "color is redundant with text labels, panel separation and dashed line styles",
             "Okabe-Ito-derived high-contrast category colors are used on white",
         ],
         "outputs": {

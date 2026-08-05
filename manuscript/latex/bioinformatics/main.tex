@@ -165,7 +165,7 @@ Supplementary material includes the paper-level ablation table, protein-level bo
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=\textwidth]{figure1_method_overview.pdf}
-\caption{Method overview. \method{} is a sequence-only predictor that combines frozen ESM2-t33 residue embeddings, amino-acid one-hot features and relative-position features; warm-starts from a P4.6 \backbone{} checkpoint; freezes shared TCN blocks; trains low-rank SDR, LDR, terminal-IDR and internal-IDR adapters with a residue-level MoE gate; and produces calibrated disorder probabilities through three-seed score averaging and validation-fitted Platt calibration.}
+\caption{Method architecture. A protein token track is expanded into four residue-level architecture layers. (a) Sequence-only residue representation combines frozen ESM2-t33 residue embeddings, amino-acid one-hot features and relative-position features. (b) A P4.6 \backbone{} checkpoint initializes the input projection and multi-kernel dilated TCN blocks, which are frozen during P4.8 specialization. (c) Low-rank SDR, LDR, terminal-IDR and internal-IDR adapters generate region-specific expert logits that are mixed by a residue-level MoE gate. (d) Three-seed score averaging and validation-fitted Platt calibration produce residue-level disorder probabilities, binary calls and entropy-based uncertainty.}
 \label{fig:method}
 \end{figure*}
 

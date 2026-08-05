@@ -1,22 +1,24 @@
 {
   "figure": "P5.8 RegionAdapterMoETCN method overview",
   "audience_medium": "Bioinformatics manuscript, static full-width method figure",
-  "figure_type": "workflow schematic; no quantitative data encoding",
+  "figure_type": "multi-panel method architecture schematic; no quantitative data encoding",
   "target_size_mm": {
     "width": 183.0,
-    "height": 108.0
+    "height": 156.0
   },
   "source_inputs": [
     "scripts/assemble_p5_8_fusionencoder_style_assets.py",
-    "manuscript/latex/bioinformatics/main.tex"
+    "manuscript/latex/bioinformatics/main.tex",
+    "models/sequence_models.py",
+    "scripts/train_sequence_disorder_model.py"
   ],
   "transformations": [
-    "manual schematic layout from the P4.8 architecture description",
+    "manual architecture-figure layout from the P4.8 model description and local reference method figures",
     "no numeric data filtering, smoothing, normalization, or imputation"
   ],
   "accessibility": [
     "all module roles are labeled directly",
-    "color is redundant with text labels and line styles",
+    "color is redundant with text labels, panel separation and dashed line styles",
     "Okabe-Ito-derived high-contrast category colors are used on white"
   ],
   "outputs": {
