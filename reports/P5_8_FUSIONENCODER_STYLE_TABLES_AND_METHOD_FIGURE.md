@@ -1,4 +1,4 @@
-# P5.8 FusionEncoder-style Tables and Method Figure
+# P5.8 FusionEncoder-style Tables and Manuscript Figures
 
 Date: 2026-08-04
 
@@ -19,13 +19,30 @@ This project now mirrors that display style for the main benchmark comparison wh
 - Main TSV table: `manuscript/tables/P5_8_Table2_FusionEncoder_style_main_comparison.tsv`
 - Full ranking Markdown table: `manuscript/tables/P5_8_TableS_FusionEncoder_style_full_rankings.md`
 - Full ranking TSV table: `manuscript/tables/P5_8_TableS_FusionEncoder_style_full_rankings.tsv`
+- Motivation figure source asset: `figures/p5_8/P5_8_PROJECT_MOTIVATION.pdf`
+- Motivation figure EPS export: `figures/p5_8/P5_8_PROJECT_MOTIVATION.eps`
+- Motivation figure SVG export: `figures/p5_8/P5_8_PROJECT_MOTIVATION.svg`
+- Motivation figure PNG preview: `figures/p5_8/P5_8_PROJECT_MOTIVATION.png`
+- Motivation figure provenance manifest: `figures/p5_8/P5_8_PROJECT_MOTIVATION.manifest.json`
 - Method figure source asset: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.pdf`
 - Method figure EPS export: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.eps`
 - Method figure SVG export: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.svg`
 - Method figure PNG preview: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.png`
 - Method figure provenance manifest: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.manifest.json`
-- Manuscript Figure 1: `manuscript/latex/bioinformatics/Fig/figure1_method_overview.pdf`
+- Manuscript motivation figure: `manuscript/latex/bioinformatics/Fig/figure_project_motivation.pdf`
+- Manuscript method figure: `manuscript/latex/bioinformatics/Fig/figure1_method_overview.pdf`
 - Compiled PDF: `manuscript/latex/RegionAdapterMoETCN_Bioinformatics_P5_8_FusionEncoder_style.pdf`
+
+## Motivation Figure
+
+On 2026-08-05, a project motivation figure was added before the method architecture figure. It frames the paper around:
+
+- regional heterogeneity of residue-level disorder labels;
+- independent-test prevalence differences using `Table1_dataset_and_nr25_summary.tsv`;
+- target-specific NR25 leakage-control counts using the same table;
+- the sequence-only design boundary, region-aware adapter specialization, Platt calibration and separated evidence levels.
+
+The motivation figure uses fixed 183 mm by 118 mm full-width dimensions and exports PDF, EPS, SVG and RGB 600 dpi PNG files with a JSON provenance manifest.
 
 ## Scientific-Visualization Redraw
 
@@ -67,7 +84,9 @@ No LaTeX errors, undefined control sequences, undefined citations or undefined r
 
 Additional figure checks:
 
-- PNG metadata check passed for 600 dpi effective resolution at 183 mm target width.
+- Motivation PNG metadata check passed for RGB mode and 600 dpi effective resolution at 183 mm target width.
+- Method PNG metadata check passed for RGB mode and 600 dpi effective resolution at 183 mm target width.
 - Palette audit confirmed all Okabe-Ito-on-white category colors pass 3:1 contrast against white; several pairwise grayscale separations require contextual review, so the figure uses direct labels and line-style redundancy.
-- PDF page size from `pdfinfo`: 518.74 by 442.21 pt, approximately 183 by 156 mm.
+- Motivation PDF page size from `pdfinfo`: 518.74 by 334.49 pt, approximately 183 by 118 mm.
+- Method PDF page size from `pdfinfo`: 518.74 by 442.21 pt, approximately 183 by 156 mm.
 - The skill's PDF metadata helper could not run because the local Conda environment lacks `pypdf`; `pdfinfo` was used as the fallback vector-file metadata check.

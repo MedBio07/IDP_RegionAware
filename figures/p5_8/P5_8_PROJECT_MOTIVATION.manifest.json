@@ -1,0 +1,30 @@
+{
+  "figure": "P5.8 RegionAdapterMoETCN project motivation",
+  "audience_medium": "Bioinformatics manuscript, static full-width motivation figure",
+  "figure_type": "multi-panel motivation schematic with dataset-summary bars",
+  "target_size_mm": {
+    "width": 183.0,
+    "height": 118.0
+  },
+  "source_inputs": [
+    "manuscript/tables/Table1_dataset_and_nr25_summary.tsv",
+    "manuscript/latex/bioinformatics/main.tex",
+    "scripts/assemble_p5_8_fusionencoder_style_assets.py"
+  ],
+  "transformations": [
+    "test disorder fractions are plotted directly from Table1_dataset_and_nr25_summary.tsv",
+    "NR25 removed protein counts are plotted as direct text from Table1_dataset_and_nr25_summary.tsv",
+    "all other panels are schematic motivation elements with no quantitative data encoding"
+  ],
+  "accessibility": [
+    "direct labels are used for all conceptual modules",
+    "color is redundant with panel structure, text labels, hatching and dashed boundaries",
+    "Okabe-Ito-derived category colors are used on a white background"
+  ],
+  "outputs": {
+    "pdf": "figures/p5_8/P5_8_PROJECT_MOTIVATION.pdf",
+    "eps": "figures/p5_8/P5_8_PROJECT_MOTIVATION.eps",
+    "svg": "figures/p5_8/P5_8_PROJECT_MOTIVATION.svg",
+    "png_600dpi": "figures/p5_8/P5_8_PROJECT_MOTIVATION.png"
+  }
+}

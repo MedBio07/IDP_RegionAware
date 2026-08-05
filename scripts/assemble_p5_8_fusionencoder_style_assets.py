@@ -267,6 +267,239 @@ def write_latex_table(path: Path, ranked: dict[str, list[dict[str, object]]]) ->
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def plot_project_motivation(path_pdf: Path, path_png: Path) -> None:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib as mpl
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Rectangle
+    from PIL import Image
+
+    path_pdf.parent.mkdir(parents=True, exist_ok=True)
+    path_eps = path_pdf.with_suffix(".eps")
+    path_svg = path_pdf.with_suffix(".svg")
+    path_manifest = path_pdf.with_suffix(".manifest.json")
+
+    table_rows = read_tsv(TABLE_DIR / "Table1_dataset_and_nr25_summary.tsv")
+    test_rows = [row for row in table_rows if row["role"] == "test"]
+    test_rows = sorted(test_rows, key=lambda row: ("SL329", "MXD494", "DISORDER723").index(row["dataset"].split()[0]))
+    disorder_fracs = [float(row["disorder_fraction_known"]) for row in test_rows]
+    nr25_removed = [int(row["nr25_removed_train_proteins"]) for row in test_rows]
+
+    palette = {
+        "blue": "#0072B2",
+        "vermillion": "#D55E00",
+        "green": "#009E73",
+        "purple": "#CC79A7",
+        "sky": "#56B4E9",
+        "yellow": "#F0E442",
+        "black": "#111827",
+        "gray": "#4B5563",
+        "light_gray": "#F3F4F6",
+        "pale_blue": "#EAF3FA",
+        "pale_orange": "#FFF2E6",
+        "pale_green": "#EAF7F1",
+        "pale_purple": "#F8ECF4",
+        "pale_yellow": "#FFF8E1",
+        "white": "#FFFFFF",
+    }
+    rc = {
+        "font.family": "DejaVu Sans",
+        "font.size": 7,
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+        "svg.fonttype": "none",
+        "axes.linewidth": 0.6,
+        "figure.facecolor": "white",
+        "savefig.facecolor": "white",
+    }
+    width_mm = 183.0
+    height_mm = 118.0
+    with mpl.rc_context(rc):
+        fig, ax = plt.subplots(figsize=(width_mm / 25.4, height_mm / 25.4), layout="constrained")
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.set_axis_off()
+
+        def panel(x: float, y: float, w: float, h: float, label: str, title: str) -> None:
+            ax.add_patch(Rectangle((x, y), w, h, facecolor="none", edgecolor="#1F354D", linewidth=0.9))
+            ax.text(x + 0.012, y + h - 0.028, f"({label})", ha="left", va="center", fontsize=7.7, fontweight="bold")
+            ax.text(x + 0.050, y + h - 0.028, title, ha="left", va="center", fontsize=7.5, fontweight="bold")
+
+        def box(
+            x: float,
+            y: float,
+            w: float,
+            h: float,
+            text: str,
+            face: str,
+            edge: str,
+            fontsize: float = 5.8,
+            weight: str = "normal",
+            linestyle: str = "-",
+        ) -> None:
+            patch = FancyBboxPatch(
+                (x, y),
+                w,
+                h,
+                boxstyle="round,pad=0.006,rounding_size=0.006",
+                facecolor=face,
+                edgecolor=edge,
+                linewidth=0.75,
+                linestyle=linestyle,
+            )
+            ax.add_patch(patch)
+            ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fontsize, fontweight=weight, color=palette["black"], linespacing=1.05)
+
+        def arrow(start: tuple[float, float], end: tuple[float, float], color: str = palette["gray"], curve: float = 0.0, linestyle: str = "-", linewidth: float = 0.65) -> None:
+            ax.add_patch(
+                FancyArrowPatch(
+                    start,
+                    end,
+                    arrowstyle="-|>",
+                    mutation_scale=7,
+                    linewidth=linewidth,
+                    linestyle=linestyle,
+                    color=color,
+                    shrinkA=0,
+                    shrinkB=0,
+                    connectionstyle=f"arc3,rad={curve}",
+                )
+            )
+
+        def residue_tiles(x: float, y: float, labels: str, cell_w: float, cell_h: float) -> None:
+            colors = [palette["pale_blue"], palette["pale_green"], palette["pale_orange"], palette["pale_purple"]]
+            edges = [palette["blue"], palette["green"], palette["vermillion"], palette["purple"]]
+            for index, label in enumerate(labels):
+                ax.add_patch(
+                    FancyBboxPatch(
+                        (x + index * cell_w, y),
+                        cell_w * 0.84,
+                        cell_h,
+                        boxstyle="round,pad=0.002,rounding_size=0.003",
+                        facecolor=colors[index % len(colors)],
+                        edgecolor=edges[index % len(edges)],
+                        linewidth=0.55,
+                    )
+                )
+                ax.text(x + index * cell_w + cell_w * 0.42, y + cell_h / 2, label, ha="center", va="center", fontsize=5.0, fontweight="bold")
+
+        def wavy_region(x0: float, x1: float, y: float, color: str) -> None:
+            xs = [x0 + (x1 - x0) * step / 40 for step in range(41)]
+            ys = [y + 0.010 * math.sin(step * math.pi / 2.5) for step in range(41)]
+            ax.plot(xs, ys, color=color, linewidth=1.6)
+
+        ax.text(0.500, 0.965, "Motivation: region-aware and calibrated evidence for sequence-only IDR prediction", ha="center", va="center", fontsize=9.4, fontweight="bold")
+
+        panel(0.045, 0.575, 0.425, 0.325, "a", "Biological target is regionally heterogeneous")
+        ax.plot([0.085, 0.420], [0.745, 0.745], color=palette["gray"], linewidth=0.9)
+        ax.add_patch(Rectangle((0.115, 0.733), 0.080, 0.024, facecolor=palette["pale_blue"], edgecolor=palette["blue"], linewidth=0.7))
+        ax.add_patch(Rectangle((0.315, 0.733), 0.060, 0.024, facecolor=palette["pale_blue"], edgecolor=palette["blue"], linewidth=0.7))
+        wavy_region(0.083, 0.112, 0.745, palette["vermillion"])
+        wavy_region(0.205, 0.255, 0.745, palette["green"])
+        wavy_region(0.380, 0.425, 0.745, palette["purple"])
+        ax.add_patch(Rectangle((0.265, 0.733), 0.030, 0.024, facecolor="#FFFFFF", edgecolor=palette["gray"], linewidth=0.6, hatch="//"))
+        ax.text(0.090, 0.690, "terminal IDR", fontsize=5.2, ha="left", va="center", color=palette["vermillion"])
+        ax.text(0.205, 0.690, "SDR/LDR", fontsize=5.2, ha="left", va="center", color=palette["green"])
+        ax.text(0.268, 0.690, "unknown\nmasked", fontsize=5.0, ha="center", va="center", color=palette["gray"], linespacing=1.0)
+        ax.text(0.352, 0.690, "internal IDR", fontsize=5.2, ha="left", va="center", color=palette["purple"])
+        ax.text(0.085, 0.625, "Aggregate residue metrics can hide different errors at termini,\ninternal regions, boundaries and low-prevalence test sets.", fontsize=5.4, color=palette["gray"], ha="left", va="center", linespacing=1.15)
+
+        panel(0.530, 0.575, 0.425, 0.325, "b", "Benchmark claims need explicit controls")
+        x_base = 0.565
+        bar_w = 0.050
+        for index, row in enumerate(test_rows):
+            label = row["dataset"].split()[0]
+            frac = disorder_fracs[index]
+            x = x_base + index * 0.082
+            ax.add_patch(Rectangle((x, 0.650), bar_w, 0.150, facecolor="#FFFFFF", edgecolor=palette["gray"], linewidth=0.55))
+            ax.add_patch(Rectangle((x, 0.650), bar_w, 0.150 * frac / 0.50, facecolor=palette["pale_orange"], edgecolor=palette["vermillion"], linewidth=0.55))
+            ax.text(x + bar_w / 2, 0.625, label, fontsize=5.0, ha="center", va="center")
+            ax.text(x + bar_w / 2, 0.810, f"{frac * 100:.1f}%", fontsize=5.0, ha="center", va="center", color=palette["vermillion"], fontweight="bold")
+        ax.text(0.565, 0.835, "Test disorder fraction", fontsize=5.5, ha="left", va="center", fontweight="bold")
+        ax.text(0.820, 0.795, "DM3000", fontsize=5.2, ha="center", va="center")
+        ax.text(0.900, 0.795, "test", fontsize=5.2, ha="center", va="center")
+        box(0.785, 0.728, 0.070, 0.038, "train", palette["pale_blue"], palette["blue"], 5.0)
+        box(0.865, 0.728, 0.070, 0.038, "target", palette["pale_purple"], palette["purple"], 5.0)
+        arrow((0.855, 0.747), (0.865, 0.747), palette["gray"], linewidth=0.45)
+        box(0.785, 0.666, 0.150, 0.038, "NR25 removes\n176 / 323 / 424", "#FFFFFF", palette["black"], 4.9, linestyle="--")
+        ax.text(0.805, 0.620, "Raw scores also need calibration\nbefore probability interpretation.", fontsize=5.2, ha="left", va="center", color=palette["gray"], linespacing=1.05)
+
+        panel(0.045, 0.130, 0.910, 0.365, "c", "This project: constrained input, region-aware model, separated evidence")
+        box(0.078, 0.360, 0.120, 0.052, "Sequence-only\ninputs", palette["pale_blue"], palette["blue"], 5.6, "bold")
+        residue_tiles(0.085, 0.320, "MASSCAVQ", 0.014, 0.020)
+        box(0.080, 0.250, 0.050, 0.038, "ESM2", "#FFFFFF", palette["blue"], 4.8)
+        box(0.137, 0.250, 0.050, 0.038, "1-hot", "#FFFFFF", palette["green"], 4.8)
+        box(0.194, 0.250, 0.050, 0.038, "pos", "#FFFFFF", palette["vermillion"], 4.8)
+        box(0.078, 0.173, 0.175, 0.048, "No MSA/PSSM, PDB,\nAF2 confidence or function labels", "#FFFFFF", palette["gray"], 4.8, linestyle="--")
+
+        arrow((0.260, 0.333), (0.315, 0.333), palette["gray"])
+        box(0.315, 0.350, 0.105, 0.052, "Frozen\nTCN state", palette["light_gray"], palette["gray"], 5.4, "bold")
+        adapter_specs = [
+            ("SDR", 0.455, 0.390, palette["blue"], palette["pale_blue"]),
+            ("LDR", 0.455, 0.328, palette["green"], palette["pale_green"]),
+            ("terminal", 0.455, 0.266, palette["vermillion"], palette["pale_orange"]),
+            ("internal", 0.455, 0.204, palette["purple"], palette["pale_purple"]),
+        ]
+        for label, x, y, edge, face in adapter_specs:
+            box(x, y, 0.105, 0.040, label, face, edge, 4.9, "bold")
+            arrow((0.420, 0.376), (x, y + 0.020), edge, curve=0.04 if y > 0.30 else -0.04, linewidth=0.45)
+        box(0.600, 0.283, 0.085, 0.060, "MoE gate\n+ Platt", palette["pale_yellow"], "#8A6D00", 5.2, "bold")
+        for _, x, y, edge, _ in adapter_specs:
+            arrow((x + 0.105, y + 0.020), (0.600, 0.315), edge, curve=0.04 if y > 0.30 else -0.04, linewidth=0.45)
+
+        evidence = [
+            ("full benchmark", 0.735, 0.385, palette["blue"], palette["pale_blue"]),
+            ("NR25 robustness", 0.735, 0.322, palette["green"], palette["pale_green"]),
+            ("hard-case strata", 0.735, 0.259, palette["vermillion"], palette["pale_orange"]),
+            ("calibration\nuncertainty", 0.735, 0.196, palette["purple"], palette["pale_purple"]),
+        ]
+        arrow((0.685, 0.315), (0.735, 0.315), palette["gray"])
+        for label, x, y, edge, face in evidence:
+            box(x, y, 0.142, 0.044, label, face, edge, 5.1, "bold")
+        box(0.735, 0.146, 0.142, 0.032, "claim boundary", "#FFFFFF", palette["gray"], 4.9, linestyle="--")
+
+        fig.savefig(path_pdf, dpi=600, metadata={"Title": "RegionAdapterMoETCN project motivation"})
+        fig.savefig(path_eps, dpi=600)
+        fig.savefig(path_svg, dpi=600)
+        fig.savefig(path_png, dpi=600)
+        plt.close(fig)
+
+    with Image.open(path_png) as image:
+        if image.mode != "RGB":
+            image.convert("RGB").save(path_png, dpi=(600, 600))
+
+    manifest = {
+        "figure": "P5.8 RegionAdapterMoETCN project motivation",
+        "audience_medium": "Bioinformatics manuscript, static full-width motivation figure",
+        "figure_type": "multi-panel motivation schematic with dataset-summary bars",
+        "target_size_mm": {"width": width_mm, "height": height_mm},
+        "source_inputs": [
+            "manuscript/tables/Table1_dataset_and_nr25_summary.tsv",
+            "manuscript/latex/bioinformatics/main.tex",
+            "scripts/assemble_p5_8_fusionencoder_style_assets.py",
+        ],
+        "transformations": [
+            "test disorder fractions are plotted directly from Table1_dataset_and_nr25_summary.tsv",
+            "NR25 removed protein counts are plotted as direct text from Table1_dataset_and_nr25_summary.tsv",
+            "all other panels are schematic motivation elements with no quantitative data encoding",
+        ],
+        "accessibility": [
+            "direct labels are used for all conceptual modules",
+            "color is redundant with panel structure, text labels, hatching and dashed boundaries",
+            "Okabe-Ito-derived category colors are used on a white background",
+        ],
+        "outputs": {
+            "pdf": str(path_pdf.relative_to(ROOT)),
+            "eps": str(path_eps.relative_to(ROOT)),
+            "svg": str(path_svg.relative_to(ROOT)),
+            "png_600dpi": str(path_png.relative_to(ROOT)),
+        },
+    }
+    path_manifest.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+
 def plot_method_overview(path_pdf: Path, path_png: Path) -> None:
     import matplotlib
 
@@ -627,10 +860,15 @@ def main() -> None:
     )
     write_latex_table(LATEX_TABLE_DIR / "table2_fusionencoder_style_main.tex", ranked)
 
+    LATEX_FIG_DIR.mkdir(parents=True, exist_ok=True)
+    motivation_pdf = FIGURE_DIR / "P5_8_PROJECT_MOTIVATION.pdf"
+    motivation_png = FIGURE_DIR / "P5_8_PROJECT_MOTIVATION.png"
+    plot_project_motivation(motivation_pdf, motivation_png)
+    shutil.copyfile(motivation_pdf, LATEX_FIG_DIR / "figure_project_motivation.pdf")
+
     method_pdf = FIGURE_DIR / "P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.pdf"
     method_png = FIGURE_DIR / "P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.png"
     plot_method_overview(method_pdf, method_png)
-    LATEX_FIG_DIR.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(method_pdf, LATEX_FIG_DIR / "figure1_method_overview.pdf")
 
 

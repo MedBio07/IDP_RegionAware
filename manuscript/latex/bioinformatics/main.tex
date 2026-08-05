@@ -64,6 +64,8 @@ We present \method, a sequence-only residue-level IDR prediction framework that 
 
 The study makes five contributions. First, it introduces a warm-start region-adapter MoE specialization over a strong sequence-only ESM2-t33 \backbone{} backbone. Second, it separates full DM3000 benchmark performance from target-specific NR25 low-homology training. Third, it reports hard-case stratification across short/long disorder, terminal/internal IDRs, residue zones and protein-level strata. Fourth, it fits Platt calibration on validation predictions and evaluates probability quality and uncertainty-error enrichment. Fifth, it includes exploratory gate analysis to test whether region routing is interpretable, while keeping the primary claim anchored to empirical benchmark, NR25 and hard-case evidence.
 
+Figure~\ref{fig:motivation} summarizes the study motivation: regionally heterogeneous IDR labels, benchmark interpretation risks and the resulting need for sequence-only inputs, region-aware specialization, calibration and separated evidence levels.
+
 \section{Materials and Methods}
 
 \subsection{Datasets and label handling}
@@ -161,6 +163,13 @@ Supplementary material includes the paper-level ablation table, protein-level bo
 \section{Acknowledgements}
 
 \placeholder{Acknowledgements to be filled before submission.}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figure_project_motivation.pdf}
+\caption{Project motivation and claim boundary. (a) Intrinsic disorder labels are regionally heterogeneous, spanning terminal and internal IDRs, short and long disorder patterns, ordered residues and unknown labels that must be masked during evaluation. (b) Benchmark interpretation requires explicit handling of prevalence differences, homologous training examples and raw-score calibration. Disorder fractions are from the three independent test sets, and NR25 removed protein counts are from target-specific MMseqs2 filtering. (c) The project therefore keeps the primary model sequence-only, adds region-aware adapter specialization and evaluates full-benchmark performance, NR25 robustness, hard-case strata and Platt-calibrated uncertainty as separate evidence levels.}
+\label{fig:motivation}
+\end{figure*}
 
 \begin{figure*}[!t]
 \centering
