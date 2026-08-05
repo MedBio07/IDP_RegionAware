@@ -1,0 +1,28 @@
+{
+  "figure": "P5.8 RegionAdapterMoETCN method overview",
+  "audience_medium": "Bioinformatics manuscript, static full-width method figure",
+  "figure_type": "workflow schematic; no quantitative data encoding",
+  "target_size_mm": {
+    "width": 183.0,
+    "height": 108.0
+  },
+  "source_inputs": [
+    "scripts/assemble_p5_8_fusionencoder_style_assets.py",
+    "manuscript/latex/bioinformatics/main.tex"
+  ],
+  "transformations": [
+    "manual schematic layout from the P4.8 architecture description",
+    "no numeric data filtering, smoothing, normalization, or imputation"
+  ],
+  "accessibility": [
+    "all module roles are labeled directly",
+    "color is redundant with text labels and line styles",
+    "Okabe-Ito-derived high-contrast category colors are used on white"
+  ],
+  "outputs": {
+    "pdf": "figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.pdf",
+    "eps": "figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.eps",
+    "svg": "figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.svg",
+    "png_600dpi": "figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.png"
+  }
+}

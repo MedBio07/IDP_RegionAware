@@ -20,8 +20,24 @@ This project now mirrors that display style for the main benchmark comparison wh
 - Full ranking Markdown table: `manuscript/tables/P5_8_TableS_FusionEncoder_style_full_rankings.md`
 - Full ranking TSV table: `manuscript/tables/P5_8_TableS_FusionEncoder_style_full_rankings.tsv`
 - Method figure source asset: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.pdf`
+- Method figure EPS export: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.eps`
+- Method figure SVG export: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.svg`
+- Method figure PNG preview: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.png`
+- Method figure provenance manifest: `figures/p5_8/P5_8_REGIONADAPTERMOETCN_METHOD_OVERVIEW.manifest.json`
 - Manuscript Figure 1: `manuscript/latex/bioinformatics/Fig/figure1_method_overview.pdf`
 - Compiled PDF: `manuscript/latex/RegionAdapterMoETCN_Bioinformatics_P5_8_FusionEncoder_style.pdf`
+
+## Scientific-Visualization Redraw
+
+On 2026-08-05, Figure 1 was redrawn using the local `scientific-visualization` skill guidance. The updated method figure uses:
+
+- fixed 183 mm by 108 mm physical dimensions for full-width manuscript use;
+- Matplotlib Type 42 font settings for editable vector text in PDF/EPS;
+- PDF, EPS, SVG and 600 dpi PNG exports;
+- direct labels and dashed-line redundancy so color is not the only cue;
+- an explicit JSON provenance manifest documenting source files, transformations and outputs.
+
+The redraw removes the earlier dense crossing-arrow layout and replaces it with a left-to-right workflow: residue inputs, warm-start frozen TCN backbone, trainable region-adapter MoE, and calibration output.
 
 ## Main Benchmark Display
 
@@ -48,3 +64,10 @@ The Bioinformatics LaTeX manuscript was rebuilt with:
 ```
 
 No LaTeX errors, undefined control sequences, undefined citations or undefined references were detected after compilation.
+
+Additional figure checks:
+
+- PNG metadata check passed for 600 dpi effective resolution at 183 mm target width.
+- Palette audit confirmed all Okabe-Ito-on-white category colors pass 3:1 contrast against white; several pairwise grayscale separations require contextual review, so the figure uses direct labels and line-style redundancy.
+- PDF page size from `pdfinfo`: 518.74 by 306.14 pt, approximately 183 by 108 mm.
+- The skill's PDF metadata helper could not run because the local Conda environment lacks `pypdf`; `pdfinfo` was used as the fallback vector-file metadata check.

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import math
 import re
 import shutil
@@ -270,106 +271,235 @@ def plot_method_overview(path_pdf: Path, path_png: Path) -> None:
     import matplotlib
 
     matplotlib.use("Agg")
+    import matplotlib as mpl
     import matplotlib.pyplot as plt
     from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
     path_pdf.parent.mkdir(parents=True, exist_ok=True)
-    fig, ax = plt.subplots(figsize=(12.5, 6.4))
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.set_axis_off()
-    fig.patch.set_facecolor("white")
+    path_eps = path_pdf.with_suffix(".eps")
+    path_svg = path_pdf.with_suffix(".svg")
+    path_manifest = path_pdf.with_suffix(".manifest.json")
+    palette = {
+        "blue": "#0072B2",
+        "vermillion": "#D55E00",
+        "green": "#009E73",
+        "purple": "#CC79A7",
+        "black": "#111827",
+        "gray": "#4B5563",
+        "light_gray": "#F3F4F6",
+        "pale_blue": "#EAF3FA",
+        "pale_orange": "#FFF2E6",
+        "pale_green": "#EAF7F1",
+        "pale_purple": "#F8ECF4",
+        "pale_yellow": "#FFF8E1",
+        "white": "#FFFFFF",
+    }
 
-    def box(
-        x: float,
-        y: float,
-        w: float,
-        h: float,
-        text: str,
-        face: str = "#f8fafc",
-        edge: str = "#334155",
-        fontsize: float = 9.0,
-        weight: str = "normal",
-    ) -> None:
-        patch = FancyBboxPatch(
-            (x, y),
-            w,
-            h,
-            boxstyle="round,pad=0.012,rounding_size=0.012",
-            linewidth=1.0,
-            edgecolor=edge,
-            facecolor=face,
-        )
-        ax.add_patch(patch)
-        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fontsize, color="#0f172a", fontweight=weight)
+    rc = {
+        "font.family": "DejaVu Sans",
+        "font.size": 7,
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+        "svg.fonttype": "none",
+        "axes.linewidth": 0.6,
+        "figure.facecolor": "white",
+        "savefig.facecolor": "white",
+    }
+    width_mm = 183.0
+    height_mm = 108.0
+    with mpl.rc_context(rc):
+        fig, ax = plt.subplots(figsize=(width_mm / 25.4, height_mm / 25.4), layout="constrained")
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.set_axis_off()
 
-    def arrow(start: tuple[float, float], end: tuple[float, float], color: str = "#475569", curve: float = 0.0) -> None:
-        ax.add_patch(
-            FancyArrowPatch(
-                start,
-                end,
-                arrowstyle="-|>",
-                mutation_scale=13,
-                linewidth=1.1,
-                color=color,
-                connectionstyle=f"arc3,rad={curve}",
+        def box(
+            x: float,
+            y: float,
+            w: float,
+            h: float,
+            text: str,
+            face: str,
+            edge: str,
+            fontsize: float = 6.8,
+            weight: str = "normal",
+            linestyle: str = "-",
+            linewidth: float = 0.9,
+        ) -> None:
+            patch = FancyBboxPatch(
+                (x, y),
+                w,
+                h,
+                boxstyle="round,pad=0.008,rounding_size=0.010",
+                linewidth=linewidth,
+                linestyle=linestyle,
+                edgecolor=edge,
+                facecolor=face,
+                mutation_aspect=1.0,
             )
+            ax.add_patch(patch)
+            ax.text(
+                x + w / 2,
+                y + h / 2,
+                text,
+                ha="center",
+                va="center",
+                fontsize=fontsize,
+                color=palette["black"],
+                fontweight=weight,
+                linespacing=1.05,
+            )
+
+        def arrow(
+            start: tuple[float, float],
+            end: tuple[float, float],
+            color: str = palette["gray"],
+            curve: float = 0.0,
+            linestyle: str = "-",
+            linewidth: float = 0.85,
+            mutation_scale: float = 8.0,
+        ) -> None:
+            ax.add_patch(
+                FancyArrowPatch(
+                    start,
+                    end,
+                    arrowstyle="-|>",
+                    mutation_scale=mutation_scale,
+                    linewidth=linewidth,
+                    linestyle=linestyle,
+                    color=color,
+                    shrinkA=0.0,
+                    shrinkB=0.0,
+                    connectionstyle=f"arc3,rad={curve}",
+                )
+            )
+
+        def panel_label(x: float, text: str) -> None:
+            ax.text(x, 0.895, text, ha="left", va="center", fontsize=7.2, color=palette["black"], fontweight="bold")
+
+        ax.text(
+            0.50,
+            0.962,
+            "RegionAdapterMoETCN sequence-only prediction workflow",
+            ha="center",
+            va="center",
+            fontsize=10.0,
+            fontweight="bold",
+            color=palette["black"],
+        )
+        panel_label(0.026, "a  Residue inputs")
+        panel_label(0.346, "b  Warm-start backbone")
+        panel_label(0.612, "c  Region-adapter MoE")
+        panel_label(0.850, "d  Calibration output")
+
+        box(0.028, 0.520, 0.104, 0.120, "Protein\nsequence", palette["pale_blue"], palette["blue"], 7.0, "bold")
+        feature_boxes = [
+            ("Frozen ESM2-t33\nembedding", 0.180, 0.730, palette["pale_blue"], palette["blue"]),
+            ("Amino-acid\none-hot", 0.180, 0.555, palette["pale_green"], palette["green"]),
+            ("Relative\nposition", 0.180, 0.380, palette["pale_orange"], palette["vermillion"]),
+        ]
+        for label, x, y, face, edge in feature_boxes:
+            box(x, y, 0.126, 0.100, label, face, edge, 6.2)
+            arrow((0.132, 0.580), (x, y + 0.050), edge, curve=0.07 if y > 0.58 else -0.07)
+
+        box(0.352, 0.540, 0.100, 0.105, "Concatenated\nresidue tensor", palette["white"], palette["black"], 6.4, "bold")
+        for _, x, y, _, edge in feature_boxes:
+            arrow((x + 0.126, y + 0.050), (0.352, 0.592), edge, curve=-0.02 if y > 0.58 else 0.02)
+
+        box(0.492, 0.727, 0.130, 0.083, "P4.6 checkpoint\nloads weights", palette["light_gray"], palette["gray"], 5.9)
+        box(0.492, 0.520, 0.130, 0.135, "Frozen shared\nTCN blocks", palette["light_gray"], palette["black"], 7.0, "bold")
+        arrow((0.452, 0.592), (0.492, 0.592), palette["gray"])
+        arrow((0.557, 0.727), (0.557, 0.655), palette["gray"], linewidth=0.8)
+
+        adapter_specs = [
+            ("SDR\nadapter", 0.682, 0.765, palette["pale_blue"], palette["blue"]),
+            ("LDR\nadapter", 0.682, 0.632, palette["pale_green"], palette["green"]),
+            ("Terminal-IDR\nadapter", 0.682, 0.499, palette["pale_orange"], palette["vermillion"]),
+            ("Internal-IDR\nadapter", 0.682, 0.366, palette["pale_purple"], palette["purple"]),
+        ]
+        for label, x, y, face, edge in adapter_specs:
+            box(x, y, 0.122, 0.078, label + "\n+ head", face, edge, 5.9, "bold")
+            arrow((0.622, 0.588), (x, y + 0.039), edge, curve=0.07 if y > 0.58 else -0.07)
+
+        box(0.682, 0.175, 0.122, 0.082, "Residue-level\ngate", palette["white"], palette["purple"], 6.4, "bold", linestyle="--")
+        arrow((0.622, 0.548), (0.682, 0.216), palette["purple"], curve=-0.18, linestyle="--")
+
+        box(0.845, 0.522, 0.072, 0.112, "Generic +\nweighted\nexpert mix", palette["white"], palette["black"], 5.6, "bold")
+        for _, x, y, _, edge in adapter_specs:
+            arrow((x + 0.122, y + 0.039), (0.845, 0.578), edge, curve=0.04 if y > 0.58 else -0.04)
+        arrow((0.804, 0.216), (0.845, 0.548), palette["purple"], curve=0.22, linestyle="--")
+        ax.text(0.735, 0.300, "Only adapters,\nheads and gate\nare trained", ha="center", va="center", fontsize=5.6, color=palette["gray"], linespacing=1.05)
+
+        box(0.922, 0.700, 0.060, 0.076, "Average\n3 seeds", palette["pale_blue"], palette["blue"], 5.4)
+        box(0.922, 0.410, 0.060, 0.076, "Platt\nscaling", palette["pale_yellow"], "#8A6D00", 5.4)
+        box(0.913, 0.128, 0.076, 0.090, "Calibrated\nIDR p\n+ entropy", palette["white"], palette["black"], 5.3, "bold")
+        arrow((0.917, 0.578), (0.952, 0.700), palette["blue"], curve=0.12)
+        arrow((0.952, 0.700), (0.952, 0.486), palette["blue"], curve=-0.04)
+        arrow((0.952, 0.410), (0.952, 0.218), "#8A6D00")
+
+        ax.text(
+            0.080,
+            0.235,
+            "Sequence-only inputs:\nno PSSM, MSA, PDB coordinates,\nAlphaFold confidence or function labels",
+            ha="center",
+            va="center",
+            fontsize=5.8,
+            color=palette["gray"],
+            linespacing=1.1,
+        )
+        ax.text(
+            0.430,
+            0.225,
+            "Frozen modules preserve the P4.6 backbone;\ntrainable adapters provide local score correction",
+            ha="center",
+            va="center",
+            fontsize=5.8,
+            color=palette["gray"],
+            linespacing=1.1,
+        )
+        ax.text(
+            0.743,
+            0.094,
+            "Gate weights are reported as auxiliary mechanism evidence,\nnot as direct biological region annotations",
+            ha="center",
+            va="center",
+            fontsize=5.5,
+            color=palette["gray"],
+            linespacing=1.1,
         )
 
-    ax.text(0.50, 0.965, "RegionAdapterMoETCN: sequence-only region-adapter mixture of experts", ha="center", va="center", fontsize=14, fontweight="bold", color="#0f172a")
-    panel_color = "#475569"
-    ax.text(0.06, 0.895, "(a) Residue features", ha="left", va="center", fontsize=10, fontweight="bold", color=panel_color)
-    ax.text(0.29, 0.895, "(b) Warm-start backbone", ha="left", va="center", fontsize=10, fontweight="bold", color=panel_color)
-    ax.text(0.53, 0.895, "(c) Region-adapter MoE", ha="left", va="center", fontsize=10, fontweight="bold", color=panel_color)
-    ax.text(0.77, 0.895, "(d) Calibration and output", ha="left", va="center", fontsize=10, fontweight="bold", color=panel_color)
+        fig.savefig(path_pdf, dpi=600, metadata={"Title": "RegionAdapterMoETCN method overview"})
+        fig.savefig(path_eps, dpi=600)
+        fig.savefig(path_svg, dpi=600)
+        fig.savefig(path_png, dpi=600)
+        plt.close(fig)
 
-    box(0.035, 0.58, 0.14, 0.14, "Protein\nsequence", face="#eef2ff", edge="#4f46e5", fontsize=10, weight="bold")
-    box(0.215, 0.74, 0.17, 0.10, "Frozen ESM2-t33\nresidue embedding", face="#eff6ff", edge="#2563eb")
-    box(0.215, 0.58, 0.17, 0.10, "Amino-acid\none-hot", face="#ecfdf5", edge="#059669")
-    box(0.215, 0.42, 0.17, 0.10, "Relative\nposition", face="#fff7ed", edge="#ea580c")
-    box(0.425, 0.58, 0.15, 0.14, "Frozen shared\nTCN blocks", face="#f8fafc", edge="#334155", fontsize=10, weight="bold")
-    box(0.405, 0.78, 0.19, 0.07, "P4.6 RegionAwareTCN checkpoint", face="#f1f5f9", edge="#64748b", fontsize=8.7)
-
-    adapters = [
-        ("SDR adapter\n+ expert head", 0.625, 0.765, "#e0f2fe", "#0284c7"),
-        ("LDR adapter\n+ expert head", 0.625, 0.635, "#dcfce7", "#16a34a"),
-        ("Terminal-IDR adapter\n+ expert head", 0.625, 0.505, "#fef3c7", "#d97706"),
-        ("Internal-IDR adapter\n+ expert head", 0.625, 0.375, "#fee2e2", "#dc2626"),
-    ]
-    for label, x, y, face, edge in adapters:
-        box(x, y, 0.16, 0.085, label, face=face, edge=edge, fontsize=8.3)
-    box(0.625, 0.20, 0.16, 0.09, "Residue-level\nsoftmax gate", face="#f5f3ff", edge="#7c3aed", fontsize=8.8, weight="bold")
-    box(0.815, 0.51, 0.10, 0.12, "Expert\nmixture\nlogit", face="#f8fafc", edge="#334155", fontsize=9.0, weight="bold")
-    box(0.815, 0.30, 0.10, 0.09, "Generic\ndisorder logit", face="#f1f5f9", edge="#64748b", fontsize=8.6)
-    box(0.82, 0.74, 0.13, 0.09, "3-seed score\naveraging", face="#ecfeff", edge="#0891b2", fontsize=8.6)
-    box(0.82, 0.15, 0.13, 0.09, "Platt calibration\nDM1229 only", face="#fefce8", edge="#ca8a04", fontsize=8.6)
-    box(0.835, 0.015, 0.14, 0.10, "Calibrated IDR\nprobability + entropy\nuncertainty", face="#f8fafc", edge="#0f172a", fontsize=8.3, weight="bold")
-
-    arrow((0.175, 0.65), (0.215, 0.79), curve=0.15)
-    arrow((0.175, 0.65), (0.215, 0.63))
-    arrow((0.175, 0.65), (0.215, 0.47), curve=-0.15)
-    arrow((0.385, 0.79), (0.425, 0.67), curve=-0.18)
-    arrow((0.385, 0.63), (0.425, 0.65))
-    arrow((0.385, 0.47), (0.425, 0.62), curve=0.18)
-    arrow((0.50, 0.78), (0.50, 0.72), color="#64748b")
-    for _, _, y, _, edge in adapters:
-        arrow((0.575, 0.65), (0.625, y + 0.042), color=edge)
-        arrow((0.785, y + 0.042), (0.815, 0.57), color=edge)
-    arrow((0.575, 0.61), (0.625, 0.245), color="#7c3aed", curve=-0.25)
-    arrow((0.785, 0.245), (0.815, 0.545), color="#7c3aed", curve=0.25)
-    arrow((0.865, 0.51), (0.865, 0.39), color="#475569")
-    arrow((0.865, 0.63), (0.885, 0.74), color="#0891b2")
-    arrow((0.885, 0.74), (0.885, 0.24), color="#0891b2", curve=-0.12)
-    arrow((0.885, 0.30), (0.885, 0.24), color="#64748b")
-    arrow((0.885, 0.15), (0.895, 0.115), color="#ca8a04")
-
-    ax.text(0.105, 0.30, "No PSSM, MSA,\nPDB coordinates,\nor AlphaFold inputs", ha="center", va="center", fontsize=8.5, color="#334155")
-    ax.text(0.505, 0.30, "Only adapters,\nexpert heads,\nand gate are trained", ha="center", va="center", fontsize=8.5, color="#334155")
-    ax.text(0.705, 0.125, "Gate weights are analyzed\nas auxiliary mechanism evidence", ha="center", va="center", fontsize=8.1, color="#334155")
-
-    fig.tight_layout(pad=0.7)
-    fig.savefig(path_pdf)
-    fig.savefig(path_png, dpi=300)
+    manifest = {
+        "figure": "P5.8 RegionAdapterMoETCN method overview",
+        "audience_medium": "Bioinformatics manuscript, static full-width method figure",
+        "figure_type": "workflow schematic; no quantitative data encoding",
+        "target_size_mm": {"width": width_mm, "height": height_mm},
+        "source_inputs": [
+            "scripts/assemble_p5_8_fusionencoder_style_assets.py",
+            "manuscript/latex/bioinformatics/main.tex",
+        ],
+        "transformations": [
+            "manual schematic layout from the P4.8 architecture description",
+            "no numeric data filtering, smoothing, normalization, or imputation",
+        ],
+        "accessibility": [
+            "all module roles are labeled directly",
+            "color is redundant with text labels and line styles",
+            "Okabe-Ito-derived high-contrast category colors are used on white",
+        ],
+        "outputs": {
+            "pdf": str(path_pdf.relative_to(ROOT)),
+            "eps": str(path_eps.relative_to(ROOT)),
+            "svg": str(path_svg.relative_to(ROOT)),
+            "png_600dpi": str(path_png.relative_to(ROOT)),
+        },
+    }
+    path_manifest.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     plt.close(fig)
 
 
