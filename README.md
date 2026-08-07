@@ -15,10 +15,15 @@ Repository URL: https://github.com/MedBio07/IDP_RegionAware
 - `reports/`: project execution and experiment summaries.
 - `manuscript/`: manuscript drafts, tables, and LaTeX source.
 - `figures/`: generated manuscript figures that are small enough for Git.
+- `results/reproduction/idp_edl/`: compressed, prediction-only residue scores
+  and audited summary statistics from the local IDP-EDL reproduction.
 
 Large local artifacts are excluded by `.gitignore`, including raw data,
-embeddings, trained weights, prediction TSVs, generated result tables, local
-Conda environments, and cached files.
+embeddings, trained weights, general prediction TSVs, generated result tables,
+local Conda environments, and cached files. The curated IDP-EDL reproduction
+release is the explicit exception; it is compressed and omits sequences and
+per-residue reference labels. Aggregate class and confusion-matrix counts are
+retained for auditable metric accounting.
 
 ## Environment
 
@@ -53,6 +58,16 @@ python3 scripts/evaluate_disorder_predictions.py \
   --dataset SL329 \
   --out results/SL329_my_method_metrics.tsv
 ```
+
+## Published Baseline Predictions
+
+The audited, prediction-only IDP-EDL residue scores for SL329, MXD494, and
+DISORDER723 are available under
+[`results/reproduction/idp_edl/`](results/reproduction/idp_edl/README.md).
+The release includes compressed scores, recomputed statistics, paper-value
+comparisons, protocol caveats, and SHA256 provenance. It does not include test
+sequences or per-residue reference labels; summaries retain aggregate label
+counts.
 
 ## Project Status
 

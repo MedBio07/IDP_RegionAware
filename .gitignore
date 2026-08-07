@@ -28,10 +28,18 @@ data/**
 !data/**/README.md
 !data/**/*.md
 predictions/
+reproduction/idp_edl/outputs/
+reproduction/idp_edl/artifacts/
 results/**
 !results/**/
 !results/**/README.md
 !results/**/*.md
+# Curated, prediction-only IDP-EDL reproduction release. These files omit
+# amino-acid sequences and reference labels.
+!results/reproduction/idp_edl/*.tsv.gz
+!results/reproduction/idp_edl/*.json
+!results/reproduction/idp_edl/summary.tsv
+!results/reproduction/idp_edl/paper_comparison.tsv
 models/**/*.pt
 models/**/*.pth
 models/**/*.pkl

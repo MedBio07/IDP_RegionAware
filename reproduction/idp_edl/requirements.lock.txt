@@ -1,0 +1,11 @@
+# Python 3.8.19, local IDP-EDL reproduction environment.
+# CUDA torch wheels may carry a local build suffix (the audited environment is
+# torch 2.4.1+cu121); keep the base version pinned for portability.
+torch==2.4.1
+transformers==4.46.1
+tokenizers==0.20.3
+sentencepiece==0.2.0
+safetensors==0.5.3
+numpy==1.24.3
+scikit-learn==1.3.2
+biopython==1.83
