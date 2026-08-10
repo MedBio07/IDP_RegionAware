@@ -16,9 +16,28 @@ from evaluate_disorder_predictions import evaluate, parse_labeled_fasta, read_pr
 from train_sequence_disorder_model import average_precision, fmax
 
 
-def average_predictions(paths: list[Path], delimiter: str) -> dict[str, list[float]]:
+def normalize_weights(weights: list[float] | None, input_count: int) -> list[float] | None:
+    if weights is None:
+        return None
+    if len(weights) != input_count:
+        raise ValueError(
+            f"--weights must contain exactly one value per --inputs file "
+            f"({len(weights)} != {input_count})"
+        )
+    if any(not math.isfinite(weight) or weight < 0 for weight in weights):
+        raise ValueError("--weights must be finite and non-negative")
+    total = sum(weights)
+    if not math.isfinite(total) or total <= 0:
+        raise ValueError("--weights must have a finite total greater than zero")
+    return [weight / total for weight in weights]
+
+
+def average_predictions(
+    paths: list[Path], delimiter: str, weights: list[float] | None = None
+) -> dict[str, list[float]]:
     if not paths:
         raise ValueError("at least one prediction file is required")
+    normalized_weights = normalize_weights(weights, len(paths))
     prediction_sets = [read_prediction_tsv(path, delimiter) for path in paths]
     first = prediction_sets[0]
     protein_ids = list(first)
@@ -40,13 +59,22 @@ def average_predictions(paths: list[Path], delimiter: str) -> dict[str, list[flo
     for protein_id in protein_ids:
         length = len(first[protein_id])
         totals = [0.0] * length
-        for path, predictions in zip(paths, prediction_sets):
-            scores = predictions[protein_id]
-            if len(scores) != length:
-                raise ValueError(f"{path}: length mismatch for {protein_id}: {len(scores)} != {length}")
-            for index, score in enumerate(scores):
-                totals[index] += float(score)
-        averaged[protein_id] = [value / len(prediction_sets) for value in totals]
+        if normalized_weights is None:
+            for path, predictions in zip(paths, prediction_sets):
+                scores = predictions[protein_id]
+                if len(scores) != length:
+                    raise ValueError(f"{path}: length mismatch for {protein_id}: {len(scores)} != {length}")
+                for index, score in enumerate(scores):
+                    totals[index] += float(score)
+            averaged[protein_id] = [value / len(prediction_sets) for value in totals]
+        else:
+            for path, predictions, weight in zip(paths, prediction_sets, normalized_weights):
+                scores = predictions[protein_id]
+                if len(scores) != length:
+                    raise ValueError(f"{path}: length mismatch for {protein_id}: {len(scores)} != {length}")
+                for index, score in enumerate(scores):
+                    totals[index] += weight * float(score)
+            averaged[protein_id] = totals
     return averaged
 
 
@@ -143,6 +171,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset")
     parser.add_argument("--metrics-out", type=Path)
     parser.add_argument("--threshold", type=float)
+    parser.add_argument("--weights", type=float, nargs="+", help="non-negative input weights")
     parser.add_argument("--delimiter", default="\t")
     args = parser.parse_args()
     if args.delimiter == "\\t":
@@ -151,12 +180,13 @@ def parse_args() -> argparse.Namespace:
         raise ValueError("--labels is required with --metrics-out")
     if args.metrics_out and not args.dataset:
         raise ValueError("--dataset is required with --metrics-out")
+    args.weights = normalize_weights(args.weights, len(args.inputs))
     return args
 
 
 def main() -> None:
     args = parse_args()
-    predictions = average_predictions(args.inputs, args.delimiter)
+    predictions = average_predictions(args.inputs, args.delimiter, args.weights)
     write_predictions(args.out, predictions)
     if args.metrics_out:
         assert args.labels is not None

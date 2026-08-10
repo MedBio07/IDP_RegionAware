@@ -1,0 +1,104 @@
+experiment_id: p4_9c_lastblock_rank005_protect010
+stage: P4.9-C
+objective: improve internal-IDR ranking while preserving P4.8 full-benchmark performance
+
+model: RegionAdapterMoETCN
+features:
+  - esm
+  - position
+  - onehot
+esm2_model: esm2_t33_650M_UR50D
+embedding_dir: data/features/esm2_embeddings/esm2_t33_650M_UR50D_layer33_fp16
+
+data:
+  train: data/DM3000_Train.fasta
+  validation: data/DM1229_Validation.fasta
+  tests:
+    - name: SL329
+      path: data/SL329_test.fasta
+    - name: MXD494
+      path: data/MXD494_test.fasta
+    - name: DISORDER723
+      path: data/DISORDER723_test.fasta
+
+architecture:
+  hidden_dim: 128
+  layers: 4
+  kernels: [3, 7, 15]
+  dilations: [1, 2, 4, 8]
+  dropout: 0.0
+  adapter_dim: 32
+  gate_temperature: 1.0
+
+warm_start:
+  init_from_checkpoint_pattern: models/p4_7_region_adapter_moe_tcn_esm2_t33_gate002_warm_seed{seed}.pt
+  freeze_shared_backbone: true
+  unfreeze_last_block: true
+  trainable_modules:
+    - region_adapters
+    - expert_heads
+    - gate_head
+    - blocks.3
+    - final_norm
+
+loss:
+  main_loss: weighted_bce
+  main_loss_weight: 1.0
+  auxiliary_loss_weight: 0.0
+  gate_loss_weight: 0.02
+  pairwise_rank_weight: 0.05
+  pairwise_margin: 0.2
+  pairwise_max_per_segment: 16
+  pairwise_positive_region: internal_idr
+  pairwise_negative_region: ordered_residue_same_protein
+  pairwise_reduction: equal_weight_per_internal_segment
+  teacher_protect_weight: 0.10
+  teacher_protect_loss: huber_on_logits
+  teacher_protected_regions: [ordered, terminal_idr]
+  teacher_unprotected_regions: [internal_idr]
+
+training:
+  optimizer: AdamW
+  adapter_expert_gate_learning_rate: 0.0001
+  last_block_final_norm_learning_rate: 0.00002
+  weight_decay: 0.0001
+  epochs: 4
+  max_tokens: 10000
+  max_proteins: 32
+  seeds: [1, 2, 3]
+  checkpoint_selection: highest DM1229 validation AUC among trained epochs
+  selected_epochs:
+    seed1: 4
+    seed2: 3
+    seed3: 1
+
+ensemble:
+  selection_data: DM1229_Validation
+  weight_grid_step: 0.1
+  seed_order: [1, 2, 3]
+  weights: [0.4, 0.2, 0.4]
+  raw_validation_threshold: 0.813982
+
+calibration:
+  method: platt
+  fit_data: DM1229_Validation
+  validation_threshold: 0.321806
+
+nr25:
+  train_pattern: data/nr25_by_test/DM3000_Train_nr25_vs_{dataset}.fasta
+  init_checkpoint_pattern: models/p4_8_nr25_{dataset_slug}_region_adapter_moe_tcn_gate002_warm_seed1.pt
+  seed: 1
+  select_initial_checkpoint: true
+  other_hyperparameters_match_full_train: true
+
+release_gate:
+  baseline: p4_8_region_adapter_moe_tcn_gate002_warm_equal_3seed
+  require_positive_mean_full_auc_delta: true
+  maximum_allowed_dataset_auc_drop: 0.001
+  require_internal_auc_gain_on_at_least_two_datasets: true
+  observed_full_auc_deltas:
+    SL329: 0.000971
+    MXD494: 0.000122
+    DISORDER723: 0.000062
+  observed_mean_full_auc_delta: 0.000385
+  decision: promote

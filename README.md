@@ -27,6 +27,23 @@ DisorderUnetLM reproduction releases are explicit exceptions; they are
 compressed and omit sequences and per-residue reference labels. Aggregate
 class and confusion-matrix counts are retained for auditable metric accounting.
 
+## Current Main Model
+
+P4.9-C is the selected full-training model. It continues the P4.8
+`RegionAdapterMoETCN` with an Internal-IDR pairwise ranking objective, frozen
+teacher protection for ordered and Terminal-IDR residues, and low-learning-rate
+adaptation of only the last TCN block. The validation-locked weighted ensemble
+improves ROC-AUC over P4.8 on SL329, MXD494, and DISORDER723 by `0.000971`,
+`0.000122`, and `0.000062`, respectively, while improving Internal-IDR AUC,
+AUPR, and MCC on all three datasets.
+
+See
+[`configs/p4_9c_lastblock_internal_rank.yaml`](configs/p4_9c_lastblock_internal_rank.yaml)
+and
+[`reports/P4_9C_LAST_BLOCK_INTERNAL_RANK_SUMMARY.md`](reports/P4_9C_LAST_BLOCK_INTERNAL_RANK_SUMMARY.md)
+for the locked protocol, paired statistics, calibration, NR25 results, negative
+secondary metrics, and reproduction commands.
+
 ## Environment
 
 Install the provisional runtime requirements with:
