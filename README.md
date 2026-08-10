@@ -17,13 +17,15 @@ Repository URL: https://github.com/MedBio07/IDP_RegionAware
 - `figures/`: generated manuscript figures that are small enough for Git.
 - `results/reproduction/idp_edl/`: compressed, prediction-only residue scores
   and audited summary statistics from the local IDP-EDL reproduction.
+- `results/reproduction/disorderunetlm/`: validated, compressed residue scores
+  and recomputed statistics from the supplied DisorderUnetLM reproduction output.
 
 Large local artifacts are excluded by `.gitignore`, including raw data,
 embeddings, trained weights, general prediction TSVs, generated result tables,
-local Conda environments, and cached files. The curated IDP-EDL reproduction
-release is the explicit exception; it is compressed and omits sequences and
-per-residue reference labels. Aggregate class and confusion-matrix counts are
-retained for auditable metric accounting.
+local Conda environments, and cached files. The curated IDP-EDL and
+DisorderUnetLM reproduction releases are explicit exceptions; they are
+compressed and omit sequences and per-residue reference labels. Aggregate
+class and confusion-matrix counts are retained for auditable metric accounting.
 
 ## Environment
 
@@ -68,6 +70,12 @@ The release includes compressed scores, recomputed statistics, paper-value
 comparisons, protocol caveats, and SHA256 provenance. It does not include test
 sequences or per-residue reference labels; summaries retain aggregate label
 counts.
+
+The supplied DisorderUnetLM prediction artifact for the same three datasets is
+available under
+[`results/reproduction/disorderunetlm/`](results/reproduction/disorderunetlm/README.md).
+It includes complete residue coverage, deterministic packaging, recomputed
+metrics, multipart-protein provenance, and explicit reproduction limitations.
 
 ## Project Status
 

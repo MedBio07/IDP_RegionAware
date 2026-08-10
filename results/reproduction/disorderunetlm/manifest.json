@@ -1,0 +1,4900 @@
+{
+  "archive": {
+    "filename": "DisorderUnetLM_predictions_SL329_MXD494_DISORDER723.zip",
+    "sha256": "72bae68e91fee0e0bf3c4db5adf64e41b51fa50ac6360186c0fd799e841497e8",
+    "size_bytes": 4583640
+  },
+  "caveats": [
+    "The supplied archive contains predictions but no model, model-version, checkpoint, preprocessing, ensemble, dependency, device, runtime, seed, or class-column metadata.",
+    "Probability column 1 is interpreted as disorder based on the paper's residue-probability definition and p > 0.5 rule; the ZIP does not label its class columns.",
+    "The DisorderUnetLM paper reports no direct SL329, MXD494, or DISORDER723 results; CAID-2 values are not comparable dataset results."
+  ],
+  "datasets": {
+    "DISORDER723": {
+      "archive_member_count": 723,
+      "archive_members": {
+        "1a06A": [
+          "DISORDER723/1a06A.npy"
+        ],
+        "1a15B": [
+          "DISORDER723/1a15B.npy"
+        ],
+        "1a1qA": [
+          "DISORDER723/1a1qA.npy"
+        ],
+        "1a21A": [
+          "DISORDER723/1a21A.npy"
+        ],
+        "1a2kD": [
+          "DISORDER723/1a2kD.npy"
+        ],
+        "1a2tA": [
+          "DISORDER723/1a2tA.npy"
+        ],
+        "1a2xB": [
+          "DISORDER723/1a2xB.npy"
+        ],
+        "1a3aB": [
+          "DISORDER723/1a3aB.npy"
+        ],
+        "1a3cA": [
+          "DISORDER723/1a3cA.npy"
+        ],
+        "1a3gA": [
+          "DISORDER723/1a3gA.npy"
+        ],
+        "1a3zA": [
+          "DISORDER723/1a3zA.npy"
+        ],
+        "1a48A": [
+          "DISORDER723/1a48A.npy"
+        ],
+        "1a4iA": [
+          "DISORDER723/1a4iA.npy"
+        ],
+        "1a5aA": [
+          "DISORDER723/1a5aA.npy"
+        ],
+        "1a5aB": [
+          "DISORDER723/1a5aB.npy"
+        ],
+        "1a5tA": [
+          "DISORDER723/1a5tA.npy"
+        ],
+        "1a5yA": [
+          "DISORDER723/1a5yA.npy"
+        ],
+        "1a62A": [
+          "DISORDER723/1a62A.npy"
+        ],
+        "1a69C": [
+          "DISORDER723/1a69C.npy"
+        ],
+        "1a6jB": [
+          "DISORDER723/1a6jB.npy"
+        ],
+        "1a6qA": [
+          "DISORDER723/1a6qA.npy"
+        ],
+        "1a76A": [
+          "DISORDER723/1a76A.npy"
+        ],
+        "1a7jA": [
+          "DISORDER723/1a7jA.npy"
+        ],
+        "1a8mB": [
+          "DISORDER723/1a8mB.npy"
+        ],
+        "1a8yA": [
+          "DISORDER723/1a8yA.npy"
+        ],
+        "1a95D": [
+          "DISORDER723/1a95D.npy"
+        ],
+        "1a9sA": [
+          "DISORDER723/1a9sA.npy"
+        ],
+        "1aa1L": [
+          "DISORDER723/1aa1L.npy"
+        ],
+        "1aa6A": [
+          "DISORDER723/1aa6A.npy"
+        ],
+        "1accA": [
+          "DISORDER723/1accA.npy"
+        ],
+        "1ad2A": [
+          "DISORDER723/1ad2A.npy"
+        ],
+        "1ae1B": [
+          "DISORDER723/1ae1B.npy"
+        ],
+        "1af3A": [
+          "DISORDER723/1af3A.npy"
+        ],
+        "1afsA": [
+          "DISORDER723/1afsA.npy"
+        ],
+        "1agqC": [
+          "DISORDER723/1agqC.npy"
+        ],
+        "1ah5A": [
+          "DISORDER723/1ah5A.npy"
+        ],
+        "1ah6A": [
+          "DISORDER723/1ah6A.npy"
+        ],
+        "1aijH": [
+          "DISORDER723/1aijH.npy"
+        ],
+        "1ajkB": [
+          "DISORDER723/1ajkB.npy"
+        ],
+        "1ak0A": [
+          "DISORDER723/1ak0A.npy"
+        ],
+        "1ak2A": [
+          "DISORDER723/1ak2A.npy"
+        ],
+        "1akdA": [
+          "DISORDER723/1akdA.npy"
+        ],
+        "1al3A": [
+          "DISORDER723/1al3A.npy"
+        ],
+        "1am7B": [
+          "DISORDER723/1am7B.npy"
+        ],
+        "1ao6A": [
+          "DISORDER723/1ao6A.npy"
+        ],
+        "1aofB": [
+          "DISORDER723/1aofB.npy"
+        ],
+        "1aohA": [
+          "DISORDER723/1aohA.npy"
+        ],
+        "1apaA": [
+          "DISORDER723/1apaA.npy"
+        ],
+        "1aq6B": [
+          "DISORDER723/1aq6B.npy"
+        ],
+        "1aqbA": [
+          "DISORDER723/1aqbA.npy"
+        ],
+        "1aqdD": [
+          "DISORDER723/1aqdD.npy"
+        ],
+        "1aqdK": [
+          "DISORDER723/1aqdK.npy"
+        ],
+        "1aqhA": [
+          "DISORDER723/1aqhA.npy"
+        ],
+        "1aruA": [
+          "DISORDER723/1aruA.npy"
+        ],
+        "1askB": [
+          "DISORDER723/1askB.npy"
+        ],
+        "1assA": [
+          "DISORDER723/1assA.npy"
+        ],
+        "1at3A": [
+          "DISORDER723/1at3A.npy"
+        ],
+        "1auiA": [
+          "DISORDER723/1auiA.npy"
+        ],
+        "1aupA": [
+          "DISORDER723/1aupA.npy"
+        ],
+        "1av5A": [
+          "DISORDER723/1av5A.npy"
+        ],
+        "1avfJ": [
+          "DISORDER723/1avfJ.npy"
+        ],
+        "1ax8A": [
+          "DISORDER723/1ax8A.npy"
+        ],
+        "1az5A": [
+          "DISORDER723/1az5A.npy"
+        ],
+        "1b0nA": [
+          "DISORDER723/1b0nA.npy"
+        ],
+        "1b0nB": [
+          "DISORDER723/1b0nB.npy"
+        ],
+        "1b0uA": [
+          "DISORDER723/1b0uA.npy"
+        ],
+        "1b1cA": [
+          "DISORDER723/1b1cA.npy"
+        ],
+        "1b24A": [
+          "DISORDER723/1b24A.npy"
+        ],
+        "1b25C": [
+          "DISORDER723/1b25C.npy"
+        ],
+        "1b27E": [
+          "DISORDER723/1b27E.npy"
+        ],
+        "1b2vA": [
+          "DISORDER723/1b2vA.npy"
+        ],
+        "1b34A": [
+          "DISORDER723/1b34A.npy"
+        ],
+        "1b34B": [
+          "DISORDER723/1b34B.npy"
+        ],
+        "1b49C": [
+          "DISORDER723/1b49C.npy"
+        ],
+        "1b4fG": [
+          "DISORDER723/1b4fG.npy"
+        ],
+        "1b4kA": [
+          "DISORDER723/1b4kA.npy"
+        ],
+        "1b4sA": [
+          "DISORDER723/1b4sA.npy"
+        ],
+        "1b4uA": [
+          "DISORDER723/1b4uA.npy"
+        ],
+        "1b54A": [
+          "DISORDER723/1b54A.npy"
+        ],
+        "1b57B": [
+          "DISORDER723/1b57B.npy"
+        ],
+        "1b5lA": [
+          "DISORDER723/1b5lA.npy"
+        ],
+        "1b62A": [
+          "DISORDER723/1b62A.npy"
+        ],
+        "1b65E": [
+          "DISORDER723/1b65E.npy"
+        ],
+        "1b68A": [
+          "DISORDER723/1b68A.npy"
+        ],
+        "1b6aA": [
+          "DISORDER723/1b6aA.npy"
+        ],
+        "1b6qA": [
+          "DISORDER723/1b6qA.npy"
+        ],
+        "1b6rA": [
+          "DISORDER723/1b6rA.npy"
+        ],
+        "1b78A": [
+          "DISORDER723/1b78A.npy"
+        ],
+        "1b7tA": [
+          "DISORDER723/1b7tA.npy"
+        ],
+        "1b7tY": [
+          "DISORDER723/1b7tY.npy"
+        ],
+        "1b7yA": [
+          "DISORDER723/1b7yA.npy"
+        ],
+        "1b8eA": [
+          "DISORDER723/1b8eA.npy"
+        ],
+        "1b8kA": [
+          "DISORDER723/1b8kA.npy"
+        ],
+        "1b8zB": [
+          "DISORDER723/1b8zB.npy"
+        ],
+        "1b93A": [
+          "DISORDER723/1b93A.npy"
+        ],
+        "1b9hA": [
+          "DISORDER723/1b9hA.npy"
+        ],
+        "1ba0A": [
+          "DISORDER723/1ba0A.npy"
+        ],
+        "1ba3A": [
+          "DISORDER723/1ba3A.npy"
+        ],
+        "1bazC": [
+          "DISORDER723/1bazC.npy"
+        ],
+        "1bd0B": [
+          "DISORDER723/1bd0B.npy"
+        ],
+        "1bd9A": [
+          "DISORDER723/1bd9A.npy"
+        ],
+        "1bdfC": [
+          "DISORDER723/1bdfC.npy"
+        ],
+        "1beaA": [
+          "DISORDER723/1beaA.npy"
+        ],
+        "1befA": [
+          "DISORDER723/1befA.npy"
+        ],
+        "1bfbA": [
+          "DISORDER723/1bfbA.npy"
+        ],
+        "1bfdA": [
+          "DISORDER723/1bfdA.npy"
+        ],
+        "1bfnA": [
+          "DISORDER723/1bfnA.npy"
+        ],
+        "1bg6A": [
+          "DISORDER723/1bg6A.npy"
+        ],
+        "1bg8C": [
+          "DISORDER723/1bg8C.npy"
+        ],
+        "1bh5C": [
+          "DISORDER723/1bh5C.npy"
+        ],
+        "1bikA": [
+          "DISORDER723/1bikA.npy"
+        ],
+        "1biqA": [
+          "DISORDER723/1biqA.npy"
+        ],
+        "1bj7A": [
+          "DISORDER723/1bj7A.npy"
+        ],
+        "1bjfB": [
+          "DISORDER723/1bjfB.npy"
+        ],
+        "1bjpC": [
+          "DISORDER723/1bjpC.npy"
+        ],
+        "1bkjB": [
+          "DISORDER723/1bkjB.npy"
+        ],
+        "1bkyA": [
+          "DISORDER723/1bkyA.npy"
+        ],
+        "1blxB": [
+          "DISORDER723/1blxB.npy"
+        ],
+        "1blzA": [
+          "DISORDER723/1blzA.npy"
+        ],
+        "1bm7A": [
+          "DISORDER723/1bm7A.npy"
+        ],
+        "1bncA": [
+          "DISORDER723/1bncA.npy"
+        ],
+        "1bo4B": [
+          "DISORDER723/1bo4B.npy"
+        ],
+        "1bobA": [
+          "DISORDER723/1bobA.npy"
+        ],
+        "1boiA": [
+          "DISORDER723/1boiA.npy"
+        ],
+        "1bp5B": [
+          "DISORDER723/1bp5B.npy"
+        ],
+        "1bq5A": [
+          "DISORDER723/1bq5A.npy"
+        ],
+        "1bqgA": [
+          "DISORDER723/1bqgA.npy"
+        ],
+        "1br9A": [
+          "DISORDER723/1br9A.npy"
+        ],
+        "1brlA": [
+          "DISORDER723/1brlA.npy"
+        ],
+        "1brmA": [
+          "DISORDER723/1brmA.npy"
+        ],
+        "1bt3A": [
+          "DISORDER723/1bt3A.npy"
+        ],
+        "1bwpA": [
+          "DISORDER723/1bwpA.npy"
+        ],
+        "1bwsA": [
+          "DISORDER723/1bwsA.npy"
+        ],
+        "1bx8A": [
+          "DISORDER723/1bx8A.npy"
+        ],
+        "1bxtA": [
+          "DISORDER723/1bxtA.npy"
+        ],
+        "1c03C": [
+          "DISORDER723/1c03C.npy"
+        ],
+        "1c1bA": [
+          "DISORDER723/1c1bA.npy"
+        ],
+        "1c1dA": [
+          "DISORDER723/1c1dA.npy"
+        ],
+        "1c1hA": [
+          "DISORDER723/1c1hA.npy"
+        ],
+        "1c30G": [
+          "DISORDER723/1c30G.npy"
+        ],
+        "1c3jA": [
+          "DISORDER723/1c3jA.npy"
+        ],
+        "1c3kA": [
+          "DISORDER723/1c3kA.npy"
+        ],
+        "1c5kA": [
+          "DISORDER723/1c5kA.npy"
+        ],
+        "1c76A": [
+          "DISORDER723/1c76A.npy"
+        ],
+        "1c7hA": [
+          "DISORDER723/1c7hA.npy"
+        ],
+        "1c7nC": [
+          "DISORDER723/1c7nC.npy"
+        ],
+        "1c7rA": [
+          "DISORDER723/1c7rA.npy"
+        ],
+        "1c8nA": [
+          "DISORDER723/1c8nA.npy"
+        ],
+        "1c9kC": [
+          "DISORDER723/1c9kC.npy"
+        ],
+        "1c9uA": [
+          "DISORDER723/1c9uA.npy"
+        ],
+        "1cb0A": [
+          "DISORDER723/1cb0A.npy"
+        ],
+        "1cbfA": [
+          "DISORDER723/1cbfA.npy"
+        ],
+        "1cc1S": [
+          "DISORDER723/1cc1S.npy"
+        ],
+        "1cecA": [
+          "DISORDER723/1cecA.npy"
+        ],
+        "1cexA": [
+          "DISORDER723/1cexA.npy"
+        ],
+        "1cf9A": [
+          "DISORDER723/1cf9A.npy"
+        ],
+        "1cfyB": [
+          "DISORDER723/1cfyB.npy"
+        ],
+        "1chuA": [
+          "DISORDER723/1chuA.npy"
+        ],
+        "1ci8B": [
+          "DISORDER723/1ci8B.npy"
+        ],
+        "1cjcA": [
+          "DISORDER723/1cjcA.npy"
+        ],
+        "1cjmA": [
+          "DISORDER723/1cjmA.npy"
+        ],
+        "1ckeA": [
+          "DISORDER723/1ckeA.npy"
+        ],
+        "1ckmA": [
+          "DISORDER723/1ckmA.npy"
+        ],
+        "1cl0A": [
+          "DISORDER723/1cl0A.npy"
+        ],
+        "1cm9B": [
+          "DISORDER723/1cm9B.npy"
+        ],
+        "1cmvA": [
+          "DISORDER723/1cmvA.npy"
+        ],
+        "1cnt3": [
+          "DISORDER723/1cnt3.npy"
+        ],
+        "1cnvA": [
+          "DISORDER723/1cnvA.npy"
+        ],
+        "1cp7A": [
+          "DISORDER723/1cp7A.npy"
+        ],
+        "1cqaA": [
+          "DISORDER723/1cqaA.npy"
+        ],
+        "1csnA": [
+          "DISORDER723/1csnA.npy"
+        ],
+        "1ct9D": [
+          "DISORDER723/1ct9D.npy"
+        ],
+        "1cukA": [
+          "DISORDER723/1cukA.npy"
+        ],
+        "1cxyA": [
+          "DISORDER723/1cxyA.npy"
+        ],
+        "1cy5A": [
+          "DISORDER723/1cy5A.npy"
+        ],
+        "1cyoA": [
+          "DISORDER723/1cyoA.npy"
+        ],
+        "1cz3A": [
+          "DISORDER723/1cz3A.npy"
+        ],
+        "1czaN": [
+          "DISORDER723/1czaN.npy"
+        ],
+        "1czfB": [
+          "DISORDER723/1czfB.npy"
+        ],
+        "1d0iK": [
+          "DISORDER723/1d0iK.npy"
+        ],
+        "1d0sA": [
+          "DISORDER723/1d0sA.npy"
+        ],
+        "1d1pA": [
+          "DISORDER723/1d1pA.npy"
+        ],
+        "1d2fB": [
+          "DISORDER723/1d2fB.npy"
+        ],
+        "1d2tA": [
+          "DISORDER723/1d2tA.npy"
+        ],
+        "1d3bB": [
+          "DISORDER723/1d3bB.npy"
+        ],
+        "1d3bC": [
+          "DISORDER723/1d3bC.npy"
+        ],
+        "1d3vB": [
+          "DISORDER723/1d3vB.npy"
+        ],
+        "1d5wB": [
+          "DISORDER723/1d5wB.npy"
+        ],
+        "1d6jB": [
+          "DISORDER723/1d6jB.npy"
+        ],
+        "1d6uA": [
+          "DISORDER723/1d6uA.npy"
+        ],
+        "1d7yA": [
+          "DISORDER723/1d7yA.npy"
+        ],
+        "1d8cA": [
+          "DISORDER723/1d8cA.npy"
+        ],
+        "1d8dB": [
+          "DISORDER723/1d8dB.npy"
+        ],
+        "1d9qC": [
+          "DISORDER723/1d9qC.npy"
+        ],
+        "1daaA": [
+          "DISORDER723/1daaA.npy"
+        ],
+        "1daeA": [
+          "DISORDER723/1daeA.npy"
+        ],
+        "1darA": [
+          "DISORDER723/1darA.npy"
+        ],
+        "1db3A": [
+          "DISORDER723/1db3A.npy"
+        ],
+        "1dbgA": [
+          "DISORDER723/1dbgA.npy"
+        ],
+        "1dbiA": [
+          "DISORDER723/1dbiA.npy"
+        ],
+        "1dbuA": [
+          "DISORDER723/1dbuA.npy"
+        ],
+        "1dcoB": [
+          "DISORDER723/1dcoB.npy"
+        ],
+        "1dcsA": [
+          "DISORDER723/1dcsA.npy"
+        ],
+        "1dd4C": [
+          "DISORDER723/1dd4C.npy"
+        ],
+        "1dd6A": [
+          "DISORDER723/1dd6A.npy"
+        ],
+        "1ddwA": [
+          "DISORDER723/1ddwA.npy"
+        ],
+        "1dekB": [
+          "DISORDER723/1dekB.npy"
+        ],
+        "1dfaA": [
+          "DISORDER723/1dfaA.npy"
+        ],
+        "1dg3A": [
+          "DISORDER723/1dg3A.npy"
+        ],
+        "1dgmA": [
+          "DISORDER723/1dgmA.npy"
+        ],
+        "1dhyA": [
+          "DISORDER723/1dhyA.npy"
+        ],
+        "1di6A": [
+          "DISORDER723/1di6A.npy"
+        ],
+        "1dikA": [
+          "DISORDER723/1dikA.npy"
+        ],
+        "1dioE": [
+          "DISORDER723/1dioE.npy"
+        ],
+        "1dioG": [
+          "DISORDER723/1dioG.npy"
+        ],
+        "1dj7A": [
+          "DISORDER723/1dj7A.npy"
+        ],
+        "1dklA": [
+          "DISORDER723/1dklA.npy"
+        ],
+        "1dm0A": [
+          "DISORDER723/1dm0A.npy"
+        ],
+        "1dm9A": [
+          "DISORDER723/1dm9A.npy"
+        ],
+        "1dohA": [
+          "DISORDER723/1dohA.npy"
+        ],
+        "1dp0D": [
+          "DISORDER723/1dp0D.npy"
+        ],
+        "1dp4C": [
+          "DISORDER723/1dp4C.npy"
+        ],
+        "1dpsH": [
+          "DISORDER723/1dpsH.npy"
+        ],
+        "1dqsA": [
+          "DISORDER723/1dqsA.npy"
+        ],
+        "1drtA": [
+          "DISORDER723/1drtA.npy"
+        ],
+        "1dtlA": [
+          "DISORDER723/1dtlA.npy"
+        ],
+        "1ducA": [
+          "DISORDER723/1ducA.npy"
+        ],
+        "1dudA": [
+          "DISORDER723/1dudA.npy"
+        ],
+        "1dveA": [
+          "DISORDER723/1dveA.npy"
+        ],
+        "1dx6A": [
+          "DISORDER723/1dx6A.npy"
+        ],
+        "1dymA": [
+          "DISORDER723/1dymA.npy"
+        ],
+        "1dz3A": [
+          "DISORDER723/1dz3A.npy"
+        ],
+        "1dzfA": [
+          "DISORDER723/1dzfA.npy"
+        ],
+        "1dzuP": [
+          "DISORDER723/1dzuP.npy"
+        ],
+        "1e0dA": [
+          "DISORDER723/1e0dA.npy"
+        ],
+        "1e0tA": [
+          "DISORDER723/1e0tA.npy"
+        ],
+        "1e0vA": [
+          "DISORDER723/1e0vA.npy"
+        ],
+        "1e1eA": [
+          "DISORDER723/1e1eA.npy"
+        ],
+        "1e1oA": [
+          "DISORDER723/1e1oA.npy"
+        ],
+        "1e20A": [
+          "DISORDER723/1e20A.npy"
+        ],
+        "1e21A": [
+          "DISORDER723/1e21A.npy"
+        ],
+        "1e3dB": [
+          "DISORDER723/1e3dB.npy"
+        ],
+        "1e4fT": [
+          "DISORDER723/1e4fT.npy"
+        ],
+        "1e59A": [
+          "DISORDER723/1e59A.npy"
+        ],
+        "1e5eA": [
+          "DISORDER723/1e5eA.npy"
+        ],
+        "1e5kA": [
+          "DISORDER723/1e5kA.npy"
+        ],
+        "1e5mA": [
+          "DISORDER723/1e5mA.npy"
+        ],
+        "1e5sA": [
+          "DISORDER723/1e5sA.npy"
+        ],
+        "1e5xA": [
+          "DISORDER723/1e5xA.npy"
+        ],
+        "1e6eD": [
+          "DISORDER723/1e6eD.npy"
+        ],
+        "1e8gB": [
+          "DISORDER723/1e8gB.npy"
+        ],
+        "1e9nA": [
+          "DISORDER723/1e9nA.npy"
+        ],
+        "1e9xA": [
+          "DISORDER723/1e9xA.npy"
+        ],
+        "1ea3B": [
+          "DISORDER723/1ea3B.npy"
+        ],
+        "1earA": [
+          "DISORDER723/1earA.npy"
+        ],
+        "1eb7A": [
+          "DISORDER723/1eb7A.npy"
+        ],
+        "1eccA": [
+          "DISORDER723/1eccA.npy"
+        ],
+        "1ecmA": [
+          "DISORDER723/1ecmA.npy"
+        ],
+        "1ecwA": [
+          "DISORDER723/1ecwA.npy"
+        ],
+        "1edtA": [
+          "DISORDER723/1edtA.npy"
+        ],
+        "1ee0B": [
+          "DISORDER723/1ee0B.npy"
+        ],
+        "1ee1B": [
+          "DISORDER723/1ee1B.npy"
+        ],
+        "1ee3P": [
+          "DISORDER723/1ee3P.npy"
+        ],
+        "1ef8B": [
+          "DISORDER723/1ef8B.npy"
+        ],
+        "1eg2A": [
+          "DISORDER723/1eg2A.npy"
+        ],
+        "1eg5A": [
+          "DISORDER723/1eg5A.npy"
+        ],
+        "1egaB": [
+          "DISORDER723/1egaB.npy"
+        ],
+        "1egdD": [
+          "DISORDER723/1egdD.npy"
+        ],
+        "1eh6A": [
+          "DISORDER723/1eh6A.npy"
+        ],
+        "1ehyB": [
+          "DISORDER723/1ehyB.npy"
+        ],
+        "1eixC": [
+          "DISORDER723/1eixC.npy"
+        ],
+        "1ej2A": [
+          "DISORDER723/1ej2A.npy"
+        ],
+        "1ejfA": [
+          "DISORDER723/1ejfA.npy"
+        ],
+        "1ekeA": [
+          "DISORDER723/1ekeA.npy"
+        ],
+        "1ekqA": [
+          "DISORDER723/1ekqA.npy"
+        ],
+        "1ekrA": [
+          "DISORDER723/1ekrA.npy"
+        ],
+        "1el5B": [
+          "DISORDER723/1el5B.npy"
+        ],
+        "1el6A": [
+          "DISORDER723/1el6A.npy"
+        ],
+        "1em9A": [
+          "DISORDER723/1em9A.npy"
+        ],
+        "1enoA": [
+          "DISORDER723/1enoA.npy"
+        ],
+        "1eokA": [
+          "DISORDER723/1eokA.npy"
+        ],
+        "1epuA": [
+          "DISORDER723/1epuA.npy"
+        ],
+        "1epxD": [
+          "DISORDER723/1epxD.npy"
+        ],
+        "1eq2C": [
+          "DISORDER723/1eq2C.npy"
+        ],
+        "1es8A": [
+          "DISORDER723/1es8A.npy"
+        ],
+        "1esmB": [
+          "DISORDER723/1esmB.npy"
+        ],
+        "1et9A": [
+          "DISORDER723/1et9A.npy"
+        ],
+        "1etkA": [
+          "DISORDER723/1etkA.npy"
+        ],
+        "1eugA": [
+          "DISORDER723/1eugA.npy"
+        ],
+        "1ev7B": [
+          "DISORDER723/1ev7B.npy"
+        ],
+        "1evsA": [
+          "DISORDER723/1evsA.npy"
+        ],
+        "1evuB": [
+          "DISORDER723/1evuB.npy"
+        ],
+        "1evyA": [
+          "DISORDER723/1evyA.npy"
+        ],
+        "1ew2A": [
+          "DISORDER723/1ew2A.npy"
+        ],
+        "1ewjE": [
+          "DISORDER723/1ewjE.npy"
+        ],
+        "1ex2A": [
+          "DISORDER723/1ex2A.npy"
+        ],
+        "1eyeA": [
+          "DISORDER723/1eyeA.npy"
+        ],
+        "1eylA": [
+          "DISORDER723/1eylA.npy"
+        ],
+        "1eypA": [
+          "DISORDER723/1eypA.npy"
+        ],
+        "1eyrB": [
+          "DISORDER723/1eyrB.npy"
+        ],
+        "1eysC": [
+          "DISORDER723/1eysC.npy"
+        ],
+        "1eysM": [
+          "DISORDER723/1eysM.npy"
+        ],
+        "1eyvB": [
+          "DISORDER723/1eyvB.npy"
+        ],
+        "1eyyD": [
+          "DISORDER723/1eyyD.npy"
+        ],
+        "1f05B": [
+          "DISORDER723/1f05B.npy"
+        ],
+        "1f0kA": [
+          "DISORDER723/1f0kA.npy"
+        ],
+        "1f0lB": [
+          "DISORDER723/1f0lB.npy"
+        ],
+        "1f12A": [
+          "DISORDER723/1f12A.npy"
+        ],
+        "1f1zA": [
+          "DISORDER723/1f1zA.npy"
+        ],
+        "1f2lC": [
+          "DISORDER723/1f2lC.npy"
+        ],
+        "1f2qA": [
+          "DISORDER723/1f2qA.npy"
+        ],
+        "1f32A": [
+          "DISORDER723/1f32A.npy"
+        ],
+        "1f3tB": [
+          "DISORDER723/1f3tB.npy"
+        ],
+        "1f42A": [
+          "DISORDER723/1f42A.npy"
+        ],
+        "1f48A": [
+          "DISORDER723/1f48A.npy"
+        ],
+        "1f5aA": [
+          "DISORDER723/1f5aA.npy"
+        ],
+        "1f5fA": [
+          "DISORDER723/1f5fA.npy"
+        ],
+        "1f5qB": [
+          "DISORDER723/1f5qB.npy"
+        ],
+        "1f6bB": [
+          "DISORDER723/1f6bB.npy"
+        ],
+        "1f6dB": [
+          "DISORDER723/1f6dB.npy"
+        ],
+        "1f6fA": [
+          "DISORDER723/1f6fA.npy"
+        ],
+        "1f6fB": [
+          "DISORDER723/1f6fB.npy"
+        ],
+        "1f6kC": [
+          "DISORDER723/1f6kC.npy"
+        ],
+        "1f6yB": [
+          "DISORDER723/1f6yB.npy"
+        ],
+        "1f8fA": [
+          "DISORDER723/1f8fA.npy"
+        ],
+        "1f8gD": [
+          "DISORDER723/1f8gD.npy"
+        ],
+        "1f8rC": [
+          "DISORDER723/1f8rC.npy"
+        ],
+        "1fa9A": [
+          "DISORDER723/1fa9A.npy"
+        ],
+        "1fahA": [
+          "DISORDER723/1fahA.npy"
+        ],
+        "1fc5B": [
+          "DISORDER723/1fc5B.npy"
+        ],
+        "1fcjC": [
+          "DISORDER723/1fcjC.npy"
+        ],
+        "1fcmA": [
+          "DISORDER723/1fcmA.npy"
+        ],
+        "1fcqA": [
+          "DISORDER723/1fcqA.npy"
+        ],
+        "1fd9A": [
+          "DISORDER723/1fd9A.npy"
+        ],
+        "1feaB": [
+          "DISORDER723/1feaB.npy"
+        ],
+        "1fepA": [
+          "DISORDER723/1fepA.npy"
+        ],
+        "1fewA": [
+          "DISORDER723/1fewA.npy"
+        ],
+        "1ff3B": [
+          "DISORDER723/1ff3B.npy"
+        ],
+        "1ffuB": [
+          "DISORDER723/1ffuB.npy"
+        ],
+        "1fgsA": [
+          "DISORDER723/1fgsA.npy"
+        ],
+        "1fhgA": [
+          "DISORDER723/1fhgA.npy"
+        ],
+        "1fhuA": [
+          "DISORDER723/1fhuA.npy"
+        ],
+        "1fitA": [
+          "DISORDER723/1fitA.npy"
+        ],
+        "1fjrB": [
+          "DISORDER723/1fjrB.npy"
+        ],
+        "1fm0E": [
+          "DISORDER723/1fm0E.npy"
+        ],
+        "1fm5A": [
+          "DISORDER723/1fm5A.npy"
+        ],
+        "1fmtB": [
+          "DISORDER723/1fmtB.npy"
+        ],
+        "1fnjA": [
+          "DISORDER723/1fnjA.npy"
+        ],
+        "1fnoA": [
+          "DISORDER723/1fnoA.npy"
+        ],
+        "1fo4B": [
+          "DISORDER723/1fo4B.npy"
+        ],
+        "1fohA": [
+          "DISORDER723/1fohA.npy"
+        ],
+        "1fp1D": [
+          "DISORDER723/1fp1D.npy"
+        ],
+        "1fp2A": [
+          "DISORDER723/1fp2A.npy"
+        ],
+        "1fp4A": [
+          "DISORDER723/1fp4A.npy"
+        ],
+        "1fp6D": [
+          "DISORDER723/1fp6D.npy"
+        ],
+        "1fpoC": [
+          "DISORDER723/1fpoC.npy"
+        ],
+        "1fpzC": [
+          "DISORDER723/1fpzC.npy"
+        ],
+        "1fs9A": [
+          "DISORDER723/1fs9A.npy"
+        ],
+        "1fseD": [
+          "DISORDER723/1fseD.npy"
+        ],
+        "1fsiA": [
+          "DISORDER723/1fsiA.npy"
+        ],
+        "1ftkA": [
+          "DISORDER723/1ftkA.npy"
+        ],
+        "1ftnA": [
+          "DISORDER723/1ftnA.npy"
+        ],
+        "1fupB": [
+          "DISORDER723/1fupB.npy"
+        ],
+        "1fuuA": [
+          "DISORDER723/1fuuA.npy"
+        ],
+        "1fw1A": [
+          "DISORDER723/1fw1A.npy"
+        ],
+        "1fweC": [
+          "DISORDER723/1fweC.npy"
+        ],
+        "1fx3B": [
+          "DISORDER723/1fx3B.npy"
+        ],
+        "1fx7B": [
+          "DISORDER723/1fx7B.npy"
+        ],
+        "1fx8A": [
+          "DISORDER723/1fx8A.npy"
+        ],
+        "1fxxA": [
+          "DISORDER723/1fxxA.npy"
+        ],
+        "1fy2A": [
+          "DISORDER723/1fy2A.npy"
+        ],
+        "1fyzA": [
+          "DISORDER723/1fyzA.npy"
+        ],
+        "1fzvA": [
+          "DISORDER723/1fzvA.npy"
+        ],
+        "1g0sA": [
+          "DISORDER723/1g0sA.npy"
+        ],
+        "1g27A": [
+          "DISORDER723/1g27A.npy"
+        ],
+        "1g2pA": [
+          "DISORDER723/1g2pA.npy"
+        ],
+        "1g31E": [
+          "DISORDER723/1g31E.npy"
+        ],
+        "1g39A": [
+          "DISORDER723/1g39A.npy"
+        ],
+        "1g3pA": [
+          "DISORDER723/1g3pA.npy"
+        ],
+        "1g3uA": [
+          "DISORDER723/1g3uA.npy"
+        ],
+        "1g41A": [
+          "DISORDER723/1g41A.npy"
+        ],
+        "1g4mA": [
+          "DISORDER723/1g4mA.npy"
+        ],
+        "1g5cF": [
+          "DISORDER723/1g5cF.npy"
+        ],
+        "1g5rA": [
+          "DISORDER723/1g5rA.npy"
+        ],
+        "1g6oB": [
+          "DISORDER723/1g6oB.npy"
+        ],
+        "1g76A": [
+          "DISORDER723/1g76A.npy"
+        ],
+        "1g8eB": [
+          "DISORDER723/1g8eB.npy"
+        ],
+        "1g8jC": [
+          "DISORDER723/1g8jC.npy"
+        ],
+        "1g8jD": [
+          "DISORDER723/1g8jD.npy"
+        ],
+        "1g8pA": [
+          "DISORDER723/1g8pA.npy"
+        ],
+        "1g8tA": [
+          "DISORDER723/1g8tA.npy"
+        ],
+        "1g8yB": [
+          "DISORDER723/1g8yB.npy"
+        ],
+        "1g95A": [
+          "DISORDER723/1g95A.npy"
+        ],
+        "1g96A": [
+          "DISORDER723/1g96A.npy"
+        ],
+        "1g99A": [
+          "DISORDER723/1g99A.npy"
+        ],
+        "1g9fA": [
+          "DISORDER723/1g9fA.npy"
+        ],
+        "1g9rA": [
+          "DISORDER723/1g9rA.npy"
+        ],
+        "1gajA": [
+          "DISORDER723/1gajA.npy"
+        ],
+        "1gakA": [
+          "DISORDER723/1gakA.npy"
+        ],
+        "1garA": [
+          "DISORDER723/1garA.npy"
+        ],
+        "1gcwB": [
+          "DISORDER723/1gcwB.npy"
+        ],
+        "1gcyA": [
+          "DISORDER723/1gcyA.npy"
+        ],
+        "1gczA": [
+          "DISORDER723/1gczA.npy"
+        ],
+        "1gd8B": [
+          "DISORDER723/1gd8B.npy"
+        ],
+        "1ge6A": [
+          "DISORDER723/1ge6A.npy"
+        ],
+        "1ge8A": [
+          "DISORDER723/1ge8A.npy"
+        ],
+        "1gefE": [
+          "DISORDER723/1gefE.npy"
+        ],
+        "1gewA": [
+          "DISORDER723/1gewA.npy"
+        ],
+        "1gflA": [
+          "DISORDER723/1gflA.npy"
+        ],
+        "1gggA": [
+          "DISORDER723/1gggA.npy"
+        ],
+        "1gheA": [
+          "DISORDER723/1gheA.npy"
+        ],
+        "1ghqB": [
+          "DISORDER723/1ghqB.npy"
+        ],
+        "1gk8O": [
+          "DISORDER723/1gk8O.npy"
+        ],
+        "1gk9A": [
+          "DISORDER723/1gk9A.npy"
+        ],
+        "1gkxA": [
+          "DISORDER723/1gkxA.npy"
+        ],
+        "1gmjD": [
+          "DISORDER723/1gmjD.npy"
+        ],
+        "1gmmA": [
+          "DISORDER723/1gmmA.npy"
+        ],
+        "1gmuA": [
+          "DISORDER723/1gmuA.npy"
+        ],
+        "1gndA": [
+          "DISORDER723/1gndA.npy"
+        ],
+        "1gnkA": [
+          "DISORDER723/1gnkA.npy"
+        ],
+        "1go3E": [
+          "DISORDER723/1go3E.npy"
+        ],
+        "1gp4A": [
+          "DISORDER723/1gp4A.npy"
+        ],
+        "1gpjA": [
+          "DISORDER723/1gpjA.npy"
+        ],
+        "1gpmD": [
+          "DISORDER723/1gpmD.npy"
+        ],
+        "1gpqA": [
+          "DISORDER723/1gpqA.npy"
+        ],
+        "1gq3A": [
+          "DISORDER723/1gq3A.npy"
+        ],
+        "1gqbA": [
+          "DISORDER723/1gqbA.npy"
+        ],
+        "1gqgA": [
+          "DISORDER723/1gqgA.npy"
+        ],
+        "1gqyB": [
+          "DISORDER723/1gqyB.npy"
+        ],
+        "1gr0A": [
+          "DISORDER723/1gr0A.npy"
+        ],
+        "1gshA": [
+          "DISORDER723/1gshA.npy"
+        ],
+        "1gskA": [
+          "DISORDER723/1gskA.npy"
+        ],
+        "1gteD": [
+          "DISORDER723/1gteD.npy"
+        ],
+        "1gttB": [
+          "DISORDER723/1gttB.npy"
+        ],
+        "1gu3A": [
+          "DISORDER723/1gu3A.npy"
+        ],
+        "1gu8A": [
+          "DISORDER723/1gu8A.npy"
+        ],
+        "1gu9G": [
+          "DISORDER723/1gu9G.npy"
+        ],
+        "1guzC": [
+          "DISORDER723/1guzC.npy"
+        ],
+        "1gv3B": [
+          "DISORDER723/1gv3B.npy"
+        ],
+        "1gveB": [
+          "DISORDER723/1gveB.npy"
+        ],
+        "1gvnB": [
+          "DISORDER723/1gvnB.npy"
+        ],
+        "1gvnC": [
+          "DISORDER723/1gvnC.npy"
+        ],
+        "1gwcB": [
+          "DISORDER723/1gwcB.npy"
+        ],
+        "1gwiB": [
+          "DISORDER723/1gwiB.npy"
+        ],
+        "1gwkB": [
+          "DISORDER723/1gwkB.npy"
+        ],
+        "1gx5A": [
+          "DISORDER723/1gx5A.npy"
+        ],
+        "1gy9B": [
+          "DISORDER723/1gy9B.npy"
+        ],
+        "1gzrB": [
+          "DISORDER723/1gzrB.npy"
+        ],
+        "1h0bB": [
+          "DISORDER723/1h0bB.npy"
+        ],
+        "1h0nA": [
+          "DISORDER723/1h0nA.npy"
+        ],
+        "1h1dA": [
+          "DISORDER723/1h1dA.npy"
+        ],
+        "1h21C": [
+          "DISORDER723/1h21C.npy"
+        ],
+        "1h34A": [
+          "DISORDER723/1h34A.npy"
+        ],
+        "1h3fB": [
+          "DISORDER723/1h3fB.npy"
+        ],
+        "1h3nA": [
+          "DISORDER723/1h3nA.npy"
+        ],
+        "1h4xB": [
+          "DISORDER723/1h4xB.npy"
+        ],
+        "1h5wA": [
+          "DISORDER723/1h5wA.npy"
+        ],
+        "1h65B": [
+          "DISORDER723/1h65B.npy"
+        ],
+        "1h6aB": [
+          "DISORDER723/1h6aB.npy"
+        ],
+        "1h6jA": [
+          "DISORDER723/1h6jA.npy"
+        ],
+        "1h6xA": [
+          "DISORDER723/1h6xA.npy"
+        ],
+        "1h75A": [
+          "DISORDER723/1h75A.npy"
+        ],
+        "1h78A": [
+          "DISORDER723/1h78A.npy"
+        ],
+        "1h7sA": [
+          "DISORDER723/1h7sA.npy"
+        ],
+        "1h8nA": [
+          "DISORDER723/1h8nA.npy"
+        ],
+        "1h8pB": [
+          "DISORDER723/1h8pB.npy"
+        ],
+        "1h96A": [
+          "DISORDER723/1h96A.npy"
+        ],
+        "1h9oA": [
+          "DISORDER723/1h9oA.npy"
+        ],
+        "1hc7B": [
+          "DISORDER723/1hc7B.npy"
+        ],
+        "1hd3A": [
+          "DISORDER723/1hd3A.npy"
+        ],
+        "1hd5A": [
+          "DISORDER723/1hd5A.npy"
+        ],
+        "1hd8A": [
+          "DISORDER723/1hd8A.npy"
+        ],
+        "1hdhA": [
+          "DISORDER723/1hdhA.npy"
+        ],
+        "1hdmA": [
+          "DISORDER723/1hdmA.npy"
+        ],
+        "1hdmB": [
+          "DISORDER723/1hdmB.npy"
+        ],
+        "1hf2D": [
+          "DISORDER723/1hf2D.npy"
+        ],
+        "1hfbD": [
+          "DISORDER723/1hfbD.npy"
+        ],
+        "1hfeL": [
+          "DISORDER723/1hfeL.npy"
+        ],
+        "1hfeT": [
+          "DISORDER723/1hfeT.npy"
+        ],
+        "1hfkA": [
+          "DISORDER723/1hfkA.npy"
+        ],
+        "1hh1A": [
+          "DISORDER723/1hh1A.npy"
+        ],
+        "1hh8A": [
+          "DISORDER723/1hh8A.npy"
+        ],
+        "1hl5F": [
+          "DISORDER723/1hl5F.npy"
+        ],
+        "1hl6B": [
+          "DISORDER723/1hl6B.npy"
+        ],
+        "1hl6C": [
+          "DISORDER723/1hl6C.npy"
+        ],
+        "1hl8B": [
+          "DISORDER723/1hl8B.npy"
+        ],
+        "1hm2A": [
+          "DISORDER723/1hm2A.npy"
+        ],
+        "1hmpB": [
+          "DISORDER723/1hmpB.npy"
+        ],
+        "1hn0A": [
+          "DISORDER723/1hn0A.npy"
+        ],
+        "1hnkA": [
+          "DISORDER723/1hnkA.npy"
+        ],
+        "1hnoA": [
+          "DISORDER723/1hnoA.npy"
+        ],
+        "1hp7A": [
+          "DISORDER723/1hp7A.npy"
+        ],
+        "1hqvA": [
+          "DISORDER723/1hqvA.npy"
+        ],
+        "1hqz8": [
+          "DISORDER723/1hqz8.npy"
+        ],
+        "1hskA": [
+          "DISORDER723/1hskA.npy"
+        ],
+        "1hssD": [
+          "DISORDER723/1hssD.npy"
+        ],
+        "1hu9A": [
+          "DISORDER723/1hu9A.npy"
+        ],
+        "1hvxA": [
+          "DISORDER723/1hvxA.npy"
+        ],
+        "1hw1A": [
+          "DISORDER723/1hw1A.npy"
+        ],
+        "1hw3A": [
+          "DISORDER723/1hw3A.npy"
+        ],
+        "1hw7A": [
+          "DISORDER723/1hw7A.npy"
+        ],
+        "1hwgA": [
+          "DISORDER723/1hwgA.npy"
+        ],
+        "1hx3B": [
+          "DISORDER723/1hx3B.npy"
+        ],
+        "1hx8A": [
+          "DISORDER723/1hx8A.npy"
+        ],
+        "1hxaA": [
+          "DISORDER723/1hxaA.npy"
+        ],
+        "1hxdB": [
+          "DISORDER723/1hxdB.npy"
+        ],
+        "1hxpB": [
+          "DISORDER723/1hxpB.npy"
+        ],
+        "1hxs1": [
+          "DISORDER723/1hxs1.npy"
+        ],
+        "1hxs2": [
+          "DISORDER723/1hxs2.npy"
+        ],
+        "1hzzC": [
+          "DISORDER723/1hzzC.npy"
+        ],
+        "1i04A": [
+          "DISORDER723/1i04A.npy"
+        ],
+        "1i0rA": [
+          "DISORDER723/1i0rA.npy"
+        ],
+        "1i1iP": [
+          "DISORDER723/1i1iP.npy"
+        ],
+        "1i1qA": [
+          "DISORDER723/1i1qA.npy"
+        ],
+        "1i1rB": [
+          "DISORDER723/1i1rB.npy"
+        ],
+        "1i21X": [
+          "DISORDER723/1i21X.npy"
+        ],
+        "1i36B": [
+          "DISORDER723/1i36B.npy"
+        ],
+        "1i3cA": [
+          "DISORDER723/1i3cA.npy"
+        ],
+        "1i4aA": [
+          "DISORDER723/1i4aA.npy"
+        ],
+        "1i52A": [
+          "DISORDER723/1i52A.npy"
+        ],
+        "1i5nC": [
+          "DISORDER723/1i5nC.npy"
+        ],
+        "1i5zA": [
+          "DISORDER723/1i5zA.npy"
+        ],
+        "1i6oB": [
+          "DISORDER723/1i6oB.npy"
+        ],
+        "1i7kA": [
+          "DISORDER723/1i7kA.npy"
+        ],
+        "1i8dA": [
+          "DISORDER723/1i8dA.npy"
+        ],
+        "1i8nC": [
+          "DISORDER723/1i8nC.npy"
+        ],
+        "1i9gA": [
+          "DISORDER723/1i9gA.npy"
+        ],
+        "1i9sA": [
+          "DISORDER723/1i9sA.npy"
+        ],
+        "1ia6A": [
+          "DISORDER723/1ia6A.npy"
+        ],
+        "1iarB": [
+          "DISORDER723/1iarB.npy"
+        ],
+        "1iazB": [
+          "DISORDER723/1iazB.npy"
+        ],
+        "1ibrD": [
+          "DISORDER723/1ibrD.npy"
+        ],
+        "1ic2D": [
+          "DISORDER723/1ic2D.npy"
+        ],
+        "1icpA": [
+          "DISORDER723/1icpA.npy"
+        ],
+        "1icwB": [
+          "DISORDER723/1icwB.npy"
+        ],
+        "1idpC": [
+          "DISORDER723/1idpC.npy"
+        ],
+        "1idqA": [
+          "DISORDER723/1idqA.npy"
+        ],
+        "1idrA": [
+          "DISORDER723/1idrA.npy"
+        ],
+        "1ie7B": [
+          "DISORDER723/1ie7B.npy"
+        ],
+        "1igwB": [
+          "DISORDER723/1igwB.npy"
+        ],
+        "1ih7A": [
+          "DISORDER723/1ih7A.npy"
+        ],
+        "1ihgA": [
+          "DISORDER723/1ihgA.npy"
+        ],
+        "1ii5A": [
+          "DISORDER723/1ii5A.npy"
+        ],
+        "1ii6B": [
+          "DISORDER723/1ii6B.npy"
+        ],
+        "1iirA": [
+          "DISORDER723/1iirA.npy"
+        ],
+        "1ikpA": [
+          "DISORDER723/1ikpA.npy"
+        ],
+        "1iktA": [
+          "DISORDER723/1iktA.npy"
+        ],
+        "1in4A": [
+          "DISORDER723/1in4A.npy"
+        ],
+        "1inlB": [
+          "DISORDER723/1inlB.npy"
+        ],
+        "1inrA": [
+          "DISORDER723/1inrA.npy"
+        ],
+        "1ipaA": [
+          "DISORDER723/1ipaA.npy"
+        ],
+        "1ipbA": [
+          "DISORDER723/1ipbA.npy"
+        ],
+        "1iq0A": [
+          "DISORDER723/1iq0A.npy"
+        ],
+        "1iq8A": [
+          "DISORDER723/1iq8A.npy"
+        ],
+        "1iqrA": [
+          "DISORDER723/1iqrA.npy"
+        ],
+        "1iqvA": [
+          "DISORDER723/1iqvA.npy"
+        ],
+        "1irqB": [
+          "DISORDER723/1irqB.npy"
+        ],
+        "1is2B": [
+          "DISORDER723/1is2B.npy"
+        ],
+        "1is9A": [
+          "DISORDER723/1is9A.npy"
+        ],
+        "1isfB": [
+          "DISORDER723/1isfB.npy"
+        ],
+        "1itbB": [
+          "DISORDER723/1itbB.npy"
+        ],
+        "1itkA": [
+          "DISORDER723/1itkA.npy"
+        ],
+        "1itzA": [
+          "DISORDER723/1itzA.npy"
+        ],
+        "1iujA": [
+          "DISORDER723/1iujA.npy"
+        ],
+        "1iukA": [
+          "DISORDER723/1iukA.npy"
+        ],
+        "1ivnA": [
+          "DISORDER723/1ivnA.npy"
+        ],
+        "1iw2A": [
+          "DISORDER723/1iw2A.npy"
+        ],
+        "1iweB": [
+          "DISORDER723/1iweB.npy"
+        ],
+        "1iwlA": [
+          "DISORDER723/1iwlA.npy"
+        ],
+        "1iwmA": [
+          "DISORDER723/1iwmA.npy"
+        ],
+        "1ixcA": [
+          "DISORDER723/1ixcA.npy"
+        ],
+        "1ixeB": [
+          "DISORDER723/1ixeB.npy"
+        ],
+        "1ixkA": [
+          "DISORDER723/1ixkA.npy"
+        ],
+        "1iy8E": [
+          "DISORDER723/1iy8E.npy"
+        ],
+        "1iz0A": [
+          "DISORDER723/1iz0A.npy"
+        ],
+        "1izcA": [
+          "DISORDER723/1izcA.npy"
+        ],
+        "1iznB": [
+          "DISORDER723/1iznB.npy"
+        ],
+        "1iznC": [
+          "DISORDER723/1iznC.npy"
+        ],
+        "1izoB": [
+          "DISORDER723/1izoB.npy"
+        ],
+        "1izzA": [
+          "DISORDER723/1izzA.npy"
+        ],
+        "1j0rB": [
+          "DISORDER723/1j0rB.npy"
+        ],
+        "1j1iA": [
+          "DISORDER723/1j1iA.npy"
+        ],
+        "1j1tA": [
+          "DISORDER723/1j1tA.npy"
+        ],
+        "1j1yA": [
+          "DISORDER723/1j1yA.npy"
+        ],
+        "1j22A": [
+          "DISORDER723/1j22A.npy"
+        ],
+        "1j27A": [
+          "DISORDER723/1j27A.npy"
+        ],
+        "1j2rC": [
+          "DISORDER723/1j2rC.npy"
+        ],
+        "1j2wA": [
+          "DISORDER723/1j2wA.npy"
+        ],
+        "1j2zA": [
+          "DISORDER723/1j2zA.npy"
+        ],
+        "1j30B": [
+          "DISORDER723/1j30B.npy"
+        ],
+        "1j3aA": [
+          "DISORDER723/1j3aA.npy"
+        ],
+        "1j3lF": [
+          "DISORDER723/1j3lF.npy"
+        ],
+        "1j3pB": [
+          "DISORDER723/1j3pB.npy"
+        ],
+        "1j3wA": [
+          "DISORDER723/1j3wA.npy"
+        ],
+        "1j53A": [
+          "DISORDER723/1j53A.npy"
+        ],
+        "1j55A": [
+          "DISORDER723/1j55A.npy"
+        ],
+        "1j58A": [
+          "DISORDER723/1j58A.npy"
+        ],
+        "1j6wB": [
+          "DISORDER723/1j6wB.npy"
+        ],
+        "1j72A": [
+          "DISORDER723/1j72A.npy"
+        ],
+        "1j74A": [
+          "DISORDER723/1j74A.npy"
+        ],
+        "1j77A": [
+          "DISORDER723/1j77A.npy"
+        ],
+        "1j78B": [
+          "DISORDER723/1j78B.npy"
+        ],
+        "1j79B": [
+          "DISORDER723/1j79B.npy"
+        ],
+        "1j7nA": [
+          "DISORDER723/1j7nA.npy"
+        ],
+        "1j85A": [
+          "DISORDER723/1j85A.npy"
+        ],
+        "1j8yF": [
+          "DISORDER723/1j8yF.npy"
+        ],
+        "1jalA": [
+          "DISORDER723/1jalA.npy"
+        ],
+        "1jb9A": [
+          "DISORDER723/1jb9A.npy"
+        ],
+        "1jbmD": [
+          "DISORDER723/1jbmD.npy"
+        ],
+        "1jc9A": [
+          "DISORDER723/1jc9A.npy"
+        ],
+        "1jccB": [
+          "DISORDER723/1jccB.npy"
+        ],
+        "1jcnB": [
+          "DISORDER723/1jcnB.npy"
+        ],
+        "1jcqA": [
+          "DISORDER723/1jcqA.npy"
+        ],
+        "1jd1E": [
+          "DISORDER723/1jd1E.npy"
+        ],
+        "1jdiB": [
+          "DISORDER723/1jdiB.npy"
+        ],
+        "1jdwA": [
+          "DISORDER723/1jdwA.npy"
+        ],
+        "1je5A": [
+          "DISORDER723/1je5A.npy"
+        ],
+        "1jf2A": [
+          "DISORDER723/1jf2A.npy"
+        ],
+        "1jfaB": [
+          "DISORDER723/1jfaB.npy"
+        ],
+        "1jfuA": [
+          "DISORDER723/1jfuA.npy"
+        ],
+        "1jg1A": [
+          "DISORDER723/1jg1A.npy"
+        ],
+        "1jg8A": [
+          "DISORDER723/1jg8A.npy"
+        ],
+        "1jgtB": [
+          "DISORDER723/1jgtB.npy"
+        ],
+        "1jhfB": [
+          "DISORDER723/1jhfB.npy"
+        ],
+        "1jihA": [
+          "DISORDER723/1jihA.npy"
+        ],
+        "1jilA": [
+          "DISORDER723/1jilA.npy"
+        ],
+        "1jjvA": [
+          "DISORDER723/1jjvA.npy"
+        ],
+        "1jkfA": [
+          "DISORDER723/1jkfA.npy"
+        ],
+        "1jl0A": [
+          "DISORDER723/1jl0A.npy"
+        ],
+        "1jl2B": [
+          "DISORDER723/1jl2B.npy"
+        ],
+        "1jl3C": [
+          "DISORDER723/1jl3C.npy"
+        ],
+        "1jmvD": [
+          "DISORDER723/1jmvD.npy"
+        ],
+        "1jmxB": [
+          "DISORDER723/1jmxB.npy"
+        ],
+        "1jndA": [
+          "DISORDER723/1jndA.npy"
+        ],
+        "1jogB": [
+          "DISORDER723/1jogB.npy"
+        ],
+        "1josA": [
+          "DISORDER723/1josA.npy"
+        ],
+        "1jp3A": [
+          "DISORDER723/1jp3A.npy"
+        ],
+        "1jp4A": [
+          "DISORDER723/1jp4A.npy"
+        ],
+        "1jpmA": [
+          "DISORDER723/1jpmA.npy"
+        ],
+        "1jpuA": [
+          "DISORDER723/1jpuA.npy"
+        ],
+        "1jpxA": [
+          "DISORDER723/1jpxA.npy"
+        ],
+        "1jqdB": [
+          "DISORDER723/1jqdB.npy"
+        ],
+        "1jqnA": [
+          "DISORDER723/1jqnA.npy"
+        ],
+        "1jqpA": [
+          "DISORDER723/1jqpA.npy"
+        ],
+        "1jrgA": [
+          "DISORDER723/1jrgA.npy"
+        ],
+        "1jrkA": [
+          "DISORDER723/1jrkA.npy"
+        ],
+        "1js1Z": [
+          "DISORDER723/1js1Z.npy"
+        ],
+        "1js3A": [
+          "DISORDER723/1js3A.npy"
+        ],
+        "1jsdB": [
+          "DISORDER723/1jsdB.npy"
+        ],
+        "1jsmA": [
+          "DISORDER723/1jsmA.npy"
+        ],
+        "1jssB": [
+          "DISORDER723/1jssB.npy"
+        ],
+        "1jsxA": [
+          "DISORDER723/1jsxA.npy"
+        ],
+        "1jt9A": [
+          "DISORDER723/1jt9A.npy"
+        ],
+        "1jtkA": [
+          "DISORDER723/1jtkA.npy"
+        ],
+        "1jtmA": [
+          "DISORDER723/1jtmA.npy"
+        ],
+        "1ju2B": [
+          "DISORDER723/1ju2B.npy"
+        ],
+        "1ju3A": [
+          "DISORDER723/1ju3A.npy"
+        ],
+        "1jv0B": [
+          "DISORDER723/1jv0B.npy"
+        ],
+        "1jv6A": [
+          "DISORDER723/1jv6A.npy"
+        ],
+        "1jvdA": [
+          "DISORDER723/1jvdA.npy"
+        ],
+        "1jw9B": [
+          "DISORDER723/1jw9B.npy"
+        ],
+        "1jwfA": [
+          "DISORDER723/1jwfA.npy"
+        ],
+        "1jwiA": [
+          "DISORDER723/1jwiA.npy"
+        ],
+        "1jxzC": [
+          "DISORDER723/1jxzC.npy"
+        ],
+        "1jy5A": [
+          "DISORDER723/1jy5A.npy"
+        ],
+        "1jy8A": [
+          "DISORDER723/1jy8A.npy"
+        ],
+        "1jyaB": [
+          "DISORDER723/1jyaB.npy"
+        ],
+        "1jyeA": [
+          "DISORDER723/1jyeA.npy"
+        ],
+        "1k0mB": [
+          "DISORDER723/1k0mB.npy"
+        ],
+        "1k1eD": [
+          "DISORDER723/1k1eD.npy"
+        ],
+        "1k1fA": [
+          "DISORDER723/1k1fA.npy"
+        ],
+        "1k1xB": [
+          "DISORDER723/1k1xB.npy"
+        ],
+        "1k24A": [
+          "DISORDER723/1k24A.npy"
+        ],
+        "1k2i1": [
+          "DISORDER723/1k2i1.npy"
+        ],
+        "1k2yX": [
+          "DISORDER723/1k2yX.npy"
+        ],
+        "1k3cA": [
+          "DISORDER723/1k3cA.npy"
+        ],
+        "1k3rA": [
+          "DISORDER723/1k3rA.npy"
+        ],
+        "1k3sA": [
+          "DISORDER723/1k3sA.npy"
+        ],
+        "1k46A": [
+          "DISORDER723/1k46A.npy"
+        ],
+        "1k49A": [
+          "DISORDER723/1k49A.npy"
+        ],
+        "1k4cC": [
+          "DISORDER723/1k4cC.npy"
+        ],
+        "1k4kB": [
+          "DISORDER723/1k4kB.npy"
+        ],
+        "1k4nA": [
+          "DISORDER723/1k4nA.npy"
+        ],
+        "1k5hB": [
+          "DISORDER723/1k5hB.npy"
+        ],
+        "1k5jC": [
+          "DISORDER723/1k5jC.npy"
+        ],
+        "1k6iA": [
+          "DISORDER723/1k6iA.npy"
+        ],
+        "1k6yB": [
+          "DISORDER723/1k6yB.npy"
+        ],
+        "1k7gA": [
+          "DISORDER723/1k7gA.npy"
+        ],
+        "1k7tA": [
+          "DISORDER723/1k7tA.npy"
+        ],
+        "1k7wC": [
+          "DISORDER723/1k7wC.npy"
+        ],
+        "1k87A": [
+          "DISORDER723/1k87A.npy"
+        ],
+        "1k8kA": [
+          "DISORDER723/1k8kA.npy"
+        ],
+        "1k8kC": [
+          "DISORDER723/1k8kC.npy"
+        ],
+        "1k8kD": [
+          "DISORDER723/1k8kD.npy"
+        ],
+        "1k8kG": [
+          "DISORDER723/1k8kG.npy"
+        ],
+        "1k92A": [
+          "DISORDER723/1k92A.npy"
+        ],
+        "1k9dA": [
+          "DISORDER723/1k9dA.npy"
+        ],
+        "1kagA": [
+          "DISORDER723/1kagA.npy"
+        ],
+        "1kb0A": [
+          "DISORDER723/1kb0A.npy"
+        ],
+        "1kbiA": [
+          "DISORDER723/1kbiA.npy"
+        ],
+        "1kcfA": [
+          "DISORDER723/1kcfA.npy"
+        ],
+        "1kehA": [
+          "DISORDER723/1kehA.npy"
+        ],
+        "1kgnC": [
+          "DISORDER723/1kgnC.npy"
+        ],
+        "1kgsA": [
+          "DISORDER723/1kgsA.npy"
+        ],
+        "1kgzB": [
+          "DISORDER723/1kgzB.npy"
+        ],
+        "1khiA": [
+          "DISORDER723/1khiA.npy"
+        ],
+        "1khvB": [
+          "DISORDER723/1khvB.npy"
+        ],
+        "1khyD": [
+          "DISORDER723/1khyD.npy"
+        ],
+        "1kjnB": [
+          "DISORDER723/1kjnB.npy"
+        ],
+        "1kjzA": [
+          "DISORDER723/1kjzA.npy"
+        ],
+        "1kk6C": [
+          "DISORDER723/1kk6C.npy"
+        ],
+        "1kkjA": [
+          "DISORDER723/1kkjA.npy"
+        ],
+        "1kktB": [
+          "DISORDER723/1kktB.npy"
+        ],
+        "1kkuA": [
+          "DISORDER723/1kkuA.npy"
+        ],
+        "1kl9A": [
+          "DISORDER723/1kl9A.npy"
+        ],
+        "1klyA": [
+          "DISORDER723/1klyA.npy"
+        ],
+        "1ko0A": [
+          "DISORDER723/1ko0A.npy"
+        ],
+        "1ko1B": [
+          "DISORDER723/1ko1B.npy"
+        ],
+        "1ko7B": [
+          "DISORDER723/1ko7B.npy"
+        ],
+        "1ko9A": [
+          "DISORDER723/1ko9A.npy"
+        ],
+        "1kp9A": [
+          "DISORDER723/1kp9A.npy"
+        ],
+        "1kq1S": [
+          "DISORDER723/1kq1S.npy"
+        ],
+        "1kqfB": [
+          "DISORDER723/1kqfB.npy"
+        ]
+      },
+      "multipart_proteins": {},
+      "proteins": 723,
+      "summary": {
+        "accuracy": 0.9545646729762253,
+        "auc": 0.9366587494985741,
+        "aupr": 0.6697977278070613,
+        "bacc": 0.796978557173132,
+        "dataset": "DISORDER723",
+        "evaluated_residues": 215229,
+        "excluded_label_minus1": 0,
+        "fmax": 0.6313650220164841,
+        "fn": 5184,
+        "fp": 4595,
+        "mcc": 0.6064427603466394,
+        "negatives": 201703,
+        "positives": 13526,
+        "predicted_residues": 215229,
+        "proteins": 723,
+        "sn": 0.6167381339642171,
+        "source_residues": 215229,
+        "sp": 0.9772189803820469,
+        "threshold": 0.5,
+        "tn": 197108,
+        "tp": 8342
+      }
+    },
+    "MXD494": {
+      "archive_member_count": 494,
+      "archive_members": {
+        "1A12A": [
+          "MXD494/1A12A.npy"
+        ],
+        "1B65A": [
+          "MXD494/1B65A.npy"
+        ],
+        "1DC1A": [
+          "MXD494/1DC1A.npy"
+        ],
+        "1DG6A": [
+          "MXD494/1DG6A.npy"
+        ],
+        "1EOKA": [
+          "MXD494/1EOKA.npy"
+        ],
+        "1ES9A": [
+          "MXD494/1ES9A.npy"
+        ],
+        "1EUWA": [
+          "MXD494/1EUWA.npy"
+        ],
+        "1F0LA": [
+          "MXD494/1F0LA.npy"
+        ],
+        "1FCQA": [
+          "MXD494/1FCQA.npy"
+        ],
+        "1FO8A": [
+          "MXD494/1FO8A.npy"
+        ],
+        "1GK9A": [
+          "MXD494/1GK9A.npy"
+        ],
+        "1HUWA": [
+          "MXD494/1HUWA.npy"
+        ],
+        "1IZMA": [
+          "MXD494/1IZMA.npy"
+        ],
+        "1J8BA": [
+          "MXD494/1J8BA.npy"
+        ],
+        "1JI7A": [
+          "MXD494/1JI7A.npy"
+        ],
+        "1K2XB": [
+          "MXD494/1K2XB.npy"
+        ],
+        "1K92A": [
+          "MXD494/1K92A.npy"
+        ],
+        "1L3KA": [
+          "MXD494/1L3KA.npy"
+        ],
+        "1LKIA": [
+          "MXD494/1LKIA.npy"
+        ],
+        "1LMLA": [
+          "MXD494/1LMLA.npy"
+        ],
+        "1LSHB": [
+          "MXD494/1LSHB.npy"
+        ],
+        "1LTZA": [
+          "MXD494/1LTZA.npy"
+        ],
+        "1LUCA": [
+          "MXD494/1LUCA.npy"
+        ],
+        "1M1NA": [
+          "MXD494/1M1NA.npy"
+        ],
+        "1M2DA": [
+          "MXD494/1M2DA.npy"
+        ],
+        "1MVLA": [
+          "MXD494/1MVLA.npy"
+        ],
+        "1N3LA": [
+          "MXD494/1N3LA.npy"
+        ],
+        "1N93X": [
+          "MXD494/1N93X.npy"
+        ],
+        "1NBCA": [
+          "MXD494/1NBCA.npy"
+        ],
+        "1NC5A": [
+          "MXD494/1NC5A.npy"
+        ],
+        "1NQJA": [
+          "MXD494/1NQJA.npy"
+        ],
+        "1NWAA": [
+          "MXD494/1NWAA.npy"
+        ],
+        "1NZJA": [
+          "MXD494/1NZJA.npy"
+        ],
+        "1O4YA": [
+          "MXD494/1O4YA.npy"
+        ],
+        "1OJHA": [
+          "MXD494/1OJHA.npy"
+        ],
+        "1OOYA": [
+          "MXD494/1OOYA.npy"
+        ],
+        "1OW4A": [
+          "MXD494/1OW4A.npy"
+        ],
+        "1P5ZB": [
+          "MXD494/1P5ZB.npy"
+        ],
+        "1P6OA": [
+          "MXD494/1P6OA.npy"
+        ],
+        "1P90A": [
+          "MXD494/1P90A.npy"
+        ],
+        "1PQHA": [
+          "MXD494/1PQHA.npy"
+        ],
+        "1QG8A": [
+          "MXD494/1QG8A.npy"
+        ],
+        "1QNAA": [
+          "MXD494/1QNAA.npy"
+        ],
+        "1QWYA": [
+          "MXD494/1QWYA.npy"
+        ],
+        "1QXMA": [
+          "MXD494/1QXMA.npy"
+        ],
+        "1R88A": [
+          "MXD494/1R88A.npy"
+        ],
+        "1RQBA": [
+          "MXD494/1RQBA.npy"
+        ],
+        "1RUTX": [
+          "MXD494/1RUTX.npy"
+        ],
+        "1S5DA": [
+          "MXD494/1S5DA.npy"
+        ],
+        "1SG4A": [
+          "MXD494/1SG4A.npy"
+        ],
+        "1T3YA": [
+          "MXD494/1T3YA.npy"
+        ],
+        "1TWYA": [
+          "MXD494/1TWYA.npy"
+        ],
+        "1UJ2A": [
+          "MXD494/1UJ2A.npy"
+        ],
+        "1UZEA": [
+          "MXD494/1UZEA.npy"
+        ],
+        "1VJUA": [
+          "MXD494/1VJUA.npy"
+        ],
+        "1VKFA": [
+          "MXD494/1VKFA.npy"
+        ],
+        "1VKYA": [
+          "MXD494/1VKYA.npy"
+        ],
+        "1VLPA": [
+          "MXD494/1VLPA.npy"
+        ],
+        "1VLYA": [
+          "MXD494/1VLYA.npy"
+        ],
+        "1VPBA": [
+          "MXD494/1VPBA.npy"
+        ],
+        "1VR7A": [
+          "MXD494/1VR7A.npy"
+        ],
+        "1VRMA": [
+          "MXD494/1VRMA.npy"
+        ],
+        "1VYKA": [
+          "MXD494/1VYKA.npy"
+        ],
+        "1W5QA": [
+          "MXD494/1W5QA.npy"
+        ],
+        "1WB4A": [
+          "MXD494/1WB4A.npy"
+        ],
+        "1WDDA": [
+          "MXD494/1WDDA.npy"
+        ],
+        "1WU9A": [
+          "MXD494/1WU9A.npy"
+        ],
+        "1X6OA": [
+          "MXD494/1X6OA.npy"
+        ],
+        "1X9DA": [
+          "MXD494/1X9DA.npy"
+        ],
+        "1XGKA": [
+          "MXD494/1XGKA.npy"
+        ],
+        "1YO3A": [
+          "MXD494/1YO3A.npy"
+        ],
+        "1YWFA": [
+          "MXD494/1YWFA.npy"
+        ],
+        "1Z2WA": [
+          "MXD494/1Z2WA.npy"
+        ],
+        "1ZGKA": [
+          "MXD494/1ZGKA.npy"
+        ],
+        "1ZTHA": [
+          "MXD494/1ZTHA.npy"
+        ],
+        "1ZY7A": [
+          "MXD494/1ZY7A.npy"
+        ],
+        "2A3NA": [
+          "MXD494/2A3NA.npy"
+        ],
+        "2A9IA": [
+          "MXD494/2A9IA.npy"
+        ],
+        "2APJA": [
+          "MXD494/2APJA.npy"
+        ],
+        "2ARCA": [
+          "MXD494/2ARCA.npy"
+        ],
+        "2B4WA": [
+          "MXD494/2B4WA.npy"
+        ],
+        "2B61A": [
+          "MXD494/2B61A.npy"
+        ],
+        "2B9EA": [
+          "MXD494/2B9EA.npy"
+        ],
+        "2BKYA": [
+          "MXD494/2BKYA.npy"
+        ],
+        "2BZVA": [
+          "MXD494/2BZVA.npy"
+        ],
+        "2C2UA": [
+          "MXD494/2C2UA.npy"
+        ],
+        "2C61A": [
+          "MXD494/2C61A.npy"
+        ],
+        "2CJSC": [
+          "MXD494/2CJSC.npy"
+        ],
+        "2COVD": [
+          "MXD494/2COVD.npy"
+        ],
+        "2CXAA": [
+          "MXD494/2CXAA.npy"
+        ],
+        "2DDXA": [
+          "MXD494/2DDXA.npy"
+        ],
+        "2DHOA": [
+          "MXD494/2DHOA.npy"
+        ],
+        "2E1ZA": [
+          "MXD494/2E1ZA.npy"
+        ],
+        "2E3HA": [
+          "MXD494/2E3HA.npy"
+        ],
+        "2E4TA": [
+          "MXD494/2E4TA.npy"
+        ],
+        "2FCLA": [
+          "MXD494/2FCLA.npy"
+        ],
+        "2FCTA": [
+          "MXD494/2FCTA.npy"
+        ],
+        "2FG1A": [
+          "MXD494/2FG1A.npy"
+        ],
+        "2FH1A": [
+          "MXD494/2FH1A.npy"
+        ],
+        "2FSUA": [
+          "MXD494/2FSUA.npy"
+        ],
+        "2FWHA": [
+          "MXD494/2FWHA.npy"
+        ],
+        "2G40A": [
+          "MXD494/2G40A.npy"
+        ],
+        "2GAGD": [
+          "MXD494/2GAGD.npy"
+        ],
+        "2GIAA": [
+          "MXD494/2GIAA.npy"
+        ],
+        "2GLZA": [
+          "MXD494/2GLZA.npy"
+        ],
+        "2GUIA": [
+          "MXD494/2GUIA.npy"
+        ],
+        "2GVKA": [
+          "MXD494/2GVKA.npy"
+        ],
+        "2GX5A": [
+          "MXD494/2GX5A.npy"
+        ],
+        "2GZ6A": [
+          "MXD494/2GZ6A.npy"
+        ],
+        "2H6FA": [
+          "MXD494/2H6FA.npy"
+        ],
+        "2H6FB": [
+          "MXD494/2H6FB.npy"
+        ],
+        "2H98A": [
+          "MXD494/2H98A.npy"
+        ],
+        "2HBWA": [
+          "MXD494/2HBWA.npy"
+        ],
+        "2HEWF": [
+          "MXD494/2HEWF.npy"
+        ],
+        "2HHCA": [
+          "MXD494/2HHCA.npy"
+        ],
+        "2HQSC": [
+          "MXD494/2HQSC.npy"
+        ],
+        "2I49A": [
+          "MXD494/2I49A.npy"
+        ],
+        "2I6HA": [
+          "MXD494/2I6HA.npy"
+        ],
+        "2I71A": [
+          "MXD494/2I71A.npy"
+        ],
+        "2I74A": [
+          "MXD494/2I74A.npy"
+        ],
+        "2IA7A": [
+          "MXD494/2IA7A.npy"
+        ],
+        "2IM9A": [
+          "MXD494/2IM9A.npy"
+        ],
+        "2IWAA": [
+          "MXD494/2IWAA.npy"
+        ],
+        "2JH1A": [
+          "MXD494/2JH1A.npy"
+        ],
+        "2O0BA": [
+          "MXD494/2O0BA.npy"
+        ],
+        "2O6FA": [
+          "MXD494/2O6FA.npy"
+        ],
+        "2O7AA": [
+          "MXD494/2O7AA.npy"
+        ],
+        "2OA2A": [
+          "MXD494/2OA2A.npy"
+        ],
+        "2OB5A": [
+          "MXD494/2OB5A.npy"
+        ],
+        "2OX7A": [
+          "MXD494/2OX7A.npy"
+        ],
+        "2P02A": [
+          "MXD494/2P02A.npy"
+        ],
+        "2P0NA": [
+          "MXD494/2P0NA.npy"
+        ],
+        "2P17A": [
+          "MXD494/2P17A.npy"
+        ],
+        "2P4FA": [
+          "MXD494/2P4FA.npy"
+        ],
+        "2P51A": [
+          "MXD494/2P51A.npy"
+        ],
+        "2P7IA": [
+          "MXD494/2P7IA.npy"
+        ],
+        "2PC1A": [
+          "MXD494/2PC1A.npy"
+        ],
+        "2PMAA": [
+          "MXD494/2PMAA.npy"
+        ],
+        "2PNWA": [
+          "MXD494/2PNWA.npy"
+        ],
+        "2PSTX": [
+          "MXD494/2PSTX.npy"
+        ],
+        "2Q7WA": [
+          "MXD494/2Q7WA.npy"
+        ],
+        "2QEEA": [
+          "MXD494/2QEEA.npy"
+        ],
+        "2QGYA": [
+          "MXD494/2QGYA.npy"
+        ],
+        "2QIKA": [
+          "MXD494/2QIKA.npy"
+        ],
+        "2QKHA": [
+          "MXD494/2QKHA.npy"
+        ],
+        "2QMAA": [
+          "MXD494/2QMAA.npy"
+        ],
+        "2QMCA": [
+          "MXD494/2QMCA.npy"
+        ],
+        "2QSIA": [
+          "MXD494/2QSIA.npy"
+        ],
+        "2QSWA": [
+          "MXD494/2QSWA.npy"
+        ],
+        "2R1IA": [
+          "MXD494/2R1IA.npy"
+        ],
+        "2R5OA": [
+          "MXD494/2R5OA.npy"
+        ],
+        "2RA9A": [
+          "MXD494/2RA9A.npy"
+        ],
+        "2RC3A": [
+          "MXD494/2RC3A.npy"
+        ],
+        "2RDQA": [
+          "MXD494/2RDQA.npy"
+        ],
+        "2UW1A": [
+          "MXD494/2UW1A.npy"
+        ],
+        "2V3GA": [
+          "MXD494/2V3GA.npy"
+        ],
+        "2V4XA": [
+          "MXD494/2V4XA.npy"
+        ],
+        "2V8HA": [
+          "MXD494/2V8HA.npy"
+        ],
+        "2VOSA": [
+          "MXD494/2VOSA.npy"
+        ],
+        "2VOVA": [
+          "MXD494/2VOVA.npy"
+        ],
+        "2VVWA": [
+          "MXD494/2VVWA.npy"
+        ],
+        "2Z14A": [
+          "MXD494/2Z14A.npy"
+        ],
+        "2ZCMA": [
+          "MXD494/2ZCMA.npy"
+        ],
+        "2ZEXA": [
+          "MXD494/2ZEXA.npy"
+        ],
+        "3B9TA": [
+          "MXD494/3B9TA.npy"
+        ],
+        "3BA3A": [
+          "MXD494/3BA3A.npy"
+        ],
+        "3BBBA": [
+          "MXD494/3BBBA.npy"
+        ],
+        "3BGEA": [
+          "MXD494/3BGEA.npy"
+        ],
+        "3BIQA": [
+          "MXD494/3BIQA.npy"
+        ],
+        "3BJEA": [
+          "MXD494/3BJEA.npy"
+        ],
+        "3BM3A": [
+          "MXD494/3BM3A.npy"
+        ],
+        "3BMZA": [
+          "MXD494/3BMZA.npy"
+        ],
+        "3BP1A": [
+          "MXD494/3BP1A.npy"
+        ],
+        "3BYPA": [
+          "MXD494/3BYPA.npy"
+        ],
+        "3C1JA": [
+          "MXD494/3C1JA.npy"
+        ],
+        "3C6WA": [
+          "MXD494/3C6WA.npy"
+        ],
+        "3C85A": [
+          "MXD494/3C85A.npy"
+        ],
+        "3C96A": [
+          "MXD494/3C96A.npy"
+        ],
+        "3C9HA": [
+          "MXD494/3C9HA.npy"
+        ],
+        "3CANA": [
+          "MXD494/3CANA.npy"
+        ],
+        "3CBWA": [
+          "MXD494/3CBWA.npy"
+        ],
+        "3CGXA": [
+          "MXD494/3CGXA.npy"
+        ],
+        "3CIVA": [
+          "MXD494/3CIVA.npy"
+        ],
+        "3CKMA": [
+          "MXD494/3CKMA.npy"
+        ],
+        "3CP0A": [
+          "MXD494/3CP0A.npy"
+        ],
+        "3CTPA": [
+          "MXD494/3CTPA.npy"
+        ],
+        "3D1MA": [
+          "MXD494/3D1MA.npy"
+        ],
+        "3D33A": [
+          "MXD494/3D33A.npy"
+        ],
+        "3D59A": [
+          "MXD494/3D59A.npy"
+        ],
+        "3DM8A": [
+          "MXD494/3DM8A.npy"
+        ],
+        "3DT5A": [
+          "MXD494/3DT5A.npy"
+        ],
+        "3E15A": [
+          "MXD494/3E15A.npy"
+        ],
+        "3E8OA": [
+          "MXD494/3E8OA.npy"
+        ],
+        "3EJKA": [
+          "MXD494/3EJKA.npy"
+        ],
+        "3EJNA": [
+          "MXD494/3EJNA.npy"
+        ],
+        "3EMHA": [
+          "MXD494/3EMHA.npy"
+        ],
+        "3ER7A": [
+          "MXD494/3ER7A.npy"
+        ],
+        "3ET4A": [
+          "MXD494/3ET4A.npy"
+        ],
+        "3EXMA": [
+          "MXD494/3EXMA.npy"
+        ],
+        "3F0HA": [
+          "MXD494/3F0HA.npy"
+        ],
+        "3F44A": [
+          "MXD494/3F44A.npy"
+        ],
+        "3F9MA": [
+          "MXD494/3F9MA.npy"
+        ],
+        "3FIAA": [
+          "MXD494/3FIAA.npy"
+        ],
+        "3FJSA": [
+          "MXD494/3FJSA.npy"
+        ],
+        "3FLAA": [
+          "MXD494/3FLAA.npy"
+        ],
+        "DP00008": [
+          "MXD494/DP00008.npy"
+        ],
+        "DP00009": [
+          "MXD494/DP00009.npy"
+        ],
+        "DP00011": [
+          "MXD494/DP00011.npy"
+        ],
+        "DP00012": [
+          "MXD494/DP00012.npy"
+        ],
+        "DP00014": [
+          "MXD494/DP00014.npy"
+        ],
+        "DP00016": [
+          "MXD494/DP00016.npy"
+        ],
+        "DP00017": [
+          "MXD494/DP00017.npy"
+        ],
+        "DP00019": [
+          "MXD494/DP00019.npy"
+        ],
+        "DP00020": [
+          "MXD494/DP00020.npy"
+        ],
+        "DP00021": [
+          "MXD494/DP00021.npy"
+        ],
+        "DP00024": [
+          "MXD494/DP00024.npy"
+        ],
+        "DP00025": [
+          "MXD494/DP00025.npy"
+        ],
+        "DP00026": [
+          "MXD494/DP00026.npy"
+        ],
+        "DP00027": [
+          "MXD494/DP00027.npy"
+        ],
+        "DP00028": [
+          "MXD494/DP00028.npy"
+        ],
+        "DP00029": [
+          "MXD494/DP00029.npy"
+        ],
+        "DP00030": [
+          "MXD494/DP00030.npy"
+        ],
+        "DP00032": [
+          "MXD494/DP00032.npy"
+        ],
+        "DP00033": [
+          "MXD494/DP00033.npy"
+        ],
+        "DP00035": [
+          "MXD494/DP00035.npy"
+        ],
+        "DP00036": [
+          "MXD494/DP00036.npy"
+        ],
+        "DP00037": [
+          "MXD494/DP00037.npy"
+        ],
+        "DP00041": [
+          "MXD494/DP00041.npy"
+        ],
+        "DP00046": [
+          "MXD494/DP00046.npy"
+        ],
+        "DP00048": [
+          "MXD494/DP00048.npy"
+        ],
+        "DP00049": [
+          "MXD494/DP00049.npy"
+        ],
+        "DP00050": [
+          "MXD494/DP00050.npy"
+        ],
+        "DP00051": [
+          "MXD494/DP00051.npy"
+        ],
+        "DP00052": [
+          "MXD494/DP00052.npy"
+        ],
+        "DP00053": [
+          "MXD494/DP00053.npy"
+        ],
+        "DP00055": [
+          "MXD494/DP00055.npy"
+        ],
+        "DP00057": [
+          "MXD494/DP00057.npy"
+        ],
+        "DP00061": [
+          "MXD494/DP00061.npy"
+        ],
+        "DP00062": [
+          "MXD494/DP00062.npy"
+        ],
+        "DP00063": [
+          "MXD494/DP00063.npy"
+        ],
+        "DP00065": [
+          "MXD494/DP00065.npy"
+        ],
+        "DP00066": [
+          "MXD494/DP00066.npy"
+        ],
+        "DP00067": [
+          "MXD494/DP00067.npy"
+        ],
+        "DP00068": [
+          "MXD494/DP00068.npy"
+        ],
+        "DP00071": [
+          "MXD494/DP00071.npy"
+        ],
+        "DP00073": [
+          "MXD494/DP00073.npy"
+        ],
+        "DP00074": [
+          "MXD494/DP00074.npy"
+        ],
+        "DP00075": [
+          "MXD494/DP00075.npy"
+        ],
+        "DP00076": [
+          "MXD494/DP00076.npy"
+        ],
+        "DP00077": [
+          "MXD494/DP00077.npy"
+        ],
+        "DP00078": [
+          "MXD494/DP00078.npy"
+        ],
+        "DP00080": [
+          "MXD494/DP00080.npy"
+        ],
+        "DP00083": [
+          "MXD494/DP00083.npy"
+        ],
+        "DP00086": [
+          "MXD494/DP00086.npy"
+        ],
+        "DP00087": [
+          "MXD494/DP00087.npy"
+        ],
+        "DP00088": [
+          "MXD494/DP00088.npy"
+        ],
+        "DP00089": [
+          "MXD494/DP00089.npy"
+        ],
+        "DP00090": [
+          "MXD494/DP00090.npy"
+        ],
+        "DP00091": [
+          "MXD494/DP00091.npy"
+        ],
+        "DP00092": [
+          "MXD494/DP00092.npy"
+        ],
+        "DP00093": [
+          "MXD494/DP00093.npy"
+        ],
+        "DP00094": [
+          "MXD494/DP00094.npy"
+        ],
+        "DP00095": [
+          "MXD494/DP00095.npy"
+        ],
+        "DP00098": [
+          "MXD494/DP00098.npy"
+        ],
+        "DP00099": [
+          "MXD494/DP00099.npy"
+        ],
+        "DP00100": [
+          "MXD494/DP00100.npy"
+        ],
+        "DP00108": [
+          "MXD494/DP00108.npy"
+        ],
+        "DP00111": [
+          "MXD494/DP00111.npy"
+        ],
+        "DP00114": [
+          "MXD494/DP00114.npy"
+        ],
+        "DP00116": [
+          "MXD494/DP00116.npy"
+        ],
+        "DP00119": [
+          "MXD494/DP00119.npy"
+        ],
+        "DP00121": [
+          "MXD494/DP00121.npy"
+        ],
+        "DP00123": [
+          "MXD494/DP00123.npy"
+        ],
+        "DP00124": [
+          "MXD494/DP00124.npy"
+        ],
+        "DP00126": [
+          "MXD494/DP00126.npy"
+        ],
+        "DP00127": [
+          "MXD494/DP00127.npy"
+        ],
+        "DP00128": [
+          "MXD494/DP00128.npy"
+        ],
+        "DP00129": [
+          "MXD494/DP00129.npy"
+        ],
+        "DP00131": [
+          "MXD494/DP00131.npy"
+        ],
+        "DP00132": [
+          "MXD494/DP00132.npy"
+        ],
+        "DP00134": [
+          "MXD494/DP00134.npy"
+        ],
+        "DP00135": [
+          "MXD494/DP00135.npy"
+        ],
+        "DP00136": [
+          "MXD494/DP00136.npy"
+        ],
+        "DP00137": [
+          "MXD494/DP00137.npy"
+        ],
+        "DP00139": [
+          "MXD494/DP00139.npy"
+        ],
+        "DP00140": [
+          "MXD494/DP00140.npy"
+        ],
+        "DP00141": [
+          "MXD494/DP00141.npy"
+        ],
+        "DP00143": [
+          "MXD494/DP00143.npy"
+        ],
+        "DP00144": [
+          "MXD494/DP00144.npy"
+        ],
+        "DP00146": [
+          "MXD494/DP00146.npy"
+        ],
+        "DP00148": [
+          "MXD494/DP00148.npy"
+        ],
+        "DP00153": [
+          "MXD494/DP00153.npy"
+        ],
+        "DP00156": [
+          "MXD494/DP00156.npy"
+        ],
+        "DP00157": [
+          "MXD494/DP00157.npy"
+        ],
+        "DP00158": [
+          "MXD494/DP00158.npy"
+        ],
+        "DP00159": [
+          "MXD494/DP00159.npy"
+        ],
+        "DP00160": [
+          "MXD494/DP00160.npy"
+        ],
+        "DP00161": [
+          "MXD494/DP00161.npy"
+        ],
+        "DP00163": [
+          "MXD494/DP00163.npy"
+        ],
+        "DP00165": [
+          "MXD494/DP00165.npy"
+        ],
+        "DP00170": [
+          "MXD494/DP00170.npy"
+        ],
+        "DP00171": [
+          "MXD494/DP00171.npy"
+        ],
+        "DP00173": [
+          "MXD494/DP00173.npy"
+        ],
+        "DP00176": [
+          "MXD494/DP00176.npy"
+        ],
+        "DP00178": [
+          "MXD494/DP00178.npy"
+        ],
+        "DP00180": [
+          "MXD494/DP00180.npy"
+        ],
+        "DP00183": [
+          "MXD494/DP00183.npy"
+        ],
+        "DP00185": [
+          "MXD494/DP00185.npy"
+        ],
+        "DP00188": [
+          "MXD494/DP00188.npy"
+        ],
+        "DP00190": [
+          "MXD494/DP00190.npy"
+        ],
+        "DP00191": [
+          "MXD494/DP00191.npy"
+        ],
+        "DP00192": [
+          "MXD494/DP00192.npy"
+        ],
+        "DP00193": [
+          "MXD494/DP00193.npy"
+        ],
+        "DP00194": [
+          "MXD494/DP00194.npy"
+        ],
+        "DP00196": [
+          "MXD494/DP00196.npy"
+        ],
+        "DP00198": [
+          "MXD494/DP00198.npy"
+        ],
+        "DP00199": [
+          "MXD494/DP00199.npy"
+        ],
+        "DP00200": [
+          "MXD494/DP00200.npy"
+        ],
+        "DP00201": [
+          "MXD494/DP00201.npy"
+        ],
+        "DP00205": [
+          "MXD494/DP00205.npy"
+        ],
+        "DP00207": [
+          "MXD494/DP00207.npy"
+        ],
+        "DP00210": [
+          "MXD494/DP00210.npy"
+        ],
+        "DP00214": [
+          "MXD494/DP00214.npy"
+        ],
+        "DP00218": [
+          "MXD494/DP00218.npy"
+        ],
+        "DP00220": [
+          "MXD494/DP00220.npy"
+        ],
+        "DP00221": [
+          "MXD494/DP00221.npy"
+        ],
+        "DP00222": [
+          "MXD494/DP00222.npy"
+        ],
+        "DP00224": [
+          "MXD494/DP00224.npy"
+        ],
+        "DP00225": [
+          "MXD494/DP00225.npy"
+        ],
+        "DP00226": [
+          "MXD494/DP00226.npy"
+        ],
+        "DP00227": [
+          "MXD494/DP00227.npy"
+        ],
+        "DP00229": [
+          "MXD494/DP00229.npy"
+        ],
+        "DP00231": [
+          "MXD494/DP00231.npy"
+        ],
+        "DP00232": [
+          "MXD494/DP00232.npy"
+        ],
+        "DP00233": [
+          "MXD494/DP00233.npy"
+        ],
+        "DP00234": [
+          "MXD494/DP00234.npy"
+        ],
+        "DP00235": [
+          "MXD494/DP00235.npy"
+        ],
+        "DP00236": [
+          "MXD494/DP00236.npy"
+        ],
+        "DP00239": [
+          "MXD494/DP00239.npy"
+        ],
+        "DP00241": [
+          "MXD494/DP00241.npy"
+        ],
+        "DP00242": [
+          "MXD494/DP00242.npy"
+        ],
+        "DP00246": [
+          "MXD494/DP00246.npy"
+        ],
+        "DP00249": [
+          "MXD494/DP00249.npy"
+        ],
+        "DP00251": [
+          "MXD494/DP00251.npy"
+        ],
+        "DP00253": [
+          "MXD494/DP00253.npy"
+        ],
+        "DP00255": [
+          "MXD494/DP00255.npy"
+        ],
+        "DP00256": [
+          "MXD494/DP00256.npy"
+        ],
+        "DP00259": [
+          "MXD494/DP00259.npy"
+        ],
+        "DP00262": [
+          "MXD494/DP00262.npy"
+        ],
+        "DP00265": [
+          "MXD494/DP00265.npy"
+        ],
+        "DP00267": [
+          "MXD494/DP00267.npy"
+        ],
+        "DP00268": [
+          "MXD494/DP00268.npy"
+        ],
+        "DP00270": [
+          "MXD494/DP00270.npy"
+        ],
+        "DP00271": [
+          "MXD494/DP00271.npy"
+        ],
+        "DP00272": [
+          "MXD494/DP00272.npy"
+        ],
+        "DP00274": [
+          "MXD494/DP00274.npy"
+        ],
+        "DP00275": [
+          "MXD494/DP00275.npy"
+        ],
+        "DP00278": [
+          "MXD494/DP00278.npy"
+        ],
+        "DP00279": [
+          "MXD494/DP00279.npy"
+        ],
+        "DP00280": [
+          "MXD494/DP00280.npy"
+        ],
+        "DP00282": [
+          "MXD494/DP00282.npy"
+        ],
+        "DP00283": [
+          "MXD494/DP00283.npy"
+        ],
+        "DP00284": [
+          "MXD494/DP00284.npy"
+        ],
+        "DP00285": [
+          "MXD494/DP00285.npy"
+        ],
+        "DP00287": [
+          "MXD494/DP00287.npy"
+        ],
+        "DP00291": [
+          "MXD494/DP00291.npy"
+        ],
+        "DP00292": [
+          "MXD494/DP00292.npy"
+        ],
+        "DP00296": [
+          "MXD494/DP00296.npy"
+        ],
+        "DP00298": [
+          "MXD494/DP00298.npy"
+        ],
+        "DP00300": [
+          "MXD494/DP00300.npy"
+        ],
+        "DP00301": [
+          "MXD494/DP00301.npy"
+        ],
+        "DP00303": [
+          "MXD494/DP00303.npy"
+        ],
+        "DP00304": [
+          "MXD494/DP00304.npy"
+        ],
+        "DP00305": [
+          "MXD494/DP00305.npy"
+        ],
+        "DP00306": [
+          "MXD494/DP00306.npy"
+        ],
+        "DP00307": [
+          "MXD494/DP00307.npy"
+        ],
+        "DP00309": [
+          "MXD494/DP00309.npy"
+        ],
+        "DP00310": [
+          "MXD494/DP00310.npy"
+        ],
+        "DP00312": [
+          "MXD494/DP00312.npy"
+        ],
+        "DP00314": [
+          "MXD494/DP00314.npy"
+        ],
+        "DP00317": [
+          "MXD494/DP00317.npy"
+        ],
+        "DP00318": [
+          "MXD494/DP00318.npy"
+        ],
+        "DP00320": [
+          "MXD494/DP00320.npy"
+        ],
+        "DP00321": [
+          "MXD494/DP00321.npy"
+        ],
+        "DP00326": [
+          "MXD494/DP00326.npy"
+        ],
+        "DP00327": [
+          "MXD494/DP00327.npy"
+        ],
+        "DP00328": [
+          "MXD494/DP00328.npy"
+        ],
+        "DP00332": [
+          "MXD494/DP00332.npy"
+        ],
+        "DP00333": [
+          "MXD494/DP00333.npy"
+        ],
+        "DP00334": [
+          "MXD494/DP00334.npy"
+        ],
+        "DP00340": [
+          "MXD494/DP00340.npy"
+        ],
+        "DP00341": [
+          "MXD494/DP00341.npy"
+        ],
+        "DP00342": [
+          "MXD494/DP00342.npy"
+        ],
+        "DP00343": [
+          "MXD494/DP00343.npy"
+        ],
+        "DP00345": [
+          "MXD494/DP00345.npy"
+        ],
+        "DP00346": [
+          "MXD494/DP00346.npy"
+        ],
+        "DP00349": [
+          "MXD494/DP00349.npy"
+        ],
+        "DP00350": [
+          "MXD494/DP00350.npy"
+        ],
+        "DP00351": [
+          "MXD494/DP00351.npy"
+        ],
+        "DP00353": [
+          "MXD494/DP00353.npy"
+        ],
+        "DP00354": [
+          "MXD494/DP00354.npy"
+        ],
+        "DP00360": [
+          "MXD494/DP00360.npy"
+        ],
+        "DP00363": [
+          "MXD494/DP00363.npy"
+        ],
+        "DP00365": [
+          "MXD494/DP00365.npy"
+        ],
+        "DP00367": [
+          "MXD494/DP00367.npy"
+        ],
+        "DP00372": [
+          "MXD494/DP00372.npy"
+        ],
+        "DP00375": [
+          "MXD494/DP00375.npy"
+        ],
+        "DP00376": [
+          "MXD494/DP00376.npy"
+        ],
+        "DP00377": [
+          "MXD494/DP00377.npy"
+        ],
+        "DP00378": [
+          "MXD494/DP00378.npy"
+        ],
+        "DP00379": [
+          "MXD494/DP00379.npy"
+        ],
+        "DP00381": [
+          "MXD494/DP00381.npy"
+        ],
+        "DP00383": [
+          "MXD494/DP00383.npy"
+        ],
+        "DP00385": [
+          "MXD494/DP00385.npy"
+        ],
+        "DP00387": [
+          "MXD494/DP00387.npy"
+        ],
+        "DP00389": [
+          "MXD494/DP00389.npy"
+        ],
+        "DP00392": [
+          "MXD494/DP00392.npy"
+        ],
+        "DP00395": [
+          "MXD494/DP00395.npy"
+        ],
+        "DP00398": [
+          "MXD494/DP00398.npy"
+        ],
+        "DP00399": [
+          "MXD494/DP00399.npy"
+        ],
+        "DP00400": [
+          "MXD494/DP00400.npy"
+        ],
+        "DP00401": [
+          "MXD494/DP00401.npy"
+        ],
+        "DP00412": [
+          "MXD494/DP00412.npy"
+        ],
+        "DP00418": [
+          "MXD494/DP00418.npy"
+        ],
+        "DP00419": [
+          "MXD494/DP00419.npy"
+        ],
+        "DP00424": [
+          "MXD494/DP00424.npy"
+        ],
+        "DP00426": [
+          "MXD494/DP00426.npy"
+        ],
+        "DP00427": [
+          "MXD494/DP00427.npy"
+        ],
+        "DP00428": [
+          "MXD494/DP00428.npy"
+        ],
+        "DP00429": [
+          "MXD494/DP00429.npy"
+        ],
+        "DP00431": [
+          "MXD494/DP00431.npy"
+        ],
+        "DP00433": [
+          "MXD494/DP00433.npy"
+        ],
+        "DP00435": [
+          "MXD494/DP00435.npy"
+        ],
+        "DP00436": [
+          "MXD494/DP00436.npy"
+        ],
+        "DP00438": [
+          "MXD494/DP00438.npy"
+        ],
+        "DP00441": [
+          "MXD494/DP00441.npy"
+        ],
+        "DP00443": [
+          "MXD494/DP00443.npy"
+        ],
+        "DP00444": [
+          "MXD494/DP00444.npy"
+        ],
+        "DP00448": [
+          "MXD494/DP00448.npy"
+        ],
+        "DP00451": [
+          "MXD494/DP00451.npy"
+        ],
+        "DP00455": [
+          "MXD494/DP00455.npy"
+        ],
+        "DP00458": [
+          "MXD494/DP00458.npy"
+        ],
+        "DP00459": [
+          "MXD494/DP00459.npy"
+        ],
+        "DP00460": [
+          "MXD494/DP00460.npy"
+        ],
+        "DP00461": [
+          "MXD494/DP00461.npy"
+        ],
+        "DP00463": [
+          "MXD494/DP00463.npy"
+        ],
+        "DP00464": [
+          "MXD494/DP00464.npy"
+        ],
+        "DP00466": [
+          "MXD494/DP00466.npy"
+        ],
+        "DP00468": [
+          "MXD494/DP00468.npy"
+        ],
+        "DP00471": [
+          "MXD494/DP00471.npy"
+        ],
+        "DP00472": [
+          "MXD494/DP00472.npy"
+        ],
+        "DP00473": [
+          "MXD494/DP00473.npy"
+        ],
+        "DP00474": [
+          "MXD494/DP00474.npy"
+        ],
+        "DP00482": [
+          "MXD494/DP00482.npy"
+        ],
+        "DP00483": [
+          "MXD494/DP00483.npy"
+        ],
+        "DP00484": [
+          "MXD494/DP00484.npy"
+        ],
+        "DP00486": [
+          "MXD494/DP00486.npy"
+        ],
+        "DP00488": [
+          "MXD494/DP00488.npy"
+        ],
+        "DP00491": [
+          "MXD494/DP00491.npy"
+        ],
+        "DP00492": [
+          "MXD494/DP00492.npy"
+        ],
+        "DP00499": [
+          "MXD494/DP00499.npy"
+        ],
+        "DP00502": [
+          "MXD494/DP00502.npy"
+        ],
+        "DP00504": [
+          "MXD494/DP00504.npy"
+        ],
+        "DP00505": [
+          "MXD494/DP00505.npy"
+        ],
+        "DP00506": [
+          "MXD494/DP00506.npy"
+        ],
+        "DP00511": [
+          "MXD494/DP00511.npy"
+        ],
+        "DP00514": [
+          "MXD494/DP00514.npy"
+        ],
+        "DP00520": [
+          "MXD494/DP00520.npy"
+        ],
+        "DP00521": [
+          "MXD494/DP00521.npy"
+        ],
+        "DP00525": [
+          "MXD494/DP00525.npy"
+        ],
+        "DP00529": [
+          "MXD494/DP00529.npy"
+        ],
+        "DP00530": [
+          "MXD494/DP00530.npy"
+        ],
+        "DP00534": [
+          "MXD494/DP00534.npy"
+        ],
+        "DP00535": [
+          "MXD494/DP00535.npy"
+        ],
+        "DP00537": [
+          "MXD494/DP00537.npy"
+        ],
+        "DP00540": [
+          "MXD494/DP00540.npy"
+        ],
+        "DP00541": [
+          "MXD494/DP00541.npy"
+        ],
+        "DP00542": [
+          "MXD494/DP00542.npy"
+        ],
+        "DP00550": [
+          "MXD494/DP00550.npy"
+        ],
+        "DP00552": [
+          "MXD494/DP00552.npy"
+        ],
+        "DP00553": [
+          "MXD494/DP00553.npy"
+        ],
+        "DP00554": [
+          "MXD494/DP00554.npy"
+        ],
+        "DP00556": [
+          "MXD494/DP00556.npy"
+        ],
+        "DP00559": [
+          "MXD494/DP00559.npy"
+        ],
+        "DP00563": [
+          "MXD494/DP00563.npy"
+        ],
+        "DP00564": [
+          "MXD494/DP00564.npy"
+        ],
+        "DP00566": [
+          "MXD494/DP00566.npy"
+        ],
+        "DP00571": [
+          "MXD494/DP00571.npy"
+        ],
+        "DP00572": [
+          "MXD494/DP00572.npy"
+        ],
+        "DP00575": [
+          "MXD494/DP00575.npy"
+        ],
+        "DP00576": [
+          "MXD494/DP00576.npy"
+        ],
+        "DP00578": [
+          "MXD494/DP00578.npy"
+        ],
+        "DP00583": [
+          "MXD494/DP00583.npy"
+        ],
+        "DP00584": [
+          "MXD494/DP00584.npy"
+        ]
+      },
+      "multipart_proteins": {},
+      "proteins": 494,
+      "summary": {
+        "accuracy": 0.8009526669075475,
+        "auc": 0.8186407108626428,
+        "aupr": 0.5311485367445905,
+        "bacc": 0.7115872060100268,
+        "dataset": "MXD494",
+        "evaluated_residues": 196501,
+        "excluded_label_minus1": 0,
+        "fmax": 0.591095406360424,
+        "fn": 19862,
+        "fp": 19251,
+        "mcc": 0.4252860323691869,
+        "negatives": 152414,
+        "positives": 44087,
+        "predicted_residues": 196501,
+        "proteins": 494,
+        "sn": 0.5494817066255359,
+        "source_residues": 196501,
+        "sp": 0.8736927053945176,
+        "threshold": 0.5,
+        "tn": 133163,
+        "tp": 24225
+      }
+    },
+    "SL329": {
+      "archive_member_count": 331,
+      "archive_members": {
+        "DP00001": [
+          "SL329/DP00001.npy"
+        ],
+        "DP00003": [
+          "SL329/DP00003.npy"
+        ],
+        "DP00004": [
+          "SL329/DP00004.npy"
+        ],
+        "DP00012": [
+          "SL329/DP00012.npy"
+        ],
+        "DP00014": [
+          "SL329/DP00014.npy"
+        ],
+        "DP00015": [
+          "SL329/DP00015.npy"
+        ],
+        "DP00016": [
+          "SL329/DP00016.npy"
+        ],
+        "DP00018": [
+          "SL329/DP00018.npy"
+        ],
+        "DP00019": [
+          "SL329/DP00019.npy"
+        ],
+        "DP00020": [
+          "SL329/DP00020.npy"
+        ],
+        "DP00022": [
+          "SL329/DP00022.npy"
+        ],
+        "DP00023": [
+          "SL329/DP00023.npy"
+        ],
+        "DP00025": [
+          "SL329/DP00025.npy"
+        ],
+        "DP00026": [
+          "SL329/DP00026.npy"
+        ],
+        "DP00029": [
+          "SL329/DP00029.npy"
+        ],
+        "DP00030": [
+          "SL329/DP00030.npy"
+        ],
+        "DP00034": [
+          "SL329/DP00034.npy"
+        ],
+        "DP00035": [
+          "SL329/DP00035.npy"
+        ],
+        "DP00036": [
+          "SL329/DP00036.npy"
+        ],
+        "DP00037": [
+          "SL329/DP00037.npy"
+        ],
+        "DP00043": [
+          "SL329/DP00043.npy"
+        ],
+        "DP00045": [
+          "SL329/DP00045.npy"
+        ],
+        "DP00046": [
+          "SL329/DP00046.npy"
+        ],
+        "DP00048": [
+          "SL329/DP00048.npy"
+        ],
+        "DP00049": [
+          "SL329/DP00049.npy"
+        ],
+        "DP00050": [
+          "SL329/DP00050.npy"
+        ],
+        "DP00052": [
+          "SL329/DP00052.npy"
+        ],
+        "DP00055": [
+          "SL329/DP00055.npy"
+        ],
+        "DP00058": [
+          "SL329/DP00058.npy"
+        ],
+        "DP00060": [
+          "SL329/DP00060.npy"
+        ],
+        "DP00061": [
+          "SL329/DP00061.npy"
+        ],
+        "DP00062": [
+          "SL329/DP00062.npy"
+        ],
+        "DP00063": [
+          "SL329/DP00063.npy"
+        ],
+        "DP00064": [
+          "SL329/DP00064.npy"
+        ],
+        "DP00065": [
+          "SL329/DP00065.npy"
+        ],
+        "DP00066": [
+          "SL329/DP00066.npy"
+        ],
+        "DP00071": [
+          "SL329/DP00071.npy"
+        ],
+        "DP00072": [
+          "SL329/DP00072_P1.npy",
+          "SL329/DP00072_P2.npy",
+          "SL329/DP00072_P3.npy"
+        ],
+        "DP00073": [
+          "SL329/DP00073.npy"
+        ],
+        "DP00074": [
+          "SL329/DP00074.npy"
+        ],
+        "DP00075": [
+          "SL329/DP00075.npy"
+        ],
+        "DP00076": [
+          "SL329/DP00076.npy"
+        ],
+        "DP00077": [
+          "SL329/DP00077.npy"
+        ],
+        "DP00078": [
+          "SL329/DP00078.npy"
+        ],
+        "DP00079": [
+          "SL329/DP00079.npy"
+        ],
+        "DP00080": [
+          "SL329/DP00080.npy"
+        ],
+        "DP00081": [
+          "SL329/DP00081.npy"
+        ],
+        "DP00082": [
+          "SL329/DP00082.npy"
+        ],
+        "DP00083": [
+          "SL329/DP00083.npy"
+        ],
+        "DP00085": [
+          "SL329/DP00085.npy"
+        ],
+        "DP00086": [
+          "SL329/DP00086.npy"
+        ],
+        "DP00087": [
+          "SL329/DP00087.npy"
+        ],
+        "DP00090": [
+          "SL329/DP00090.npy"
+        ],
+        "DP00092_A001": [
+          "SL329/DP00092_A001.npy"
+        ],
+        "DP00093": [
+          "SL329/DP00093.npy"
+        ],
+        "DP00094": [
+          "SL329/DP00094.npy"
+        ],
+        "DP00098": [
+          "SL329/DP00098.npy"
+        ],
+        "DP00101": [
+          "SL329/DP00101.npy"
+        ],
+        "DP00102": [
+          "SL329/DP00102.npy"
+        ],
+        "DP00104": [
+          "SL329/DP00104.npy"
+        ],
+        "DP00107": [
+          "SL329/DP00107.npy"
+        ],
+        "DP00111": [
+          "SL329/DP00111.npy"
+        ],
+        "DP00113": [
+          "SL329/DP00113.npy"
+        ],
+        "DP00117": [
+          "SL329/DP00117.npy"
+        ],
+        "DP00118": [
+          "SL329/DP00118.npy"
+        ],
+        "DP00120": [
+          "SL329/DP00120.npy"
+        ],
+        "DP00121": [
+          "SL329/DP00121.npy"
+        ],
+        "DP00123": [
+          "SL329/DP00123.npy"
+        ],
+        "DP00125": [
+          "SL329/DP00125.npy"
+        ],
+        "DP00126": [
+          "SL329/DP00126.npy"
+        ],
+        "DP00127": [
+          "SL329/DP00127.npy"
+        ],
+        "DP00130": [
+          "SL329/DP00130.npy"
+        ],
+        "DP00131": [
+          "SL329/DP00131.npy"
+        ],
+        "DP00134": [
+          "SL329/DP00134.npy"
+        ],
+        "DP00135": [
+          "SL329/DP00135.npy"
+        ],
+        "DP00138": [
+          "SL329/DP00138.npy"
+        ],
+        "DP00139": [
+          "SL329/DP00139.npy"
+        ],
+        "DP00141": [
+          "SL329/DP00141.npy"
+        ],
+        "DP00142": [
+          "SL329/DP00142.npy"
+        ],
+        "DP00144": [
+          "SL329/DP00144.npy"
+        ],
+        "DP00148": [
+          "SL329/DP00148.npy"
+        ],
+        "DP00149": [
+          "SL329/DP00149.npy"
+        ],
+        "DP00151": [
+          "SL329/DP00151.npy"
+        ],
+        "DP00152": [
+          "SL329/DP00152.npy"
+        ],
+        "DP00153": [
+          "SL329/DP00153.npy"
+        ],
+        "DP00154": [
+          "SL329/DP00154.npy"
+        ],
+        "DP00156": [
+          "SL329/DP00156.npy"
+        ],
+        "DP00157": [
+          "SL329/DP00157.npy"
+        ],
+        "DP00159": [
+          "SL329/DP00159.npy"
+        ],
+        "DP00160": [
+          "SL329/DP00160.npy"
+        ],
+        "DP00161": [
+          "SL329/DP00161.npy"
+        ],
+        "DP00162": [
+          "SL329/DP00162.npy"
+        ],
+        "DP00165": [
+          "SL329/DP00165.npy"
+        ],
+        "DP00166": [
+          "SL329/DP00166.npy"
+        ],
+        "DP00171": [
+          "SL329/DP00171.npy"
+        ],
+        "DP00173": [
+          "SL329/DP00173.npy"
+        ],
+        "DP00175": [
+          "SL329/DP00175.npy"
+        ],
+        "DP00176": [
+          "SL329/DP00176.npy"
+        ],
+        "DP00177": [
+          "SL329/DP00177.npy"
+        ],
+        "DP00180": [
+          "SL329/DP00180.npy"
+        ],
+        "DP00181": [
+          "SL329/DP00181.npy"
+        ],
+        "DP00183": [
+          "SL329/DP00183.npy"
+        ],
+        "DP00187": [
+          "SL329/DP00187.npy"
+        ],
+        "DP00188": [
+          "SL329/DP00188.npy"
+        ],
+        "DP00190": [
+          "SL329/DP00190.npy"
+        ],
+        "DP00191": [
+          "SL329/DP00191.npy"
+        ],
+        "DP00192": [
+          "SL329/DP00192.npy"
+        ],
+        "DP00194": [
+          "SL329/DP00194.npy"
+        ],
+        "DP00196": [
+          "SL329/DP00196.npy"
+        ],
+        "DP00197": [
+          "SL329/DP00197.npy"
+        ],
+        "DP00199": [
+          "SL329/DP00199.npy"
+        ],
+        "DP00200": [
+          "SL329/DP00200.npy"
+        ],
+        "DP00201": [
+          "SL329/DP00201.npy"
+        ],
+        "DP00202": [
+          "SL329/DP00202.npy"
+        ],
+        "DP00206": [
+          "SL329/DP00206.npy"
+        ],
+        "DP00207": [
+          "SL329/DP00207.npy"
+        ],
+        "DP00208": [
+          "SL329/DP00208.npy"
+        ],
+        "DP00209": [
+          "SL329/DP00209.npy"
+        ],
+        "DP00210": [
+          "SL329/DP00210.npy"
+        ],
+        "DP00211": [
+          "SL329/DP00211.npy"
+        ],
+        "DP00214": [
+          "SL329/DP00214.npy"
+        ],
+        "DP00215": [
+          "SL329/DP00215.npy"
+        ],
+        "DP00217": [
+          "SL329/DP00217.npy"
+        ],
+        "DP00218": [
+          "SL329/DP00218.npy"
+        ],
+        "DP00220": [
+          "SL329/DP00220.npy"
+        ],
+        "DP00221": [
+          "SL329/DP00221.npy"
+        ],
+        "DP00223": [
+          "SL329/DP00223.npy"
+        ],
+        "DP00224": [
+          "SL329/DP00224.npy"
+        ],
+        "DP00225": [
+          "SL329/DP00225.npy"
+        ],
+        "DP00226": [
+          "SL329/DP00226.npy"
+        ],
+        "DP00228": [
+          "SL329/DP00228.npy"
+        ],
+        "DP00229": [
+          "SL329/DP00229.npy"
+        ],
+        "DP00230": [
+          "SL329/DP00230.npy"
+        ],
+        "DP00231": [
+          "SL329/DP00231.npy"
+        ],
+        "DP00233": [
+          "SL329/DP00233.npy"
+        ],
+        "DP00235": [
+          "SL329/DP00235.npy"
+        ],
+        "DP00236": [
+          "SL329/DP00236.npy"
+        ],
+        "DP00238": [
+          "SL329/DP00238.npy"
+        ],
+        "DP00240": [
+          "SL329/DP00240.npy"
+        ],
+        "DP00243": [
+          "SL329/DP00243.npy"
+        ],
+        "DP00245": [
+          "SL329/DP00245.npy"
+        ],
+        "DP00246": [
+          "SL329/DP00246.npy"
+        ],
+        "DP00247": [
+          "SL329/DP00247.npy"
+        ],
+        "DP00248": [
+          "SL329/DP00248.npy"
+        ],
+        "DP00249": [
+          "SL329/DP00249.npy"
+        ],
+        "DP00251": [
+          "SL329/DP00251.npy"
+        ],
+        "DP00254": [
+          "SL329/DP00254.npy"
+        ],
+        "DP00256": [
+          "SL329/DP00256.npy"
+        ],
+        "DP00257": [
+          "SL329/DP00257.npy"
+        ],
+        "DP00260": [
+          "SL329/DP00260.npy"
+        ],
+        "DP00261": [
+          "SL329/DP00261.npy"
+        ],
+        "DP00262": [
+          "SL329/DP00262.npy"
+        ],
+        "DP00267": [
+          "SL329/DP00267.npy"
+        ],
+        "DP00268": [
+          "SL329/DP00268.npy"
+        ],
+        "DP00269": [
+          "SL329/DP00269.npy"
+        ],
+        "DP00270": [
+          "SL329/DP00270.npy"
+        ],
+        "DP00272": [
+          "SL329/DP00272.npy"
+        ],
+        "DP00274": [
+          "SL329/DP00274.npy"
+        ],
+        "DP00275": [
+          "SL329/DP00275.npy"
+        ],
+        "DP00276": [
+          "SL329/DP00276.npy"
+        ],
+        "DP00277": [
+          "SL329/DP00277.npy"
+        ],
+        "DP00278": [
+          "SL329/DP00278.npy"
+        ],
+        "DP00279": [
+          "SL329/DP00279.npy"
+        ],
+        "DP00281": [
+          "SL329/DP00281.npy"
+        ],
+        "DP00282": [
+          "SL329/DP00282.npy"
+        ],
+        "DP00283": [
+          "SL329/DP00283.npy"
+        ],
+        "DP00285": [
+          "SL329/DP00285.npy"
+        ],
+        "DP00286": [
+          "SL329/DP00286.npy"
+        ],
+        "DP00290": [
+          "SL329/DP00290.npy"
+        ],
+        "DP00291": [
+          "SL329/DP00291.npy"
+        ],
+        "DP00292": [
+          "SL329/DP00292.npy"
+        ],
+        "DP00294": [
+          "SL329/DP00294.npy"
+        ],
+        "DP00297": [
+          "SL329/DP00297.npy"
+        ],
+        "DP00298": [
+          "SL329/DP00298.npy"
+        ],
+        "DP00301": [
+          "SL329/DP00301.npy"
+        ],
+        "DP00302": [
+          "SL329/DP00302.npy"
+        ],
+        "DP00304": [
+          "SL329/DP00304.npy"
+        ],
+        "DP00308": [
+          "SL329/DP00308.npy"
+        ],
+        "DP00309": [
+          "SL329/DP00309.npy"
+        ],
+        "DP00311": [
+          "SL329/DP00311.npy"
+        ],
+        "DP00312": [
+          "SL329/DP00312.npy"
+        ],
+        "DP00314": [
+          "SL329/DP00314.npy"
+        ],
+        "DP00315": [
+          "SL329/DP00315.npy"
+        ],
+        "DP00317": [
+          "SL329/DP00317.npy"
+        ],
+        "DP00318": [
+          "SL329/DP00318.npy"
+        ],
+        "DP00319": [
+          "SL329/DP00319.npy"
+        ],
+        "DP00320": [
+          "SL329/DP00320.npy"
+        ],
+        "DP00321": [
+          "SL329/DP00321.npy"
+        ],
+        "DP00322": [
+          "SL329/DP00322.npy"
+        ],
+        "DP00323": [
+          "SL329/DP00323.npy"
+        ],
+        "DP00324": [
+          "SL329/DP00324.npy"
+        ],
+        "DP00325": [
+          "SL329/DP00325.npy"
+        ],
+        "DP00327": [
+          "SL329/DP00327.npy"
+        ],
+        "DP00328": [
+          "SL329/DP00328.npy"
+        ],
+        "DP00332": [
+          "SL329/DP00332.npy"
+        ],
+        "DP00333": [
+          "SL329/DP00333.npy"
+        ],
+        "DP00334": [
+          "SL329/DP00334.npy"
+        ],
+        "DP00335": [
+          "SL329/DP00335.npy"
+        ],
+        "DP00336": [
+          "SL329/DP00336.npy"
+        ],
+        "DP00337": [
+          "SL329/DP00337.npy"
+        ],
+        "DP00338": [
+          "SL329/DP00338.npy"
+        ],
+        "DP00341": [
+          "SL329/DP00341.npy"
+        ],
+        "DP00342": [
+          "SL329/DP00342.npy"
+        ],
+        "DP00343": [
+          "SL329/DP00343.npy"
+        ],
+        "DP00345": [
+          "SL329/DP00345.npy"
+        ],
+        "DP00346": [
+          "SL329/DP00346.npy"
+        ],
+        "DP00348": [
+          "SL329/DP00348.npy"
+        ],
+        "DP00349": [
+          "SL329/DP00349.npy"
+        ],
+        "DP00350": [
+          "SL329/DP00350.npy"
+        ],
+        "DP00351": [
+          "SL329/DP00351.npy"
+        ],
+        "DP00353": [
+          "SL329/DP00353.npy"
+        ],
+        "DP00354": [
+          "SL329/DP00354.npy"
+        ],
+        "DP00355": [
+          "SL329/DP00355.npy"
+        ],
+        "DP00356": [
+          "SL329/DP00356.npy"
+        ],
+        "DP00358": [
+          "SL329/DP00358.npy"
+        ],
+        "DP00359": [
+          "SL329/DP00359.npy"
+        ],
+        "DP00360": [
+          "SL329/DP00360.npy"
+        ],
+        "DP00365": [
+          "SL329/DP00365.npy"
+        ],
+        "DP00373": [
+          "SL329/DP00373.npy"
+        ],
+        "DP00376": [
+          "SL329/DP00376.npy"
+        ],
+        "DP00377": [
+          "SL329/DP00377.npy"
+        ],
+        "DP00378": [
+          "SL329/DP00378.npy"
+        ],
+        "DP00379": [
+          "SL329/DP00379.npy"
+        ],
+        "DP00380": [
+          "SL329/DP00380.npy"
+        ],
+        "DP00381": [
+          "SL329/DP00381.npy"
+        ],
+        "DP00385": [
+          "SL329/DP00385.npy"
+        ],
+        "DP00386": [
+          "SL329/DP00386.npy"
+        ],
+        "DP00388": [
+          "SL329/DP00388.npy"
+        ],
+        "DP00389": [
+          "SL329/DP00389.npy"
+        ],
+        "DP00394": [
+          "SL329/DP00394.npy"
+        ],
+        "DP00395": [
+          "SL329/DP00395.npy"
+        ],
+        "DP00396": [
+          "SL329/DP00396.npy"
+        ],
+        "DP00397": [
+          "SL329/DP00397.npy"
+        ],
+        "DP00398": [
+          "SL329/DP00398.npy"
+        ],
+        "DP00401": [
+          "SL329/DP00401.npy"
+        ],
+        "DP00404": [
+          "SL329/DP00404.npy"
+        ],
+        "DP00407": [
+          "SL329/DP00407.npy"
+        ],
+        "DP00408": [
+          "SL329/DP00408.npy"
+        ],
+        "DP00415": [
+          "SL329/DP00415.npy"
+        ],
+        "DP00418": [
+          "SL329/DP00418.npy"
+        ],
+        "DP00423": [
+          "SL329/DP00423.npy"
+        ],
+        "DP00424": [
+          "SL329/DP00424.npy"
+        ],
+        "DP00426": [
+          "SL329/DP00426.npy"
+        ],
+        "DP00428": [
+          "SL329/DP00428.npy"
+        ],
+        "DP00430": [
+          "SL329/DP00430.npy"
+        ],
+        "DP00431": [
+          "SL329/DP00431.npy"
+        ],
+        "DP00432": [
+          "SL329/DP00432.npy"
+        ],
+        "DP00434": [
+          "SL329/DP00434.npy"
+        ],
+        "DP00435": [
+          "SL329/DP00435.npy"
+        ],
+        "DP00436": [
+          "SL329/DP00436.npy"
+        ],
+        "DP00437": [
+          "SL329/DP00437.npy"
+        ],
+        "DP00438": [
+          "SL329/DP00438.npy"
+        ],
+        "DP00443": [
+          "SL329/DP00443.npy"
+        ],
+        "DP00445": [
+          "SL329/DP00445.npy"
+        ],
+        "DP00446": [
+          "SL329/DP00446.npy"
+        ],
+        "DP00447": [
+          "SL329/DP00447.npy"
+        ],
+        "DP00448": [
+          "SL329/DP00448.npy"
+        ],
+        "DP00450": [
+          "SL329/DP00450.npy"
+        ],
+        "DP00455": [
+          "SL329/DP00455.npy"
+        ],
+        "DP00457": [
+          "SL329/DP00457.npy"
+        ],
+        "DP00459": [
+          "SL329/DP00459.npy"
+        ],
+        "DP00460": [
+          "SL329/DP00460.npy"
+        ],
+        "DP00461": [
+          "SL329/DP00461.npy"
+        ],
+        "DP00463": [
+          "SL329/DP00463.npy"
+        ],
+        "DP00464": [
+          "SL329/DP00464.npy"
+        ],
+        "DP00467": [
+          "SL329/DP00467.npy"
+        ],
+        "DP00468": [
+          "SL329/DP00468.npy"
+        ],
+        "DP00469": [
+          "SL329/DP00469.npy"
+        ],
+        "DP00470": [
+          "SL329/DP00470.npy"
+        ],
+        "DP00471": [
+          "SL329/DP00471.npy"
+        ],
+        "DP00472": [
+          "SL329/DP00472.npy"
+        ],
+        "DP00473": [
+          "SL329/DP00473.npy"
+        ],
+        "DP00474": [
+          "SL329/DP00474.npy"
+        ],
+        "DP00475": [
+          "SL329/DP00475.npy"
+        ],
+        "DP00482": [
+          "SL329/DP00482.npy"
+        ],
+        "DP00483": [
+          "SL329/DP00483.npy"
+        ],
+        "DP00485": [
+          "SL329/DP00485.npy"
+        ],
+        "DP00486": [
+          "SL329/DP00486.npy"
+        ],
+        "DP00487": [
+          "SL329/DP00487.npy"
+        ],
+        "DP00488": [
+          "SL329/DP00488.npy"
+        ],
+        "DP00489": [
+          "SL329/DP00489.npy"
+        ],
+        "DP00491": [
+          "SL329/DP00491.npy"
+        ],
+        "DP00492": [
+          "SL329/DP00492.npy"
+        ],
+        "DP00499": [
+          "SL329/DP00499.npy"
+        ],
+        "DP00500": [
+          "SL329/DP00500.npy"
+        ],
+        "DP00501": [
+          "SL329/DP00501.npy"
+        ],
+        "DP00502": [
+          "SL329/DP00502.npy"
+        ],
+        "DP00503": [
+          "SL329/DP00503.npy"
+        ],
+        "DP00506": [
+          "SL329/DP00506.npy"
+        ],
+        "DP00508": [
+          "SL329/DP00508.npy"
+        ],
+        "DP00509": [
+          "SL329/DP00509.npy"
+        ],
+        "DP00512": [
+          "SL329/DP00512.npy"
+        ],
+        "DP00514": [
+          "SL329/DP00514.npy"
+        ],
+        "DP00517": [
+          "SL329/DP00517.npy"
+        ],
+        "DP00518": [
+          "SL329/DP00518.npy"
+        ],
+        "DP00519": [
+          "SL329/DP00519.npy"
+        ],
+        "DP00520": [
+          "SL329/DP00520.npy"
+        ],
+        "DP00524": [
+          "SL329/DP00524.npy"
+        ],
+        "DP00525": [
+          "SL329/DP00525.npy"
+        ],
+        "DP00527": [
+          "SL329/DP00527.npy"
+        ],
+        "DP00529": [
+          "SL329/DP00529.npy"
+        ],
+        "DP00530": [
+          "SL329/DP00530.npy"
+        ],
+        "DP00537": [
+          "SL329/DP00537.npy"
+        ],
+        "DP00539": [
+          "SL329/DP00539.npy"
+        ],
+        "DP00543": [
+          "SL329/DP00543.npy"
+        ],
+        "DP00552": [
+          "SL329/DP00552.npy"
+        ],
+        "DP00553": [
+          "SL329/DP00553.npy"
+        ],
+        "DP00554": [
+          "SL329/DP00554.npy"
+        ],
+        "DP00556": [
+          "SL329/DP00556.npy"
+        ],
+        "DP00557": [
+          "SL329/DP00557.npy"
+        ],
+        "DP00559": [
+          "SL329/DP00559.npy"
+        ],
+        "DP00560": [
+          "SL329/DP00560.npy"
+        ],
+        "DP00561": [
+          "SL329/DP00561.npy"
+        ],
+        "DP00562": [
+          "SL329/DP00562.npy"
+        ],
+        "DP00566": [
+          "SL329/DP00566.npy"
+        ],
+        "DP00567": [
+          "SL329/DP00567.npy"
+        ],
+        "DP00568": [
+          "SL329/DP00568.npy"
+        ],
+        "DP00569": [
+          "SL329/DP00569.npy"
+        ],
+        "DP00570": [
+          "SL329/DP00570.npy"
+        ],
+        "DP00571": [
+          "SL329/DP00571.npy"
+        ],
+        "DP00572": [
+          "SL329/DP00572.npy"
+        ],
+        "DP00573": [
+          "SL329/DP00573.npy"
+        ],
+        "DP00574": [
+          "SL329/DP00574.npy"
+        ],
+        "DP00576": [
+          "SL329/DP00576.npy"
+        ],
+        "DP00579": [
+          "SL329/DP00579.npy"
+        ],
+        "DP00580": [
+          "SL329/DP00580.npy"
+        ],
+        "DP00581": [
+          "SL329/DP00581.npy"
+        ],
+        "DP00582": [
+          "SL329/DP00582.npy"
+        ],
+        "DP00583": [
+          "SL329/DP00583.npy"
+        ]
+      },
+      "multipart_proteins": {
+        "DP00072": {
+          "concatenated_length": 7962,
+          "members": [
+            "SL329/DP00072_P1.npy",
+            "SL329/DP00072_P2.npy",
+            "SL329/DP00072_P3.npy"
+          ],
+          "part_lengths": [
+            2654,
+            2654,
+            2654
+          ]
+        }
+      },
+      "proteins": 329,
+      "summary": {
+        "accuracy": 0.8479237306794662,
+        "auc": 0.9100379809040089,
+        "aupr": 0.907454463916113,
+        "bacc": 0.8319657240794294,
+        "dataset": "SL329",
+        "evaluated_residues": 90836,
+        "excluded_label_minus1": 89582,
+        "fmax": 0.8251065293915253,
+        "fn": 11524,
+        "fp": 2290,
+        "mcc": 0.6981108707712839,
+        "negatives": 51292,
+        "positives": 39544,
+        "predicted_residues": 180418,
+        "proteins": 329,
+        "sn": 0.7085777867691685,
+        "source_residues": 180418,
+        "sp": 0.9553536613896904,
+        "threshold": 0.5,
+        "tn": 49002,
+        "tp": 28020
+      }
+    }
+  },
+  "generation": {
+    "command_template": "python scripts/package_disorderunetlm_predictions.py --archive <prediction-archive.zip> --data-dir data --output-dir results/reproduction/disorderunetlm",
+    "numpy_version": "1.24.3",
+    "python_version": "3.8.19",
+    "scikit_learn_version": "1.3.2",
+    "script": {
+      "path": "scripts/package_disorderunetlm_predictions.py",
+      "sha256": "fba5ccbf19a89d3b8b960023ba8e0fda8afe906657f145d8b7772a594c58f846",
+      "size_bytes": 33741
+    }
+  },
+  "outputs": {
+    "README.md": {
+      "path": "README.md",
+      "sha256": "b6e80e3324546260de46c99d367b1f43b568f53f3e30b8e14104f6c7df9a23cb",
+      "size_bytes": 3198
+    },
+    "disorder723_residue_predictions.tsv.gz": {
+      "path": "disorder723_residue_predictions.tsv.gz",
+      "sha256": "93849519ccb25983e328f4179ed6409608be4cd55abd0eab3130f722a779ff83",
+      "size_bytes": 1658036
+    },
+    "mxd494_residue_predictions.tsv.gz": {
+      "path": "mxd494_residue_predictions.tsv.gz",
+      "sha256": "f1e292c263287df57e302f280ee2721bba215a5ad24a20ae5a1729cd3368e238",
+      "size_bytes": 1530098
+    },
+    "protein_summary.tsv.gz": {
+      "path": "protein_summary.tsv.gz",
+      "sha256": "66ff9ec9324bb92c5c7000fd946ca7e013a1010ae7291e8c85dd69cd0a601e05",
+      "size_bytes": 51941
+    },
+    "sl329_residue_predictions.tsv.gz": {
+      "path": "sl329_residue_predictions.tsv.gz",
+      "sha256": "31a23f032950a451b384d2c07d4299ad71e1702a4f45a629ff68fb01ad4556f6",
+      "size_bytes": 1411667
+    },
+    "summary.json": {
+      "path": "summary.json",
+      "sha256": "28c48ecf2d917cc0e4317cb68eba267f726da5e323b73a8077a38c5c2993f2f9",
+      "size_bytes": 2749
+    },
+    "summary.tsv": {
+      "path": "summary.tsv",
+      "sha256": "7e8807d6aaa48e2397938fc536fdb6cac7a0766e24bee1e7cd79c6a04fc9ce05",
+      "size_bytes": 714
+    }
+  },
+  "package": {
+    "name": "DisorderUnetLM reproduced predictions",
+    "version": "disorderunetlm-predictions-v1"
+  },
+  "protocol": {
+    "archive_class_column_metadata_present": false,
+    "datasets": [
+      "SL329",
+      "MXD494",
+      "DISORDER723"
+    ],
+    "excluded_label": -1,
+    "expected_proteins": {
+      "DISORDER723": 723,
+      "MXD494": 494,
+      "SL329": 329
+    },
+    "npy_dtype": "float32",
+    "npy_shape": "[L, 2]",
+    "prediction_rule": "score > 0.5",
+    "probability_range": [
+      0.0,
+      1.0
+    ],
+    "protein_summary_columns": [
+      "dataset",
+      "protein_id",
+      "sequence_length",
+      "source_parts",
+      "predicted_disordered_residues",
+      "predicted_disordered_fraction",
+      "score_mean",
+      "score_std",
+      "score_min",
+      "score_max"
+    ],
+    "residue_columns": [
+      "dataset",
+      "protein_id",
+      "position",
+      "prediction",
+      "score"
+    ],
+    "row_sum_atol": 1e-05,
+    "row_sum_rtol": 1e-05,
+    "score_column": 1,
+    "score_column_interpretation": "disorder class (evidence-supported; not self-described by ZIP)",
+    "summary_columns": [
+      "dataset",
+      "proteins",
+      "source_residues",
+      "predicted_residues",
+      "excluded_label_minus1",
+      "evaluated_residues",
+      "positives",
+      "negatives",
+      "threshold",
+      "tp",
+      "tn",
+      "fp",
+      "fn",
+      "accuracy",
+      "sn",
+      "sp",
+      "bacc",
+      "mcc",
+      "auc",
+      "aupr",
+      "fmax"
+    ]
+  },
+  "sources": {
+    "DISORDER723": {
+      "path": "data/DISORDER723_test.fasta",
+      "proteins": 723,
+      "sha256": "8b9576102640e7f05b33eb489b26d38612d5daad20daa98707842879e78f91ae",
+      "size_bytes": 867423,
+      "source_residues": 215229
+    },
+    "MXD494": {
+      "path": "data/MXD494_test.fasta",
+      "proteins": 494,
+      "sha256": "6a23b12f7ea50409f32a310636fa4b04adf6c67a9112ce7e94e32211e3bf9508",
+      "size_bytes": 791028,
+      "source_residues": 196501
+    },
+    "SL329": {
+      "path": "data/SL329_test.fasta",
+      "proteins": 329,
+      "sha256": "b8ff1cf22e4e098098f6326daf238d4c184324f6bce1b334b3800e590ea81b9e",
+      "size_bytes": 814878,
+      "source_residues": 180418
+    }
+  }
+}

@@ -40,6 +40,10 @@ results/**
 !results/reproduction/idp_edl/*.json
 !results/reproduction/idp_edl/summary.tsv
 !results/reproduction/idp_edl/paper_comparison.tsv
+# Curated, prediction-only DisorderUnetLM supplied-reproduction release.
+!results/reproduction/disorderunetlm/*.tsv.gz
+!results/reproduction/disorderunetlm/*.json
+!results/reproduction/disorderunetlm/summary.tsv
 models/**/*.pt
 models/**/*.pth
 models/**/*.pkl
