@@ -1,180 +1,217 @@
 {
+  "archive": {
+    "filename": "IDP-EDL \u9884\u6d4b\u7ed3\u679c.zip",
+    "member_count": 7,
+    "members": {
+      "residue_predictions_disorder723.csv": {
+        "compressed_size_bytes": 8394639,
+        "crc": 3316492714,
+        "crc32": "c5ada9aa",
+        "filename": "residue_predictions_disorder723.csv",
+        "sha256": "4d9dd2dde856aec160340eda538d93dc50ecbe743e0528e725d5d80aa93b3403",
+        "size": 20940180,
+        "size_bytes": 20940180
+      },
+      "residue_predictions_mxd494.csv": {
+        "compressed_size_bytes": 7690967,
+        "crc": 1892579050,
+        "crc32": "70ce76ea",
+        "filename": "residue_predictions_mxd494.csv",
+        "sha256": "4627fde3a774ebaa6ce148e8a576d41cf972eea31e51d610c5d767882101da08",
+        "size": 19157227,
+        "size_bytes": 19157227
+      },
+      "residue_predictions_sl329.csv": {
+        "compressed_size_bytes": 7083103,
+        "crc": 3865127678,
+        "crc32": "e6612afe",
+        "filename": "residue_predictions_sl329.csv",
+        "sha256": "1252d7b956b223c8e05d7318d4cc3382924ca56daa4a6ddec20b55e59c1c9670",
+        "size": 17681920,
+        "size_bytes": 17681920
+      }
+    },
+    "sha256": "5ae756164c918499ac6a853b38d14d67ec39fcf8745c267b0991f2bbe30b532d",
+    "size_bytes": 23170784,
+    "source_member_count": 3
+  },
   "datasets": {
-    "disorder723": {
+    "DISORDER723": {
       "proteins": 723,
-      "public": {
+      "public_output": {
         "compressed": {
-          "path": "results/reproduction/idp_edl/disorder723_residue_predictions.tsv.gz",
-          "rows": 214868,
-          "sha256": "937289b2944d382238b687a503de3c7b4993f3862cd0c31adfe7db20dacd5733",
-          "size_bytes": 1773139
+          "filename": "disorder723_residue_predictions.tsv.gz",
+          "rows": 215229,
+          "sha256": "e1f3b30d1d2495c81af1cc0c8542c20cd0e3e05cf279c4cc5887c0614eec0b95",
+          "size_bytes": 8296024
         },
-        "content": {
-          "filename": "disorder723_residue_predictions.tsv",
-          "rows": 214868,
-          "sha256": "fc7df528b9ba815682823d7ab0e7482afbbfa20a237f19691d8fd4c4fec9ffda",
-          "size_bytes": 9165412
-        }
+        "content_sha256": "d48c13ddc9e1f44c95751bd0b02c45b799ec25dde91c8c7d8bf3851e4d64ea89",
+        "content_size_bytes": 22445223
       },
-      "raw_residue_rows": 214868,
-      "source": {
-        "residue_tsv": {
-          "path": "reproduction/idp_edl/outputs/disorder723_fp32_batch4/idp_edl_residue_predictions.tsv",
-          "rows": 214868,
-          "sha256": "9bdf3ce81338ab0e7e7d9c18bf7264441f5eb18b4a9b025b8c8951d17f86d49c",
-          "size_bytes": 14752025
-        },
-        "summary_json": {
-          "path": "reproduction/idp_edl/outputs/disorder723_fp32_batch4/idp_edl_summary.json",
-          "sha256": "13eda973143f0fbb390d930f4986d1b80b73ca1f72b6abf30d87753b7f01aa11",
-          "size_bytes": 960
-        },
-        "summary_tsv": {
-          "path": "reproduction/idp_edl/outputs/disorder723_fp32_batch4/idp_edl_summary.tsv",
-          "sha256": "54b0a8de34a96f7bba9111ff43e5e256e4a5982e1adbe2b2c4ef7afcc01e8e41",
-          "size_bytes": 372
-        }
-      }
+      "source_member": "residue_predictions_disorder723.csv",
+      "source_rows": 215229
     },
-    "mxd494": {
+    "MXD494": {
       "proteins": 494,
-      "public": {
+      "public_output": {
         "compressed": {
-          "path": "results/reproduction/idp_edl/mxd494_residue_predictions.tsv.gz",
-          "rows": 190325,
-          "sha256": "a9f7c5188992135bd242199e2fb498dc24648175fb077ad956ac23838f4dacc0",
-          "size_bytes": 1580175
+          "filename": "mxd494_residue_predictions.tsv.gz",
+          "rows": 196501,
+          "sha256": "d79cf2e7e235eb0acc3fd5957cf2c2762654e91c38c2c7f99c8b606ebdc9ff0c",
+          "size_bytes": 7573259
         },
-        "content": {
-          "filename": "mxd494_residue_predictions.tsv",
-          "rows": 190325,
-          "sha256": "70d018b9c0688ff103c7d0a197de00cf827e79710c11f26c45744bc59156bd2e",
-          "size_bytes": 7498160
-        }
+        "content_sha256": "285c4edf18f4b20906ac6ae817e7e64bd0e69dd797c318d5972cc4a37a631d47",
+        "content_size_bytes": 19621768
       },
-      "raw_residue_rows": 190325,
-      "source": {
-        "residue_tsv": {
-          "path": "reproduction/idp_edl/outputs/mxd494_fp32_batch4/idp_edl_residue_predictions.tsv",
-          "rows": 190325,
-          "sha256": "7675c0c924773b86b5438d90870d8160eac836ce3104f2746754f2524854f2bd",
-          "size_bytes": 11767948
-        },
-        "summary_json": {
-          "path": "reproduction/idp_edl/outputs/mxd494_fp32_batch4/idp_edl_summary.json",
-          "sha256": "71fc88ceaccb144a46a229b571c9a931b1cafd846a8ecd828f75230a3bee4b36",
-          "size_bytes": 960
-        },
-        "summary_tsv": {
-          "path": "reproduction/idp_edl/outputs/mxd494_fp32_batch4/idp_edl_summary.tsv",
-          "sha256": "4a8184e00d7944b5b31e36a0651eb3262577990b41a953293b9860d8a5bf7cc8",
-          "size_bytes": 368
-        }
-      }
+      "source_member": "residue_predictions_mxd494.csv",
+      "source_rows": 196501
     },
-    "sl329": {
-      "proteins": 322,
-      "public": {
+    "SL329": {
+      "proteins": 329,
+      "public_output": {
         "compressed": {
-          "path": "results/reproduction/idp_edl/sl329_residue_predictions.tsv.gz",
-          "rows": 145669,
-          "sha256": "2642fc609b02e80783c923744407eeed9d9cec525477979f203d1f58338596ec",
-          "size_bytes": 1212734
+          "filename": "sl329_residue_predictions.tsv.gz",
+          "rows": 180418,
+          "sha256": "dbc9bfb42977219de8ac924f3ad1da55a46b1f01ef3f4800637fb2caedbe997b",
+          "size_bytes": 6952340
         },
-        "content": {
-          "filename": "sl329_residue_predictions.tsv",
-          "rows": 145669,
-          "sha256": "c006cdb37633d57b2dff381ba41a27c25a87adad0b72e9b6e7aac6f50a3d0188",
-          "size_bytes": 5706931
-        }
+        "content_sha256": "a09bc4081e180858e7efabfc7109a40d4773033fdd0473b2169fbe20cd222f33",
+        "content_size_bytes": 17864359
       },
-      "raw_residue_rows": 145669,
-      "source": {
-        "residue_tsv": {
-          "path": "reproduction/idp_edl/outputs/sl329_fp32_batch4/idp_edl_residue_predictions.tsv",
-          "rows": 145669,
-          "sha256": "bd9fe367e0474060a810d57900e1e23e94daab0e0db6287b672b41c04507195a",
-          "size_bytes": 8912539
-        },
-        "summary_json": {
-          "path": "reproduction/idp_edl/outputs/sl329_fp32_batch4/idp_edl_summary.json",
-          "sha256": "6b62099e47469076ee4a7a82d4203a9bb0199a1e2e3ee16c3e50b3a576166e43",
-          "size_bytes": 959
-        },
-        "summary_tsv": {
-          "path": "reproduction/idp_edl/outputs/sl329_fp32_batch4/idp_edl_summary.tsv",
-          "sha256": "a6b8e57a7410333d7619822fd0ef20e6bd575111e1f1c285de9244f61751bfcc",
-          "size_bytes": 370
-        }
-      }
+      "source_member": "residue_predictions_sl329.csv",
+      "source_rows": 180418
     }
   },
   "inputs": {
-    "sample_labels": {
-      "path": "external/IDP-EDL/data/sample_labels.fasta",
-      "sha256": "b8a3f672c74d6edd4ee7ebf2d9654a26d08edf2c389a88e19d9cbb16c703e722",
-      "size_bytes": 923769
+    "archive": {
+      "filename": "IDP-EDL \u9884\u6d4b\u7ed3\u679c.zip",
+      "sha256": "5ae756164c918499ac6a853b38d14d67ec39fcf8745c267b0991f2bbe30b532d",
+      "size_bytes": 23170784
     },
-    "sample_sequences": {
-      "path": "external/IDP-EDL/data/sample_sequences.fasta",
-      "sha256": "5122b07fa4736fdefd90f0078429ace2400bde7b678eaea10d97ffca05659b0d",
-      "size_bytes": 935341
+    "fasta": {
+      "DISORDER723": {
+        "path": "data/DISORDER723_test.fasta",
+        "rows": 723,
+        "sha256": "8b9576102640e7f05b33eb489b26d38612d5daad20daa98707842879e78f91ae",
+        "size_bytes": 867423
+      },
+      "MXD494": {
+        "path": "data/MXD494_test.fasta",
+        "rows": 494,
+        "sha256": "6a23b12f7ea50409f32a310636fa4b04adf6c67a9112ce7e94e32211e3bf9508",
+        "size_bytes": 791028
+      },
+      "SL329": {
+        "path": "data/SL329_test.fasta",
+        "rows": 329,
+        "sha256": "b8ff1cf22e4e098098f6326daf238d4c184324f6bce1b334b3800e590ea81b9e",
+        "size_bytes": 814878
+      }
     }
   },
-  "manifest_version": 1,
-  "package_files": {
-    "paper_comparison_tsv": {
-      "path": "results/reproduction/idp_edl/paper_comparison.tsv",
-      "sha256": "6a2b98d6769cfb9c4335f3bc57ddc9295defebf51eb534a246fe12b2e1bb773b",
-      "size_bytes": 1289
+  "manifest_version": 2,
+  "outputs": {
+    "component_summary.tsv": {
+      "filename": "component_summary.tsv",
+      "rows": 12,
+      "sha256": "3b9dfe68f2b5440eb1103f8ddc62439eb304da5bf9e74c6c700ee10a640b2125",
+      "size_bytes": 2498
     },
-    "summary_json": {
-      "path": "results/reproduction/idp_edl/summary.json",
-      "sha256": "4c346a8a7cae934be14a9e4872644759001436fc62bf09f66370b26197809e98",
-      "size_bytes": 2742
+    "disorder723_residue_predictions.tsv.gz": {
+      "filename": "disorder723_residue_predictions.tsv.gz",
+      "rows": 215229,
+      "sha256": "e1f3b30d1d2495c81af1cc0c8542c20cd0e3e05cf279c4cc5887c0614eec0b95",
+      "size_bytes": 8296024
     },
-    "summary_tsv": {
-      "path": "results/reproduction/idp_edl/summary.tsv",
-      "sha256": "33397b1fa0015e03d2e3145aa5d6d59becaed0ae38907e9edaa61e194a6d6bc6",
-      "size_bytes": 731
+    "mxd494_residue_predictions.tsv.gz": {
+      "filename": "mxd494_residue_predictions.tsv.gz",
+      "rows": 196501,
+      "sha256": "d79cf2e7e235eb0acc3fd5957cf2c2762654e91c38c2c7f99c8b606ebdc9ff0c",
+      "size_bytes": 7573259
+    },
+    "paper_comparison.tsv": {
+      "filename": "paper_comparison.tsv",
+      "rows": 15,
+      "sha256": "89dc5ca1aadf09c5c7d687e6b9c2210bb8396e505804f61946ee69a38182b35f",
+      "size_bytes": 1303
+    },
+    "sl329_residue_predictions.tsv.gz": {
+      "filename": "sl329_residue_predictions.tsv.gz",
+      "rows": 180418,
+      "sha256": "dbc9bfb42977219de8ac924f3ad1da55a46b1f01ef3f4800637fb2caedbe997b",
+      "size_bytes": 6952340
+    },
+    "summary.json": {
+      "filename": "summary.json",
+      "sha256": "434e27b295978e2e55c1b33df7765cb679888de927a6db160ce5d478474e23c7",
+      "size_bytes": 2135
+    },
+    "summary.tsv": {
+      "filename": "summary.tsv",
+      "rows": 3,
+      "sha256": "dc2b8ce5d1824c1368bc1557004f699ce4dce7e47b40489cb9cc616cd8e49885",
+      "size_bytes": 686
     }
   },
-  "package_version": "idp-edl-reproduction-public-v1",
+  "package_version": "v2",
   "protocol": {
-    "aa_header_intentionally_omitted": true,
-    "aggregate_label_counts_included": true,
-    "attachment_npy_not_used_as_residue_results": true,
-    "eos_tokens": 1,
-    "full_source_tables_not_copied": true,
-    "label_2_policy": "retained for internal validation only and excluded from metrics",
-    "labels_sequence_intentionally_omitted": true,
-    "max_length": 1024,
-    "max_retained_residues": 1023,
-    "metric_rule": "compute_binary_metrics on labels 0/1; label 2 excluded",
-    "prediction_rule": "prediction = int(score > 0.5)",
+    "archive_member_names": [
+      "residue_predictions_sl329.csv",
+      "residue_predictions_mxd494.csv",
+      "residue_predictions_disorder723.csv"
+    ],
+    "deterministic_gzip": {
+      "compresslevel": 9,
+      "filename_header": "",
+      "mtime": 0
+    },
+    "evaluable_rule": "true_label in {0, 1}; -1 is unknown and excluded",
+    "fasta_record_format": "three lines: >header, sequence, Python literal labels list",
+    "id_matching": "case-insensitive input IDs; public output uses local canonical ID",
+    "ignored_archive_metadata": [
+      "directory entries",
+      "__MACOSX entries",
+      "AppleDouble ._* files"
+    ],
+    "metric_rule": "compute_binary_metrics and average_precision_score on evaluable residues",
+    "package_version": "v2",
+    "position_base": 1,
+    "prediction_rule": "positive = idp_edl_score > 0.5",
+    "public_redaction": [
+      "amino_acid",
+      "true_label",
+      "evaluable"
+    ],
     "public_residue_columns": [
       "dataset",
       "protein_id",
       "position",
-      "prediction",
-      "score",
-      "max_length",
-      "truncated_residues"
+      "idp_edl_g_score",
+      "idp_edl_l_score",
+      "idp_edl_s_score",
+      "idp_edl_score"
     ],
-    "source_outputs_pattern": "reproduction/idp_edl/outputs/{sl329,mxd494,disorder723}_fp32_batch4",
+    "require_complete_positions": true,
+    "score_columns": [
+      "idp_edl_g_score",
+      "idp_edl_l_score",
+      "idp_edl_s_score",
+      "idp_edl_score"
+    ],
+    "score_range": [
+      0.0,
+      1.0
+    ],
     "source_residue_columns": [
-      "dataset",
       "protein_id",
-      "header",
-      "position",
-      "aa",
-      "model_aa",
-      "label",
-      "included_in_metrics",
-      "prediction",
-      "score",
-      "max_length",
-      "truncated_residues"
+      "residue_index",
+      "amino_acid",
+      "true_label",
+      "evaluable",
+      "idp_edl_g_score",
+      "idp_edl_l_score",
+      "idp_edl_s_score",
+      "idp_edl_score"
     ],
     "threshold": 0.5
   }

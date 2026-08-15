@@ -120,17 +120,24 @@ Each run writes:
 
 ## Public prediction package
 
-After the three `*_fp32_batch4` runs are present, validate every retained
-residue against the author sample pair and rebuild the redacted public release:
+The current public package is rebuilt from a supplied full-benchmark residue
+CSV archive. The packager validates every protein, residue index, amino acid,
+reference label, and evaluability flag against the three local benchmark FASTA
+files before publishing any scores:
 
 ```bash
-.conda/idp_edl/bin/python scripts/package_idp_edl_reproduction.py
+.conda/idp_edl/bin/python scripts/package_idp_edl_reproduction.py \
+  --archive /path/to/idp-edl-predictions.zip \
+  --sl329-fasta data/SL329_test.fasta \
+  --mxd494-fasta data/MXD494_test.fasta \
+  --disorder723-fasta data/DISORDER723_test.fasta \
+  --output-dir results/reproduction/idp_edl
 ```
 
-The command writes deterministic compressed prediction tables, recomputed
-summaries, paper comparisons, and SHA256 provenance under
-`results/reproduction/idp_edl/`. Public residue tables omit sequences,
-amino-acid identities, headers, and reference labels.
+The command writes deterministic compressed prediction tables, final and
+component summaries, paper comparisons, and SHA256 provenance. Public residue
+tables contain protein identifiers, positions, and the four supplied scores;
+they omit sequences, amino-acid identities, headers, and reference labels.
 
 ## Reproduction assumptions
 

@@ -16,7 +16,8 @@ Repository URL: https://github.com/MedBio07/IDP_RegionAware
 - `manuscript/`: manuscript drafts, tables, and LaTeX source.
 - `figures/`: generated manuscript figures that are small enough for Git.
 - `results/reproduction/idp_edl/`: compressed, prediction-only residue scores
-  and audited summary statistics from the local IDP-EDL reproduction.
+  and audited summary statistics from the supplied full-benchmark IDP-EDL
+  reproduction artifact.
 - `results/reproduction/disorderunetlm/`: validated, compressed residue scores
   and recomputed statistics from the supplied DisorderUnetLM reproduction output.
 
@@ -63,13 +64,13 @@ python3 scripts/evaluate_disorder_predictions.py \
 
 ## Published Baseline Predictions
 
-The audited, prediction-only IDP-EDL residue scores for SL329, MXD494, and
+The audited, full-coverage IDP-EDL residue scores for SL329, MXD494, and
 DISORDER723 are available under
 [`results/reproduction/idp_edl/`](results/reproduction/idp_edl/README.md).
-The release includes compressed scores, recomputed statistics, paper-value
-comparisons, protocol caveats, and SHA256 provenance. It does not include test
-sequences or per-residue reference labels; summaries retain aggregate label
-counts.
+The release includes all four supplied component/final scores, recomputed
+statistics, paper-value comparisons, strict local FASTA alignment evidence,
+and SHA256 provenance. It does not include test sequences, amino-acid columns,
+or per-residue reference labels; summaries retain aggregate label counts.
 
 The supplied DisorderUnetLM prediction artifact for the same three datasets is
 available under

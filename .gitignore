@@ -39,6 +39,7 @@ results/**
 !results/reproduction/idp_edl/*.tsv.gz
 !results/reproduction/idp_edl/*.json
 !results/reproduction/idp_edl/summary.tsv
+!results/reproduction/idp_edl/component_summary.tsv
 !results/reproduction/idp_edl/paper_comparison.tsv
 # Curated, prediction-only DisorderUnetLM supplied-reproduction release.
 !results/reproduction/disorderunetlm/*.tsv.gz
